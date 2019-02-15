@@ -13,12 +13,22 @@
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
+      <ion-button color="primary"> {{item.title}}</ion-button>     
       <div class="item-note" slot="end">
         {{item.note}}
       </div>
     </ion-item>
   </ion-list>
+  <ion-button color="primary"expand="full" fill="outline" (click)="presentLoading()"> Dailys</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Tarea por desarrollador</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Manejo de tiempos</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Retroalimentacion</ion-button>
+  <ion-button color="danger"expand="full" fill="outline"> Apuntes</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Perfil</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Foro</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Listado Problemas-Solucion</ion-button>
+  <ion-button color="primary"expand="full" fill="outline"> Grupos de desarrollo</ion-button>
+
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>
