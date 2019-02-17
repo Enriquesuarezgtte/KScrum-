@@ -10,6 +10,48 @@
 </ion-header>
 
 <ion-content>
+  <ion-slides pager>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/>
+      <h2 class="slide-title">Ready to Play?</h2>
+      <button ion-button large clear icon-end color="primary">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+</ion-slides>
+    <ion-slides pager>
+
+      <ion-slide style="background-color: green">
+        <h2></h2>
+      </ion-slide>
+    
+      <ion-slide style="background-color: blue">
+        <h2> </h2>
+      </ion-slide>
+    
+      <ion-slide style="background-color: red">
+        <h2></h2>
+      </ion-slide>
+
+      <ion-slide style="background-color: rgb(66, 180, 255)">
+        
+        <h2>Chat with Scrum master</h2>
+      </ion-slide>
+    
+    </ion-slides>
     <ion-card class="welcome-card">
       <ion-img src="/assets/shapes.svg"></ion-img>
       <ion-card-header>
@@ -20,5 +62,4 @@
         <p>This app will be useful to manage your project. Here there are some tools: </p>
       </ion-card-content>
     </ion-card>
-
 </ion-content>
