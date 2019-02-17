@@ -14,7 +14,7 @@ export class HomePage {
     },
     {
       title: "What can you do?",
-      description: "<b>Dailys</b> Create and edit dailys in your Scrum project.",
+      description: "<b>Dailys</b> Create and edit dailys in your Scrum project",
       image: "assets/img/ica-slidebox-img-2.png",
     },
     {
