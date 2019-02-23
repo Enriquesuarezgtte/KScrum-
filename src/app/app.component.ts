@@ -24,6 +24,10 @@ export class AppComponent {
       title: ' mis proyectos',
       url:'/projects',
       icon:'list-box'
+    }, {
+      title: 'Perfil',
+      url:'/perfil',
+      icon:'person'
     }
   ];
 
