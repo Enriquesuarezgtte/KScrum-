@@ -36,7 +36,7 @@ export class ProjectsPage implements OnInit {
   }
 
 projectRedir(){
-  this.router.navigate(['sproject']);
+  this.router.navigate(['list']);
 }
 
 }
