@@ -1,0 +1,1 @@
+# KScrum-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b11b3f82607948eda2f81d30f648fc86)](https://www.codacy.com/app/enriquesuarezgtte/KScrum-?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LeonardoRuiz98/KScrum-&amp;utm_campaign=Badge_Grade)
