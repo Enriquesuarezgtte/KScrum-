@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Mis proyectos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+
+        
+  <ngx-datatable class="bootstrap" filtering ="Nombre"[rows]="rows" [columnMode]="'force'" [sortType]="'multi'" [reorderable]="false">
+    <ngx-datatable-column name="Nombre"></ngx-datatable-column>
+    <ngx-datatable-column name="Tipo"></ngx-datatable-column>
+    <ngx-datatable-column name="Acciones"[sortable]="false" resizeable="true"[maxWidth]="70">
+      <ng-template let-column="column"  let-row="row" ngx-datatable-cell-template>
+          <button class="myButton">
+              Acceder
+          </button>
+
+      </ng-template>
+  </ngx-datatable-column>
+  </ngx-datatable>
+
+</ion-content>
