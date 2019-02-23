@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-list',
   templateUrl: 'list.page.html',
@@ -18,10 +19,7 @@ export class ListPage implements OnInit {
     'american-football',
     'boat',
     'bluetooth',
-    'build',
-    'ice-cream',
-    'image',
-    'key'
+    'build'
   ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(public loadingController: LoadingController) {

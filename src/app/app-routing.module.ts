@@ -22,8 +22,11 @@ const routes: Routes = [
    loadChildren: './sproject/sproject.module#SProjectPageModule' },
 
   { path: 'login',
-   loadChildren: './login/login.module#LoginPageModule' }
+   loadChildren: './login/login.module#LoginPageModule' },
 
+
+  { path: 'userprofile', 
+  loadChildren: './user-profile/user-profile.module#UserProfilePageModule' }
 
 ];
 

@@ -8,7 +8,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -17,8 +16,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule,
-    NgxDatatableModule
+    AppRoutingModule
   ],
   providers: [
     StatusBar,
