@@ -26,7 +26,7 @@ export class AppComponent {
       icon:'list-box'
     }, {
       title: 'Perfil',
-      url:'/perfil',
+      url:'/userprofile',
       icon:'person'
     }
   ];
