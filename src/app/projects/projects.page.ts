@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from  '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsPage implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   rows = [
     {
@@ -33,5 +34,9 @@ export class ProjectsPage implements OnInit {
 
   ngOnInit() {
   }
+
+projectRedir(){
+  this.router.navigate(['sproject']);
+}
 
 }
