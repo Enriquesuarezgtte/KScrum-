@@ -16,12 +16,7 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: ' mis proyectos',
+       title: ' mis proyectos',
       url:'/projects',
       icon:'list-box'
     }, {
