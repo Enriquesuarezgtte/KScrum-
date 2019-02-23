@@ -9,6 +9,28 @@ export class ProjectsPage implements OnInit {
 
   constructor() { }
 
+  rows = [
+    {
+      "nombre": "Red social",
+      "tipo": "Hybryd Application"
+      
+    },
+    {
+      "nombre": "Plataforma Empresarial",
+      "tipo": "Web Application"
+    },
+    {
+      "nombre": "MarketPlace",
+      "tipo": "Web Application"
+    },
+    {
+      "nombre": "Credits App",
+      "tipo": "Hybrid Application"
+    }
+  ];
+
+
+
   ngOnInit() {
   }
 

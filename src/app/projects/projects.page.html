@@ -9,30 +9,21 @@
 
 <ion-content padding>
 
-    <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          <ion-card-title>Card Title</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
-        </ion-card-content>
-      </ion-card>
 
 
-      <ion-card>
-          <ion-item>
-            <ion-icon name="pin" slot="start"></ion-icon>
-            <ion-label>ion-item in a card, icon left, button right</ion-label>
-            <ion-button fill="outline" slot="end">View</ion-button>
-          </ion-item>
+
         
-          <ion-card-content>
-            This is content, without any paragraph or header tags,
-            within an ion-card-content element.
-          </ion-card-content>
-        </ion-card>
+  <ngx-datatable class="bootstrap" filtering ="Nombre"[rows]="rows" [columnMode]="'force'" [sortType]="'multi'" [reorderable]="false">
+    <ngx-datatable-column name="Nombre"></ngx-datatable-column>
+    <ngx-datatable-column name="Tipo"></ngx-datatable-column>
+    <ngx-datatable-column name="Acciones"[sortable]="false" resizeable="true"[maxWidth]="70">
+      <ng-template let-column="column"  let-row="row" ngx-datatable-cell-template>
+          <button class="myButton">
+              Acceder
+          </button>
+
+      </ng-template>
+  </ngx-datatable-column>
+  </ngx-datatable>
 
 </ion-content>
