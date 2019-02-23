@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
