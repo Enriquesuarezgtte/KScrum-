@@ -112,4 +112,9 @@ ehthumbs_vista.db
 # Windows shortcuts
 *.lnk
 
+# Project ignores
+
+KScrum/package.json
+KScrum/package-lock.json
+
 # End of https://www.gitignore.io/api/ionic3,cordova,angular,windows,visualstudiocode
