@@ -1,17 +1,23 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {AngularFireAuth} from  '@angular/fire/auth';
+import {AngularFirestore } from  '@angular/fire/firestore';
+
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
+
 @Injectable()
+
 export class Api {
   url: string = 'https://example.com/api/v1';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient , public fireAuth : AngularFireAuth , public fire : AngularFirestore) {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
+   
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams()

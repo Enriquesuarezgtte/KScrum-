@@ -19,6 +19,7 @@ export class LoginPage {
     password: 'test'
   };
 
+
   // Our translated text strings
   private loginErrorString: string;
 
@@ -32,8 +33,11 @@ export class LoginPage {
     })
   }
 
+
   // Attempt to login in through our User service
   doLogin() {
+
+    console.log(this.account.email + " - "  + this.account.password);
     this.user.login(this.account).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
