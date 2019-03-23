@@ -44,13 +44,13 @@
         <ion-slide class="slide-2">
             
             <ion-list>
-                <ion-item *ngFor="let task of tasks" class="item-nat">
+                <ion-item *ngFor="let task2 of tasks2" class="item-nat">
                   <ion-card>
                       <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
-                        <img src="{{task.imagen}}" />
+                        <img src="{{task2.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task.nombre}}</ion-text>
+                      <ion-text>{{task2.nombre}}</ion-text>
                     </ion-item>    
                   </ion-card>
                 </ion-item>
@@ -59,19 +59,19 @@
         <ion-slide class="slide-3">
             
             <ion-list>
-                <ion-item *ngFor="let task of tasks" class="item-nat">
+                <ion-item *ngFor="let task3 of tasks3" class="item-nat">
                   <ion-card>
                       <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
-                        <img src="{{task.imagen}}" />
+                        <img src="{{task3.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task.nombre}}</ion-text>
+                      <ion-text>{{task3.nombre}}</ion-text>
                     </ion-item>    
                   </ion-card>
                 </ion-item>
             </ion-list>
         </ion-slide>
-        
+
       </ion-slides>
     </ion-content>
   </ion-app>
