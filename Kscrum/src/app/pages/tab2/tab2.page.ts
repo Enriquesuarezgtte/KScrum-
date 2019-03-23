@@ -56,23 +56,29 @@ export class Tab2Page implements OnInit {
      this.tasks3=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PBI 11"
+         "nombre":"               PBI 11",
+         "descripcion":"Tarea terminada el 25/02/19"
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PBI 12"
+       "nombre":"                 PBI 12",
+       "descripcion":"Tarea terminada el 28/02/19"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 13"
+        "nombre":"                PBI 13",
+        "descripcion":"Tarea terminada el 19/02/19"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 14"
+        "nombre":"                PBI 14",
+        "descripcion":"Tarea terminada el 25/01/19"
+        
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PBI 15"
+        "nombre":"                 PBI 15",
+        "descripcion":"Tarea terminada el 25/01/18"
      }
    ]
    
