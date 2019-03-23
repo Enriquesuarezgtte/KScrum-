@@ -2,22 +2,22 @@
 
 <ion-app>
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="dark">
         <ion-title>Tareas</ion-title>
       </ion-toolbar>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="dark">
         <ion-segment scrollable (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment" >
           <ion-segment-button value="0" checked>
-            <ion-icon name="call"></ion-icon>
-            <ion-label>Doing</ion-label>
+            <ion-icon name="alarm"></ion-icon>
+            <ion-label>haciendo</ion-label>
           </ion-segment-button>
           <ion-segment-button value="1">
             <ion-icon name="cloud-upload"></ion-icon>
-            <ion-label>To_do</ion-label>
+            <ion-label>Por hacer</ion-label>
           </ion-segment-button>
           <ion-segment-button value="2">
             <ion-icon name="paper"></ion-icon>
-            <ion-label>Done</ion-label>
+            <ion-label>Hecho</ion-label>
           </ion-segment-button>
         </ion-segment>
       </ion-toolbar>
