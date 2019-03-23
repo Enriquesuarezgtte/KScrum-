@@ -6,11 +6,16 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class AuthService {
 
-  constructor(auth : AngularFireAuth ) { 
+  constructor(public auth : AngularFireAuth ) { 
 
-    
+   
   }
 
 
+  loginWithEmailAndPasssword(email : string , password : string){
+    return this.auth.auth.signInWithEmailAndPassword(email , password);
+  }
 
+
+ 
 }
