@@ -14,65 +14,71 @@ export class Tab2Page implements OnInit {
     this.tasks=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PDI 1"
+         "nombre":"               PBI 1"
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PDI 2"
+       "nombre":"                 PBI 2"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 3"
+        "nombre":"                PBI 3"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 4"
+        "nombre":"                PBI 4"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PDI 5"
+        "nombre":"                 PBI 5"
      }]
      this.tasks2=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PDI 6"
+         "nombre":"               PBI 6"
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PDI 7"
+       "nombre":"                 PBI 7"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 8"
+        "nombre":"                PBI 8"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 9"
+        "nombre":"                PBI 9"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PDI 10"
+        "nombre":"                 PBI 10"
      }]
      this.tasks3=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PDI 11"
+         "nombre":"               PBI 11",
+         "descripcion":"Tarea terminada el 25/02/19"
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PDI 12"
+       "nombre":"                 PBI 12",
+       "descripcion":"Tarea terminada el 28/02/19"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 13"
+        "nombre":"                PBI 13",
+        "descripcion":"Tarea terminada el 19/02/19"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PDI 14"
+        "nombre":"                PBI 14",
+        "descripcion":"Tarea terminada el 25/01/19"
+        
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PDI 15"
+        "nombre":"                 PBI 15",
+        "descripcion":"Tarea terminada el 25/01/18"
      }
    ]
    
