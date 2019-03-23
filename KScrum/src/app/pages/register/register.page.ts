@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,14 @@ import {NavController} from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(public nav : NavController) { }
+  constructor(public nav : NavController , public auth : AuthService) { }
+  
+  public nameInput : string;
+
+  public mailInput : string;
+
+  public passwordInput : string;
+
 
   ngOnInit() {
   }
@@ -16,6 +24,15 @@ export class RegisterPage implements OnInit {
   public logoPath : string = "../../../assets/Scrum.png";
 
   registry(){
+    console.log("trying to registry")
+    this.auth.registerUserWithEmailAndPassword(this.mailInput , this.passwordInput).then((resolve) =>{
+      
+      console.log("Logged successfully" , resolve);
+      this.nav.navigateForward('menu/first');
+    } , (error) => {
+      console.log("login error" , error);
+    });
+
     this.nav.navigateForward('menu/first');
   }
 
