@@ -10,48 +10,20 @@
 <ion-content padding>
 Here there are all your projects:
 
-<ion-card color="dark" >
-  <ion-item href="/menu/first/tabs/tab1/details" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Excolnet</ion-label>
-  </ion-item>
-</ion-card>
 
-<ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>KScrum</ion-label>
-  </ion-item>
-</ion-card>
-<ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card><ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card><ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card><ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card><ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card><ion-card>
-  <ion-item href="#" class="activated">
-    <ion-icon name="analytics" slot="start"></ion-icon>
-    <ion-label>Napa S</ion-label>
-  </ion-item>
-</ion-card>
+<ion-list>
+    <ion-item *ngFor="let proyecto of proyectos" class="item-nat">
+      <ion-card>
+          <ion-item href="/menu/first/tabs/tab1/details" class="activated"  max-weight=100%>
+          <ion-thumbnail>
+            <img src="{{proyecto.imagen}}" />
+          </ion-thumbnail>
+          <ion-label>{{proyecto.nombre}}</ion-label>
+        </ion-item>    
+      </ion-card>
+    </ion-item>
+</ion-list>
+
+
+  
 </ion-content>

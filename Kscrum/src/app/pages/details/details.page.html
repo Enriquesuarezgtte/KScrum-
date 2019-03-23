@@ -9,17 +9,17 @@
 </ion-header>
  
 <ion-content padding >
-  <ion-card >
-    <ion-item href="/menu/first/tabs/tab1/details" class="activated">
-      <ion-icon name="checkmark"></ion-icon>   
-         <ion-label>Sprint 1</ion-label>
-    </ion-item>
-  </ion-card>
 
-  <ion-card >
-    <ion-item href="/menu/first/tabs/tab1/details" class="activated">
-      <ion-icon name="checkmark"></ion-icon>   
-         <ion-label>Sprint 2</ion-label>
-    </ion-item>
-  </ion-card>
+    <ion-list>
+        <ion-item *ngFor="let sprint of sprints" class="item-nat">
+          <ion-card>
+              <ion-item href="/menu/first/tabs/tab2/tab2.html" class="activated"  max-weight=100%>
+              <ion-thumbnail>
+                <img src="{{sprint.imagen}}" />
+              </ion-thumbnail>
+              <ion-label>{{sprint.nombre}}</ion-label>
+            </ion-item>    
+          </ion-card>
+        </ion-item>
+    </ion-list>
 </ion-content>
