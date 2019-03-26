@@ -1,5 +1,7 @@
 {
-  "name": "KScrum",
-  "integrations": {},
-  "type": "ionic-angular"
+  "name": "Kscrum",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
 }
