@@ -1,0 +1,22 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-title>KScrum</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+ 
+<ion-content padding color="secondary">
+
+<ion-img id ="logo" [src]="logoPath" ></ion-img>
+<div id="registerParams">
+    <ion-input id="nameInput" [(ngModel)]="nameInput"  required="true" class="test" type="text" placeholder="Nombre"></ion-input>
+    <ion-input id="mailInput" [(ngModel)]="mailInput"  required="true" class="test" type="text" placeholder="Email"></ion-input>
+    <ion-input id="passwordInput" [(ngModel)]="passwordInput"  required="true" class="test" type="password" placeholder="Contraseña"></ion-input>
+</div>
+
+<ion-button   id ="registerButton"    (click)="registry()">Registrarse</ion-button>
+
+
+
+</ion-content>
