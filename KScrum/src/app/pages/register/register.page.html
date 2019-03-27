@@ -6,16 +6,16 @@
 
 
  
-<ion-content padding color="secondary">
+<ion-content padding id="generalBackground">
 
 <ion-img id ="logo" [src]="logoPath" ></ion-img>
 <div id="registerParams">
-    <ion-input id="nameInput" [(ngModel)]="nameInput"  required="true" class="test" type="text" placeholder="Nombre"></ion-input>
+    <ion-input id="nameInput" [(ngModel)]="nameInput"  required="true" class="test" type="text" placeholder="Name"></ion-input>
     <ion-input id="mailInput" [(ngModel)]="mailInput"  required="true" class="test" type="text" placeholder="Email"></ion-input>
-    <ion-input id="passwordInput" [(ngModel)]="passwordInput"  required="true" class="test" type="password" placeholder="Contraseña"></ion-input>
+    <ion-input id="passwordInput" [(ngModel)]="passwordInput"  required="true" class="test" type="password" placeholder="Password"></ion-input>
 </div>
 
-<ion-button   id ="registerButton"    (click)="registry()">Registrarse</ion-button>
+<ion-button   id ="registerButton"    (click)="registry()">Sign up</ion-button>
 
 
 
