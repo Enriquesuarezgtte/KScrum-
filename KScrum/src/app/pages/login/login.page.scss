@@ -44,7 +44,7 @@
 
 #signUpParams{
     display: block;
-    margin: 15% auto;
+    margin: 4% auto;
     max-width: 250px;
     min-width: 250px;
 
@@ -53,8 +53,64 @@
 #registerButton{
     --background :  #3880ff;
     display: block;
-    margin: 12% auto;
+    margin: 10% auto;
     max-width: 250px;
     min-width: 250px;
+}
+
+#centered {
+    justify-content: center;
+}
+
+#icon{
+    display: inline-block;
+    --background: #005af7;
+}
+
+#generalBackground{
+    --background: #ccd2df;
+}
+
+.socialNButtons{
+    
+    display: block;
+    margin: 0 auto;
+    max-width: 250px;
+    min-width: 250px;
+}
+
+.general{
+    margin: 2% 31%;
+}
+
+#googleButton{
+    --background : #ffffff;
+    --color : #000000;
+    --placeholder-color : #000000;
+   
+}
+
+#facebookButton{
+    --background : #0537be;
+    
+}
+
+#twitterButton{
+    --background : #0e97e7;
+    
+}
+
+.simpleText{
+    margin: 9% 25%;
+    display: block;
+    text-align: center;
+    min-width: 180px;
+}
+
+.orText{
+    margin: 2% 25%;
+display: block;
+text-align: center;
+min-width: 180px;
 }
 
