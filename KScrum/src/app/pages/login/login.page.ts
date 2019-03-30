@@ -36,8 +36,9 @@ this.authService.loginWithEmailAndPasssword(this.mailInput , this.passwordInput)
   console.error(error ,  " in page")
 }) 
 
- // this.navCtrl.navigateForward('/menu/first');
 }
+
+
 
 
 redirectTo(param : string){
