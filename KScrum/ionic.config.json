@@ -1,0 +1,7 @@
+{
+  "name": "Kscrum",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
