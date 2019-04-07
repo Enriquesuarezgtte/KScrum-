@@ -10,13 +10,13 @@
 
 <ion-img id ="logo" [src]="logoPath" ></ion-img>
 <div id="loginParams">
-    <ion-input id="mailInput" [(ngModel)]="mailInput"  required="true" class="test" type="text" placeholder="Email"></ion-input>
+    <ion-input id="mailInput" [(ngModel)]="mailInput"  required="true" class="test" type="Email" placeholder="Email"></ion-input>
     <ion-input id="passwordInput" [(ngModel)]="passwordInput"  required="true" class="test" type="Password" placeholder="Password"></ion-input>
 </div>
 
 <ion-button   id ="loginButton"    (click)="login()">Login</ion-button>
 <div class="simpleText">
-<ion-label  >Dont have an account? </ion-label>
+<ion-label  >Don't have an account? </ion-label>
 </div>
 <div id="signUpParams" >
 <ion-button   id ="registerButton"    routerLink="/register"  routerDirection="root">Sign Up</ion-button>

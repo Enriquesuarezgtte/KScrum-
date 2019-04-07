@@ -9,7 +9,7 @@
         <ion-segment scrollable (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment" >
           <ion-segment-button value="0" checked>
             <ion-icon name="alarm"></ion-icon>
-            <ion-label>haciendo</ion-label>
+            <ion-label>Haciendo</ion-label>
           </ion-segment-button>
           <ion-segment-button value="1">
             <ion-icon name="cloud-upload"></ion-icon>
@@ -65,7 +65,7 @@
                       <ion-thumbnail>
                         <img src="{{task3.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task3.nombre}}</ion-text>
+                      <ion-label>{{task3.nombre}}</ion-label>
                       <ion-label>{{task3.descripcion}}</ion-label>
                     </ion-item>    
                   </ion-card>
