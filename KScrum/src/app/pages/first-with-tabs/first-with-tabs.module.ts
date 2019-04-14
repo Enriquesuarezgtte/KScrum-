@@ -8,32 +8,29 @@ import { IonicModule } from '@ionic/angular';
 import { FirstWithTabsPage } from './first-with-tabs.page';
  
 const routes: Routes = [
+ 
   {
     path: 'tabs',
     component: FirstWithTabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: '../tab1/tab1.module#Tab1PageModule'
+        path: 'projects',
+        loadChildren: '../projects/projects.module#ProjectsPageModule'
       }  ,
       {
-        path: 'tab1/details',
+        path: 'projects/details',
         loadChildren: '../details/details.module#DetailsPageModule'
       },
       {
         path: 'tab2',
         loadChildren: '../tab2/tab2.module#Tab2PageModule'
-      },
-      {
-        path: 'tab3',
-        loadChildren: '../tab3/tab3.module#Tab3PageModule'
       }
     ]
-  },
-  {
+  }, { 
     path: '',
-    redirectTo: 'tabs/tab1',
-    pathMatch: 'full'
+    redirectTo:'tabs/projects',
+    pathMatch:'full'
+    
   }
 ];
  
