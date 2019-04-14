@@ -1,7 +1,7 @@
-import { Component, OnInit  } from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
-import { FirstWithTabsPage} from '../first-with-tabs/first-with-tabs.page';
-import {NavController} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { AuthService, IUser } from '../../services/auth/auth.service';
+import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,40 +10,53 @@ import {NavController} from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  private mailInput : string;
+  public mailInput: string;
 
-  private passwordInput : string;
+  public passwordInput: string;
+
+  public currentUser: IUser;
+  public logoPath = '../../../assets/Scrum.png';
+
+  constructor(private authService: AuthService, public navCtrl: NavController, private toastController: ToastController) { }
 
 
-  public logoPath : string = "../../../assets/Scrum.png";
 
-  constructor(private authService : AuthService , public navCtrl : NavController) { }
-
-
-  
 
   ngOnInit() {
-  
+
   }
 
 
-login(){
+  login() {
+    this.authService.loginWithEmailAndPasssword(this.mailInput, this.passwordInput).then(value => {
+      if (value === true) {
+        this.redirectTo('/menu/first');
+        this.mailInput = null;
+        this.passwordInput = null;
+      } else {
+        this.presentToast('Login failure');
+      }
+    }, ((error) => {
+      this.presentToast('Login failure');
+    }));
 
-this.authService.loginWithEmailAndPasssword(this.mailInput , this.passwordInput).then( resolve =>{
-  console.log(resolve  , " in page")
-  this.navCtrl.navigateForward('/menu/first');
-}, (error) => {
-  console.error(error ,  " in page")
-}) 
 
-}
+  }
 
 
 
 
-redirectTo(param : string){
-  this.navCtrl.navigateForward(param);
-}
+  redirectTo(param: string) {
+    this.navCtrl.navigateForward(param);
+  }
 
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
 
 }
