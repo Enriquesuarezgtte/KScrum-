@@ -59,4 +59,23 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
+  loginWithGoogle(){
+    this.authService.logInWithGoogle().then( data => {
+     if (data.idToken != null){
+      this.redirectTo('/menu/first');
+     }else{
+      this.presentToast('Login failure');
+     }
+
+    }).catch( error => {
+        console.log(error);
+        this.presentToast('Login failure');
+    });
+  }
+
+
+  loginWithGitHub(){
+    this.authService.logIngWithGitHub();
+  }
+
 }
