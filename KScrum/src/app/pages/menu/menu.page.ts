@@ -1,7 +1,7 @@
 import { LoginPage } from './../login/login.page';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import {AuthService, IUser} from '../../services/auth/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
