@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, IUser } from '../../services/auth/auth.service';
+import { AuthService} from '../../services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import {IUser} from '../../models/User.model';
 
 @Component({
   selector: 'app-login',
@@ -59,22 +60,22 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  loginWithGoogle(){
-    this.authService.logInWithGoogle().then( data => {
-     if (data.idToken != null){
-      this.redirectTo('/menu/first');
-     }else{
-      this.presentToast('Login failure');
-     }
-
-    }).catch( error => {
-        console.log(error);
+  loginWithGoogle() {
+    this.authService.logInWithGoogle().then(data => {
+      if (data.idToken != null) {
+        this.redirectTo('/menu/first');
+      } else {
         this.presentToast('Login failure');
+      }
+
+    }).catch(error => {
+      console.log(error);
+      this.presentToast('Login failure');
     });
   }
 
 
-  loginWithGitHub(){
+  loginWithGitHub() {
     this.authService.logIngWithGitHub();
   }
 
