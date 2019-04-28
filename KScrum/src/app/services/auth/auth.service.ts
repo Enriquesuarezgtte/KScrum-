@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 
@@ -24,11 +26,19 @@ export class AuthService {
 
   currentUser: IUser;
 
+  webApiKey : string;
 
-  constructor(public auth: AngularFireAuth) {
+
+
+
+
+  constructor(public auth: AngularFireAuth, public googlePlus: GooglePlus) {
     this.currentUser = new IUser;
+     this.webApiKey = '173697716170-75cl00gilu525kpvmt1akoj0qbckcb0b.apps.googleusercontent.com';
 
   }
+
+
 
 
 
@@ -57,7 +67,7 @@ export class AuthService {
     });
   }
 
-  registerUserWithEmailAndPassword(email: string, password: string) : Promise< boolean>  {
+  registerUserWithEmailAndPassword(email: string, password: string): Promise<boolean> {
     return this.auth.auth.createUserWithEmailAndPassword(email, password).then(resolve => {
       if (resolve != null) {
 
@@ -70,7 +80,7 @@ export class AuthService {
       } else {
         return false;
       }
-    } ,  (error => {
+    }, (error => {
       console.error(error);
       return false;
     }));
@@ -82,5 +92,43 @@ export class AuthService {
   }
 
 
+  logInWithGoogle() : Promise<any> {
+
+     return this.googlePlus.login({'webClientId': this.webApiKey })
+      .then(res => {
+        console.log(res);
+        const googleCredential = firebase.auth.GoogleAuthProvider.credential(res.idToken);
+        this.auth.auth.signInWithCredential(googleCredential).then (resolve => {
+          console.log(resolve);
+          this.currentUser.email = resolve.email;
+          this.currentUser.UUID = resolve.uid;
+          this.currentUser.displayName = resolve.displayName;
+          this.currentUser.imageUrl = resolve.photoURL;
+
+          console.log(this.currentUser);
+        }).catch(error => {
+          console.log(error);
+        });
+          return res;
+      })
+      .catch(err => {
+        console.error(err);
+        return false;
+      });
+  }
+
+  logIngWithGitHub(){
+    const provider = new firebase.auth.GithubAuthProvider();
+   
+    console.log('Estoy en el provider');
+    this.auth.auth.signInWithPopup(provider)
+    .then(result => {
+      var user = result.user;
+      console.log(user);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
 
 }
