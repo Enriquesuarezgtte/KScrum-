@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService} from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import {IUser} from '../../models/User.model';
-
+import { IUser } from '../../models/User.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,7 +13,7 @@ export class LoginPage implements OnInit {
   public mailInput: string;
 
   public passwordInput: string;
-
+  
   public currentUser: IUser;
   public logoPath = '../../../assets/Scrum.png';
 
@@ -78,5 +77,7 @@ export class LoginPage implements OnInit {
   loginWithGitHub() {
     this.authService.logIngWithGitHub();
   }
+
+
 
 }

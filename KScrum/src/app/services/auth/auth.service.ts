@@ -4,7 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import {IUser} from '../../models/User.model';
+import { IUser } from '../../models/User.model';
+import { webApikey } from '../../../environments/environment';
 
 
 
@@ -18,16 +19,12 @@ export class AuthService {
 
   currentUser: IUser;
 
-  webApiKey : string;
-
 
 
 
 
   constructor(public auth: AngularFireAuth, public googlePlus: GooglePlus) {
     this.currentUser = new IUser;
-     this.webApiKey = '173697716170-75cl00gilu525kpvmt1akoj0qbckcb0b.apps.googleusercontent.com';
-
   }
 
 
@@ -36,6 +33,7 @@ export class AuthService {
 
   getCurrentUser() {
     return this.currentUser;
+
   }
 
   loginWithEmailAndPasssword(email: string, password: string): Promise<boolean> {
@@ -65,8 +63,7 @@ export class AuthService {
 
         this.currentUser.email = resolve.user.email;
         this.currentUser.UUID = resolve.user.uid;
-        this.currentUser.displayName = resolve.user.displayName;
-        this.currentUser.imageUrl = resolve.user.photoURL;
+
 
         return true;
       } else {
@@ -84,13 +81,13 @@ export class AuthService {
   }
 
 
-  logInWithGoogle() : Promise<any> {
+  logInWithGoogle(): Promise<any> {
 
-     return this.googlePlus.login({'webClientId': this.webApiKey })
+    return this.googlePlus.login({ 'webClientId': webApikey })
       .then(res => {
         console.log(res);
         const googleCredential = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-        this.auth.auth.signInWithCredential(googleCredential).then (resolve => {
+        this.auth.auth.signInWithCredential(googleCredential).then(resolve => {
           console.log(resolve);
           this.currentUser.email = resolve.email;
           this.currentUser.UUID = resolve.uid;
@@ -101,26 +98,80 @@ export class AuthService {
         }).catch(error => {
           console.log(error);
         });
-          return res;
+        return res;
       })
       .catch(err => {
         console.error(err);
         return false;
       });
   }
+  
 
-  logIngWithGitHub(){
+  logIngWithGitHub() {
     const provider = new firebase.auth.GithubAuthProvider();
-   
+
     console.log('Estoy en el provider');
     this.auth.auth.signInWithPopup(provider)
-    .then(result => {
-      var user = result.user;
-      console.log(user);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .then(result => {
+        var user = result.user;
+        console.log(user);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
+
+
+
+  updateFirebaseName(displayNameParam: string): Promise<boolean> {
+    return this.auth.auth.currentUser.updateProfile({
+      displayName: displayNameParam
+    }).then(() => {
+      this.currentUser.displayName = displayNameParam;
+      console.log('updated user Name  Successfully');
+      return true;
+    }).catch((error) => {
+      console.log('update user Name  failed', error);
+      return false;
+    });
+
+
+  }
+
+  updateFirebaseUser(displayNameParam: string, userPhoto: string): Promise<boolean> {
+
+    return this.auth.auth.currentUser.updateProfile({
+      displayName: displayNameParam,
+      photoURL: userPhoto
+    }).then(() => {
+      this.currentUser.displayName = displayNameParam;
+      this.currentUser.imageUrl = userPhoto;
+      console.log('updated user data Successfully');
+      return true;
+    }).catch((error) => {
+      console.log('update userName  failed', error);
+      return false;
+    });
+
+
+  }
+
+  updateFirebasePhoto(userPhoto: string): Promise<boolean> {
+
+    return this.auth.auth.currentUser.updateProfile({
+      photoURL: userPhoto
+    }).then(() => {
+      this.currentUser.imageUrl = userPhoto;
+      console.log('updated photo  Successfully');
+      return true;
+    }).catch(() => {
+      console.log('update user Name  failed');
+      return false;
+    });
+
+
+  }
+
+
 
 }

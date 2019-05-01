@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false ,
-  firebaseConfig : {
+  production: false,
+  firebaseConfig: {
     apiKey: "AIzaSyCfBjFWfuKGbC-9FS63lEyJ6WqCEuCIipE",
     authDomain: "kscrum-354e7.firebaseapp.com",
     databaseURL: "https://kscrum-354e7.firebaseio.com",
@@ -14,6 +14,8 @@ export const environment = {
   }
 
 };
+
+export const webApikey = '173697716170-75cl00gilu525kpvmt1akoj0qbckcb0b.apps.googleusercontent.com';
 
 /*
  * For easier debugging in development mode, you can import the following file

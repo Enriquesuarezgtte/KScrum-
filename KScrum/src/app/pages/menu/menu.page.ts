@@ -1,7 +1,9 @@
 import { LoginPage } from './../login/login.page';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import {AuthService} from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { IUser } from '../../models/User.model';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
@@ -10,6 +12,7 @@ import {AuthService} from '../../services/auth/auth.service';
 export class MenuPage implements OnInit {
   selectedPath = '';
 
+  public currentUser: IUser;
   pages = [
     {
       title: 'Projects',
@@ -41,19 +44,26 @@ export class MenuPage implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
+        console.log("on router", this.selectedPath );
       }
     });
   }
 
 
+
+  getUserData() {
+    this.currentUser = this.auth.getCurrentUser();
+    console.log(this.currentUser);
+  }
+
   logOut() {
- this.auth.logOut().then((value) => {
-   var currentUser  = this.auth.getCurrentUser();
-  console.log('sign out succesfully ' , currentUser);
-  this.router.navigateByUrl('/login');
- } , ((error) => {
-  console.error(error);
- }));
+    this.auth.logOut().then(() => {
+      this.currentUser = this.auth.getCurrentUser();
+      console.log('sign out succesfully ', this.currentUser);
+      this.router.navigateByUrl('/login');
+    }, ((error) => {
+      console.error(error);
+    }));
 
   }
 
@@ -62,5 +72,8 @@ export class MenuPage implements OnInit {
 
 
   ngOnInit() {
+    this.getUserData();
   }
-}
+
+
+  }
