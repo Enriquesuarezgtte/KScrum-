@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 
@@ -26,11 +28,17 @@ export class AuthService {
 
   webApiKey : string;
 
-  constructor(public auth: AngularFireAuth) {
+
+
+
+
+  constructor(public auth: AngularFireAuth, public googlePlus: GooglePlus) {
     this.currentUser = new IUser;
      this.webApiKey = '173697716170-75cl00gilu525kpvmt1akoj0qbckcb0b.apps.googleusercontent.com';
 
   }
+
+
 
 
 
@@ -59,7 +67,7 @@ export class AuthService {
     });
   }
 
-  registerUserWithEmailAndPassword(email: string, password: string) : Promise< boolean>  {
+  registerUserWithEmailAndPassword(email: string, password: string): Promise<boolean> {
     return this.auth.auth.createUserWithEmailAndPassword(email, password).then(resolve => {
       if (resolve != null) {
 
@@ -72,7 +80,7 @@ export class AuthService {
       } else {
         return false;
       }
-    } ,  (error => {
+    }, (error => {
       console.error(error);
       return false;
     }));
@@ -109,18 +117,21 @@ export class AuthService {
       });
   }
 
-  logIngWithGitHub()  {
+  logIngWithGitHub()   {
+   
     var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider).then(function() {
+   
+    this.auth.auth.signInWithRedirect(provider).then(() =>{
       return firebase.auth().getRedirectResult();
-    }).then(function(result) {
-
+    }).then( result => {
+      // This gives you a Google Access Token.
+      // You can use it to access the Google API.
+      console.log(result);
       var token = result.credential;
-    
+      // The signed-in user info.
       var user = result.user;
       // ...
-    }).catch(function(error) {
-
+    }).catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
     });
