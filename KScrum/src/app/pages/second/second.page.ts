@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IUser} from '../../models/User.model';
 
 @Component({
   selector: 'app-second',

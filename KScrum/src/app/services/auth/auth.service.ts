@@ -4,16 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import {IUser} from '../../models/User.model';
 
-
-
-export class IUser {
-  email: string;
-  UUID: string;
-  displayName: string;
-  imageUrl: string;
-
-}
 
 
 
@@ -128,13 +120,13 @@ export class AuthService {
       // You can use it to access the Google API.
       console.log(result);
       var token = result.credential;
-      // The signed-in user info.
       var user = result.user;
-      // ...
+      // The signed-in user info.
     }).catch(error => {
+      // ...
       var errorCode = error.code;
       var errorMessage = error.message;
     });
-    
   } 
+    
 }
