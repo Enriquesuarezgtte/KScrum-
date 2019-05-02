@@ -2,10 +2,15 @@
 
 <ion-app>
     <ion-header>
-      <ion-toolbar color="dark">
-        <ion-title>Tareas</ion-title>
+      <ion-toolbar color="primary">
+    
+          <ion-title>Tareas</ion-title>
+
+        
+        
+        
       </ion-toolbar>
-      <ion-toolbar color="dark">
+      <ion-toolbar color="primary">
         <ion-segment scrollable (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment" >
           <ion-segment-button value="0" checked>
             <ion-icon name="alarm"></ion-icon>
@@ -30,12 +35,15 @@
             <ion-list>
                 <ion-item *ngFor="let task of tasks" class="item-nat">
                   <ion-card>
-                      <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
+                    <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
                         <img src="{{task.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task.nombre}}</ion-text>
-                    </ion-item>    
+                      <ion-label>
+                       <h2>{{task.nombre}}</h2> 
+                     <p>{{task.descripcion}}</p></ion-label>
+                    </ion-item> 
+                      
                   </ion-card>
                 </ion-item>
             </ion-list>
@@ -46,12 +54,14 @@
             <ion-list>
                 <ion-item *ngFor="let task2 of tasks2" class="item-nat">
                   <ion-card>
-                      <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
+                    <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
                         <img src="{{task2.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task2.nombre}}</ion-text>
-                    </ion-item>    
+                      <ion-label>
+                       <h2>{{task2.nombre}}</h2> 
+                     <p>{{task2.descripcion}}</p></ion-label>
+                    </ion-item>     
                   </ion-card>
                 </ion-item>
             </ion-list>

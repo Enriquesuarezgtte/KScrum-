@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, IUser } from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-
+import { IUser } from '../../models/User.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   public mailInput: string;
 
   public passwordInput: string;
-
+  
   public currentUser: IUser;
   public logoPath = '../../../assets/Scrum.png';
 
@@ -58,5 +58,26 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+
+  loginWithGoogle() {
+    this.authService.logInWithGoogle().then(data => {
+      if (data.idToken != null) {
+        this.redirectTo('/menu/first');
+      } else {
+        this.presentToast('Login failure');
+      }
+
+    }).catch(error => {
+      console.log(error);
+      this.presentToast('Login failure');
+    });
+  }
+
+
+  loginWithGitHub() {
+    this.authService.logIngWithGitHub();
+  }
+
+
 
 }

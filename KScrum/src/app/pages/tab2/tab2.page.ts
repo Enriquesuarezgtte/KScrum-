@@ -14,44 +14,55 @@ export class Tab2Page implements OnInit {
     this.tasks=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PBI 1"
+         "nombre":"               PBI 1",
+         "descripcion":"Realizadas 5 de 9 subtareas"
+
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PBI 2"
+       "nombre":"                 PBI 2",
+       "descripcion":"Realizadas 1 de 4 tareas"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 3"
+        "nombre":"                PBI 3",
+        "descripcion":"Realizadas 5 de 6 tareas"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 4"
+        "nombre":"                PBI 4",
+        "descripcion":"Realizadas 1 de 5 tareas"
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PBI 5"
+        "nombre":"                 PBI 5",
+        "descripcion":"Realizadas 7 de 9 tareas"
      }]
      this.tasks2=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
-         "nombre":"               PBI 6"
+         "nombre":"               PBI 6",
+         "descripcion":"Tarea sin empezar, pendiente para el día 05/11 "
        },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png", 
-       "nombre":"                 PBI 7"
+       "nombre":"                 PBI 7",
+       "descripcion":"Tarea sin empezar, pendiente para el día 07/11 "
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 8"
+        "nombre":"                PBI 8",
+        "descripcion":"Tarea sin empezar, pendiente para el día 05/12 "
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                PBI 9"
+        "nombre":"                PBI 9",
+        "descripcion":"Tarea sin empezar, pendiente para el día 22/12 "
      },
      {
        "imagen":"../../../assets/drawable-xhdpi-icon.png",
-        "nombre":"                 PBI 10"
+        "nombre":"                 PBI 10",
+        "descripcion":"Tarea sin empezar, pendiente para el día 25/12"
      }]
      this.tasks3=[
       {

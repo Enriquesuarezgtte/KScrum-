@@ -22,13 +22,11 @@
   <ion-label  >Or </ion-label>
   </div>
 <div class="socialNButtons">
-  <ion-button   id ="googleButton" class="general"   >Sign in     <ion-icon name="logo-google" ></ion-icon></ion-button>
-  <ion-button   id ="facebookButton" class="general" >Sign in     <ion-icon name="logo-facebook"></ion-icon></ion-button>
-  <ion-button   id ="twitterButton"  class="general" >Sign in     <ion-icon name="logo-twitter"></ion-icon></ion-button>
+  <ion-button   id ="googleButton" class="general"  (click)="loginWithGoogle()" >Sign in <ion-icon name="logo-google" ></ion-icon></ion-button>
+  <ion-button id="githubButton" class="general" (click) ="loginWithGitHub()" > Sing in  <ion-icon name="logo-github" ></ion-icon></ion-button>
 </div>
 <div id="centered">
-<ion-icon class="icon"name="logo-twitter"></ion-icon>
-<ion-icon class="icon" name="logo-facebook"></ion-icon>
+<ion-icon class="icon" name="logo-github"></ion-icon>
 <ion-icon class="icon" name ="logo-google"></ion-icon>
 </div>
 </ion-content>
