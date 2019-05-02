@@ -102,8 +102,7 @@ export class AuthService {
           console.log(error);
         });
           return res;
-      })
-      .catch(err => {
+      }).catch(err => {
         console.error(err);
         return false;
       });
@@ -111,15 +110,20 @@ export class AuthService {
 
   logIngWithGitHub()   {
    
-    var provider = new firebase.auth.GoogleAuthProvider();
-   
+/*
     this.auth.auth.signInWithRedirect(provider).then(() =>{
-      return firebase.auth().getRedirectResult();
+      return this.auth.auth.getRedirectResult();
     }).then( result => {
-      // This gives you a Google Access Token.
+      // This gives you a Google Access Token.ro
       // You can use it to access the Google API.
       console.log(result);
-      var token = result.credential;
+      var token = result.user.getIdToken()
+      .then(token => {
+        console.log("Token:", token);
+      })
+      .catch(error => {
+        console.log("Error getting token:", error);
+      });;
       var user = result.user;
       // The signed-in user info.
     }).catch(error => {
@@ -127,6 +131,9 @@ export class AuthService {
       var errorCode = error.code;
       var errorMessage = error.message;
     });
-  } 
-    
+  } */
+  var provider = new firebase.auth.GithubAuthProvider();
+  provider.addScope('repo');
+this.auth.auth.signInWithRedirect(provider);
+  }    
 }
