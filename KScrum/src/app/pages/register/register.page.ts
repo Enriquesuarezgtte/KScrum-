@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { AuthService } from '../../services/auth/auth.service';
-import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -9,7 +8,9 @@ import { Platform } from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(public nav: NavController, public auth: AuthService,private alert: AlertController, private toastController: ToastController,public platform: Platform) { 
+  constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
+   ) {
+  }
 
   }
 
@@ -31,7 +32,17 @@ export class RegisterPage implements OnInit {
     this.auth.registerUserWithEmailAndPassword(this.mailInput, this.passwordInput).then((resolve) => {
 
       if (resolve === true) {
-        this.nav.navigateForward('menu/first');
+        this.auth.updateFirebaseName(this.nameInput).then(value => {
+          console.log("i am value", value);
+          if (value === true) {
+            this.nav.navigateForward('menu/first');
+          } else {
+            this.presentToast('Registry error');
+          }
+        }).catch(value => {
+          console.log(value);
+          this.presentToast('Registry error');
+        });
       } else {
         this.presentToast('Registry error');
       }
