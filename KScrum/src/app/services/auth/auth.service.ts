@@ -108,8 +108,6 @@ export class AuthService {
   provider.addScope('repo');
 this.auth.auth.signInWithRedirect(provider);
   }    
-  }
-
 
 
   updateFirebaseName(displayNameParam: string): Promise<boolean> {
@@ -123,5 +121,5 @@ this.auth.auth.signInWithRedirect(provider);
       console.log('update user Name  failed', error);
       return false;
     });
-  } */
+  } 
 }
