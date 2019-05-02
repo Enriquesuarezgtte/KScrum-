@@ -2,10 +2,15 @@
 
 <ion-app>
     <ion-header>
-      <ion-toolbar color="dark">
-        <ion-title>Tareas</ion-title>
+      <ion-toolbar color="primary">
+    
+          <ion-title>Tareas</ion-title>
+
+        
+        
+        
       </ion-toolbar>
-      <ion-toolbar color="dark">
+      <ion-toolbar color="primary">
         <ion-segment scrollable (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment" >
           <ion-segment-button value="0" checked>
             <ion-icon name="alarm"></ion-icon>
@@ -38,7 +43,7 @@
                        <h2>{{task.nombre}}</h2> 
                      <p>{{task.descripcion}}</p></ion-label>
                     </ion-item> 
-                    </ion-item>    
+                      
                   </ion-card>
                 </ion-item>
             </ion-list>

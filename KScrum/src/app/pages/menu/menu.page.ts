@@ -17,21 +17,15 @@ export class MenuPage implements OnInit {
     {
       title: 'Projects',
       icon: 'folder-open',
-      url: '/menu/first'
+      url: '/menu/first/tabs/projects'
     }
     , {
       title: 'Manage Projects',
       children: [
         {
           title: 'Create Project',
-          url: '/menu/second',
-          icon: 'folder-open'
-        },
-        {
-          title: 'Manage Projects',
-          url: '/menu/second/details',
-          icon: 'logo-game-controller-b'
-
+          url: '/menu/projectEdition',
+          icon: 'create'
         }
 
       ]
