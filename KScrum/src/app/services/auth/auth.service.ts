@@ -104,17 +104,10 @@ export class AuthService {
   
 
   logIngWithGitHub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-
-    console.log('Estoy en el provider');
-    this.auth.auth.signInWithPopup(provider)
-      .then(result => {
-        var user = result.user;
-        console.log(user);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  var provider = new firebase.auth.GithubAuthProvider();
+  provider.addScope('repo');
+this.auth.auth.signInWithRedirect(provider);
+  }    
   }
 
 
@@ -131,8 +124,4 @@ export class AuthService {
       return false;
     });
   } */
-  var provider = new firebase.auth.GithubAuthProvider();
-  provider.addScope('repo');
-this.auth.auth.signInWithRedirect(provider);
-  }    
 }
