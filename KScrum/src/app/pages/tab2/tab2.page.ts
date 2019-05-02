@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Platform, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -10,7 +12,11 @@ export class Tab2Page implements OnInit {
   public tasks2 : Array<Object>=[];
   public tasks3 : Array<Object>=[];
 
-  constructor() { 
+  constructor( public navCtrl: NavController,    private router: Router,
+    private platform: Platform) { 
+
+    
+
     this.tasks=[
       {
         "imagen":"../../../assets/drawable-xhdpi-icon.png",
@@ -96,6 +102,16 @@ export class Tab2Page implements OnInit {
   }
  
   ngOnInit() {
+  }
+
+  redirectTo(param: string) {
+    this.navCtrl.navigateBack(param);
+  }
+  @HostListener('document:ionBackButton', ['$event'])
+  private overrideHardwareBackAction($event: any) {
+      $event.detail.register(100, async () => {
+        this.router.navigateByUrl('/menu/first/tabs/projects/details');
+      });
   }
 
 }

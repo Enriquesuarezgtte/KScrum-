@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="test">
       <ion-buttons slot="start">
           <ion-back-button defaulthref=""></ion-back-button>
         </ion-buttons>
@@ -8,16 +8,18 @@
   </ion-toolbar>
 </ion-header>
  
-<ion-content padding >
+<ion-content color="light">
 
     <ion-list>
         <ion-item *ngFor="let sprint of sprints" class="item-nat">
           <ion-card>
-              <ion-item routerLink="/menu/first/tabs/tab2"  class="activated"  max-weight=100%>
+              <ion-item routerLink="/menu/first/tabs/tab2" routerDirection="forward" class="activated"  max-weight=100%>
               <ion-thumbnail>
                 <img src="{{sprint.imagen}}" />
               </ion-thumbnail>
-              <ion-label>{{sprint.nombre}}</ion-label>
+              <ion-label>
+                <h2>{{sprint.title}}</h2>
+              <p>{{sprint.percentage}}</p></ion-label>
             </ion-item>    
           </ion-card>
         </ion-item>

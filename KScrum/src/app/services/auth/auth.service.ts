@@ -19,10 +19,7 @@ export class AuthService {
 
   currentUser: IUser;
 
-
-
-
-
+  webApiKey : string;
   constructor(public auth: AngularFireAuth, public googlePlus: GooglePlus) {
     this.currentUser = new IUser;
   }
@@ -98,9 +95,8 @@ export class AuthService {
         }).catch(error => {
           console.log(error);
         });
-        return res;
-      })
-      .catch(err => {
+          return res;
+      }).catch(err => {
         console.error(err);
         return false;
       });
@@ -108,17 +104,10 @@ export class AuthService {
   
 
   logIngWithGitHub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-
-    console.log('Estoy en el provider');
-    this.auth.auth.signInWithPopup(provider)
-      .then(result => {
-        var user = result.user;
-        console.log(user);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  var provider = new firebase.auth.GithubAuthProvider();
+  provider.addScope('repo');
+this.auth.auth.signInWithRedirect(provider);
+  }    
   }
 
 
@@ -134,44 +123,5 @@ export class AuthService {
       console.log('update user Name  failed', error);
       return false;
     });
-
-
-  }
-
-  updateFirebaseUser(displayNameParam: string, userPhoto: string): Promise<boolean> {
-
-    return this.auth.auth.currentUser.updateProfile({
-      displayName: displayNameParam,
-      photoURL: userPhoto
-    }).then(() => {
-      this.currentUser.displayName = displayNameParam;
-      this.currentUser.imageUrl = userPhoto;
-      console.log('updated user data Successfully');
-      return true;
-    }).catch((error) => {
-      console.log('update userName  failed', error);
-      return false;
-    });
-
-
-  }
-
-  updateFirebasePhoto(userPhoto: string): Promise<boolean> {
-
-    return this.auth.auth.currentUser.updateProfile({
-      photoURL: userPhoto
-    }).then(() => {
-      this.currentUser.imageUrl = userPhoto;
-      console.log('updated photo  Successfully');
-      return true;
-    }).catch(() => {
-      console.log('update user Name  failed');
-      return false;
-    });
-
-
-  }
-
-
-
+  } */
 }
