@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NavController} from '@ionic/angular';
-import {AuthService} from '../../services/auth/auth.service';
-
+import { NavController, ToastController, AlertController} from '@ionic/angular';
+import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -9,31 +8,61 @@ import {AuthService} from '../../services/auth/auth.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(public nav : NavController , public auth : AuthService) { }
+  public nameInput: string;
+
+  public mailInput: string;
+
+  public passwordInput: string;
+
+  public logoPath = '../../../assets/Scrum.png';
+  constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
+   ) {
+  }
+
   
-  public nameInput : string;
 
-  public mailInput : string;
 
-  public passwordInput : string;
 
 
   ngOnInit() {
   }
 
-  public logoPath : string = "../../../assets/Scrum.png";
+  registry() {
+    console.log('trying to registry');
+    this.auth.registerUserWithEmailAndPassword(this.mailInput, this.passwordInput).then((resolve) => {
 
-  registry(){
-    console.log("trying to registry")
-    this.auth.registerUserWithEmailAndPassword(this.mailInput , this.passwordInput).then((resolve) =>{
-      
-      console.log("Logged successfully" , resolve);
-      this.nav.navigateForward('menu/first');
-    } , (error) => {
-      console.log("login error" , error);
+      if (resolve === true) {
+        this.auth.updateFirebaseName(this.nameInput).then(value => {
+          console.log("i am value", value);
+          if (value === true) {
+            this.nav.navigateForward('menu/first');
+          } else {
+            this.presentToast('Registry error');
+          }
+        }).catch(value => {
+          console.log(value);
+          this.presentToast('Registry error');
+        });
+      } else {
+        this.presentToast('Registry error');
+      }
+      ;
+    }, (error) => {
+      console.log('registry error', error);
+      this.presentToast('Registry error');
     });
 
-    this.nav.navigateForward('menu/first');
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+  goBack() {
+    this.nav.back();
   }
 
 }

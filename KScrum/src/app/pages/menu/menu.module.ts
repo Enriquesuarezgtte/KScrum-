@@ -1,3 +1,4 @@
+import { ProjectEditionPageModule } from './../project-edition/project-edition.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +16,12 @@ const routes: Routes = [
         loadChildren: '../first-with-tabs/first-with-tabs.module#FirstWithTabsPageModule'
       },
       {
-        path: 'second',
-        loadChildren: '../second/second.module#SecondPageModule'
+        path: 'projectEdition',
+        loadChildren: '../project-edition/project-edition.module#ProjectEditionPageModule'
       },
       {
-        path: 'second/details',
-        loadChildren: '../details/details.module#DetailsPageModule'
+        path: 'projectEdition/:id',
+        loadChildren:'../project-edition/project-edition.module#ProjectEditionPageModule'
       }
     ]
   }

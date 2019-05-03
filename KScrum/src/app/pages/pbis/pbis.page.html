@@ -1,21 +1,21 @@
-
-
-<ion-app>
-    <ion-header>
-      <ion-toolbar color="dark">
+ <ion-header>
+      <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+              <ion-back-button routerLink="/menu/first/tabs/projects/details" routerDirection="back"></ion-back-button>
+            </ion-buttons>
         <ion-title>Tareas</ion-title>
       </ion-toolbar>
-      <ion-toolbar color="dark">
+      <ion-toolbar color="primary">
         <ion-segment scrollable (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment" >
           <ion-segment-button value="0" checked>
             <ion-icon name="alarm"></ion-icon>
-            <ion-label>haciendo</ion-label>
+            <ion-label>Haciendo</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="1">
+          <ion-segment-button value="1" checked>
             <ion-icon name="cloud-upload"></ion-icon>
             <ion-label>Por hacer</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="2">
+          <ion-segment-button value="2" checked>
             <ion-icon name="paper"></ion-icon>
             <ion-label>Hecho</ion-label>
           </ion-segment-button>
@@ -30,12 +30,14 @@
             <ion-list>
                 <ion-item *ngFor="let task of tasks" class="item-nat">
                   <ion-card>
-                      <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
+                    <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
                         <img src="{{task.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task.nombre}}</ion-text>
-                    </ion-item>    
+                      <ion-label>
+                       <h2>{{task.nombre}}</h2> 
+                     <p>{{task.descripcion}}</p></ion-label>
+                    </ion-item>  
                   </ion-card>
                 </ion-item>
             </ion-list>
@@ -46,12 +48,14 @@
             <ion-list>
                 <ion-item *ngFor="let task2 of tasks2" class="item-nat">
                   <ion-card>
-                      <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
+                    <ion-item href="/menu/first/tabs/tab2/tab2-html" class="activated"  max-weight=100%>
                       <ion-thumbnail>
                         <img src="{{task2.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task2.nombre}}</ion-text>
-                    </ion-item>    
+                      <ion-label>
+                       <h2>{{task2.nombre}}</h2> 
+                     <p>{{task2.descripcion}}</p></ion-label>
+                    </ion-item>     
                   </ion-card>
                 </ion-item>
             </ion-list>
@@ -65,8 +69,9 @@
                       <ion-thumbnail>
                         <img src="{{task3.imagen}}" />
                       </ion-thumbnail>
-                      <ion-text>{{task3.nombre}}</ion-text>
-                      <ion-label>{{task3.descripcion}}</ion-label>
+                      <ion-label>
+                       <h2>{{task3.nombre}}</h2> 
+                     <p>{{task3.descripcion}}</p></ion-label>
                     </ion-item>    
                   </ion-card>
                 </ion-item>
@@ -75,4 +80,4 @@
 
       </ion-slides>
     </ion-content>
-  </ion-app>
+

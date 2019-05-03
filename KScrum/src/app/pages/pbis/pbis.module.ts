@@ -1,3 +1,4 @@
+import { PbisPage } from './pbis.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -5,12 +6,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab1Page } from './tab1.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab1Page
+    component: PbisPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab1Page]
+  declarations: [PbisPage]
 })
-export class Tab1PageModule {}
+export class PbisPageModule {}

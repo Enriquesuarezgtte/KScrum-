@@ -2,3 +2,18 @@
 .active-item {
     border-left: 8px solid var(--ion-color-primary);
 }
+.active{
+    --color: #02c4ff;
+}
+
+.active-parent{
+    font-weight: 500;
+    
+
+}
+
+.sub-item{
+    padding-left: 20p;
+
+    font-size: small;
+}
