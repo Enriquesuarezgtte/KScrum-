@@ -6,4 +6,5 @@ export class Sprint {
     percentage: string;
     extraInfo: string;
     imagen: string;
+    projectId : string;
 }
