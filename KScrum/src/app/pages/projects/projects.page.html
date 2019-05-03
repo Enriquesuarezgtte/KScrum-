@@ -34,7 +34,7 @@
           </ion-card-content>
           <div class="ion-footer">
             <ion-buttons>
-              <ion-button color="primary" [routerLink]="['/menu/projectEdition' ,  project.id]">
+              <ion-button color="primary" (click)="dispatchUpdateRequest(project.id)" >
                 <ion-icon name="construct"></ion-icon>
               </ion-button>
               <ion-button color="danger" (click)="presentDeleteConfirm(project?.projectDisplayName , project.id)">
