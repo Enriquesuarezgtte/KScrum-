@@ -8,6 +8,12 @@
     </ion-header>
  
     <ion-content>
+      <ion-item *ngIf="this.currentUser != null" >
+        <ion-avatar item-start >
+          <img [src] = "this.currentUser.imageUrl"/>
+        </ion-avatar>
+        <ion-label color="dark">{{this.currentUser.displayName}}</ion-label>
+      </ion-item>
       <ion-list>
         <div *ngFor="let p of pages">
         <ion-menu-toggle auto-hide="false" *ngIf="p.url">

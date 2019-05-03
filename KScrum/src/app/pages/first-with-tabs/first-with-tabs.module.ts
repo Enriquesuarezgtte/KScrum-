@@ -22,8 +22,8 @@ const routes: Routes = [
         loadChildren: '../details/details.module#DetailsPageModule'
       },
       {
-        path: 'tab2',
-        loadChildren: '../tab2/tab2.module#Tab2PageModule'
+        path: 'pbis',
+        loadChildren: '../pbis/pbis.module#PbisPageModule'
       }
     ]
   }, { 

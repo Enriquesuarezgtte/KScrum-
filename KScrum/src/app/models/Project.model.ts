@@ -1,9 +1,12 @@
-export class IProject {
-    projectDisplayName: string
-    projectUUID: string
-    projectPhotoURL: string
-    projectDescription : string
-    projectMembers : Array<string>
+
+export interface IProjectInterface {
+    id? : string,
+    projectDisplayName: string,
+    projectPhotoURL: string,
+    projectDescription : string,
     projectLanguaje : String
-}
+  }
+
+
+
 
