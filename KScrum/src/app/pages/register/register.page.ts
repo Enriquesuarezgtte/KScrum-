@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-register',
@@ -11,6 +11,9 @@ export class RegisterPage implements OnInit {
   constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
    ) {
   }
+
+  }
+
 
   public nameInput: string;
 
@@ -57,6 +60,9 @@ export class RegisterPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  goBack() {
+    this.nav.back();
   }
 
 }

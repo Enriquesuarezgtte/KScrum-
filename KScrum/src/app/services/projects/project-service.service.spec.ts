@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ProjectServiceService } from './project-service.service';
-
+import { AngularFirestore } from "@angular/fire/firestore";
 describe('ProjectServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
