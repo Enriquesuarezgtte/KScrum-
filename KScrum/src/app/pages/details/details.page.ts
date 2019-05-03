@@ -17,13 +17,31 @@ export class DetailsPage implements OnInit {
  
   
   constructor(private sprintService:SprintServiceService, 
-    private activatedRoute: ActivatedRoute,private router: Router, public navCtrl: NavController) { }
+    private activatedRoute: ActivatedRoute,private router: Router, public navCtrl: NavController) {
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.idProj = params["projectId"];
+       console.log("from params " , this.idProj);
+     })
+     }
 
   ngOnInit() {
-    this.idProj = this.activatedRoute.snapshot.params.get('id');
+
+    if (!this.sprints && !this.sprints){
+      this.sprint = {} as Sprint;
+      this.sprints = {} as Observable<Sprint[]>;
+    }
+
+    console.log(this.idProj);
     this.sprints = this.sprintService.getSprints(this.idProj);
 
+
   }
+
+
+
+
+
+  
 
   create(sprint: Sprint){
     this.sprintService.createSprint(sprint);

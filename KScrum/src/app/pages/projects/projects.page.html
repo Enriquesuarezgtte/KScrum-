@@ -13,13 +13,13 @@
       <ion-item *ngFor="let project of projects | async " class="item-nat">
 
         <ion-card class="projectCard">
-          <ion-card-header class="cardHeader" routerLink="/menu/first/tabs/projects/details">
+          <ion-card-header class="cardHeader" (click)="dispatch(project.id)">
             <ion-card-title>{{project?.projectDisplayName}}</ion-card-title>
             <ion-card-subtitle>{{project?.projectLanguaje}} </ion-card-subtitle>
           </ion-card-header>
 
 
-          <ion-card-content [routerLink]="['/menu/first/tabs/projects/details',  project.id]">
+          <ion-card-content (click)="dispatch(project.id)">
 
             <img class="full-image" src="{{project?.projectPhotoURL}}" />
 
@@ -34,7 +34,7 @@
           </ion-card-content>
           <div class="ion-footer">
             <ion-buttons>
-              <ion-button color="primary" [routerLink]="['/menu/projectEdition' ,  project.id]">
+              <ion-button color="primary" (click)="dispatchUpdateRequest(project.id)" >
                 <ion-icon name="construct"></ion-icon>
               </ion-button>
               <ion-button color="danger" (click)="presentDeleteConfirm(project?.projectDisplayName , project.id)">
