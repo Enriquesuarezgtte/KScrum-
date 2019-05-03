@@ -19,7 +19,7 @@
           </ion-card-header>
 
 
-          <ion-card-content routerLink="/menu/first/tabs/projects/details">
+          <ion-card-content [routerLink]="['/menu/first/tabs/projects/details',  project.id]">
 
             <img class="full-image" src="{{project?.projectPhotoURL}}" />
 

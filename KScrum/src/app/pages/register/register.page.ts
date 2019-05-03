@@ -8,13 +8,6 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
-   ) {
-  }
-
-  }
-
-
   public nameInput: string;
 
   public mailInput: string;
@@ -22,6 +15,13 @@ export class RegisterPage implements OnInit {
   public passwordInput: string;
 
   public logoPath = '../../../assets/Scrum.png';
+  constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
+   ) {
+  }
+
+  
+
+
 
 
   ngOnInit() {

@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   public currentUser: IUser;
   public logoPath = '../../../assets/Scrum.png';
 
-  constructor(private authService: AuthService, public navCtrl: NavController, private platform: Platform,
+  constructor(private authService: AuthService, public navCtrl: NavController,
      private toastController: ToastController) { }
 
   ngOnInit() {
@@ -75,7 +75,6 @@ export class LoginPage implements OnInit {
   loginWithGitHub() {
     this.authService.logIngWithGitHub();
     window.close();
-    this.platform.backButton;
 
     this.redirectTo('/menu/first');
     
