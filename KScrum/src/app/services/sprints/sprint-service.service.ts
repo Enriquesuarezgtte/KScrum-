@@ -34,18 +34,8 @@ export class SprintServiceService {
     return this.sprintsCollection.add(sprint);
   }
   getSprints(projectId: string) : Observable<Sprint[]>{
-    return this.sprintsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map( a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          if(data.projectId==projectId){
-            return { id , ... data};
-          }
-        });
-      })
-    );;
-   }
+    return this.sprt;
+  }
 
 getSprint( sprintId: string) : Observable<Sprint>{
   return this.sprintsCollection.doc<Sprint>(sprintId).valueChanges().pipe(

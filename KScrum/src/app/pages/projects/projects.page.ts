@@ -82,6 +82,17 @@ export class ProjectsPage implements OnInit {
   }
 
 
+  dispatch(id: string) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        projectId: id
+      }
+    };
+    this.navController.navigateForward(['/menu/first/tabs/projects/details'] , navigationExtras);
+    //this.router.navigate(['/menu/projectEdition'], navigationExtras);
+  }
+
+
 
 
 }
