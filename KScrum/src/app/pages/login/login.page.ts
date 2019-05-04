@@ -18,7 +18,9 @@ export class LoginPage implements OnInit {
   public logoPath = '../../../assets/Scrum.png';
 
   constructor(private authService: AuthService, public navCtrl: NavController,
-     private toastController: ToastController) { }
+     private toastController: ToastController) { 
+       this.currentUser = {} as IUser;
+     }
 
   ngOnInit() {
 
@@ -32,10 +34,10 @@ export class LoginPage implements OnInit {
         this.mailInput = null;
         this.passwordInput = null;
       } else {
-        this.presentToast('Login failure');
+        this.presentToast('Login failure 1');
       }
     }, ((error) => {
-      this.presentToast('Login failure');
+      this.presentToast('Login failure 2');
     }));
 
 

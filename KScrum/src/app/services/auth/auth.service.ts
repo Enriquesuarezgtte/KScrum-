@@ -19,9 +19,9 @@ export class AuthService {
 
   currentUser: IUser;
 
-  webApiKey : string;
+  webApiKey: string;
   constructor(public auth: AngularFireAuth, public googlePlus: GooglePlus) {
-    this.currentUser = new IUser;
+    this.currentUser = {} as IUser;
   }
 
 
@@ -36,18 +36,23 @@ export class AuthService {
   loginWithEmailAndPasssword(email: string, password: string): Promise<boolean> {
     return this.auth.auth.signInWithEmailAndPassword(email, password).then(resolve => {
       if (resolve != null) {
+        console.log(resolve);
 
-        this.currentUser.email = resolve.user.email;
-        this.currentUser.UUID = resolve.user.uid;
-        this.currentUser.displayName = resolve.user.displayName;
-        this.currentUser.imageUrl = resolve.user.photoURL;
+        const user: IUser = {
+          UUID: resolve.user.uid,
+          email: resolve.user.email,
+          displayName: resolve.user.displayName,
+          imageUrl: resolve.user.photoURL
 
+        }
+        this.currentUser = user;
         return true;
       } else {
+        console.log("cool 1 ", resolve);
         return false;
       }
     }, (error) => {
-      console.error(error);
+      console.error('error', error);
       return false;
 
 
@@ -58,16 +63,21 @@ export class AuthService {
     return this.auth.auth.createUserWithEmailAndPassword(email, password).then(resolve => {
       if (resolve != null) {
 
-        this.currentUser.email = resolve.user.email;
-        this.currentUser.UUID = resolve.user.uid;
 
+        const user: IUser = {
+          UUID: resolve.user.uid,
+          email: resolve.user.email,
+          displayName: "",
+          imageUrl: ""
+
+        }
+        this.currentUser = user;
 
         return true;
       } else {
         return false;
       }
     }, (error => {
-      console.error(error);
       return false;
     }));
   }
@@ -95,19 +105,19 @@ export class AuthService {
         }).catch(error => {
           console.log(error);
         });
-          return res;
+        return res;
       }).catch(err => {
         console.error(err);
         return false;
       });
   }
-  
+
 
   logIngWithGitHub() {
-  var provider = new firebase.auth.GithubAuthProvider();
-  provider.addScope('repo');
-this.auth.auth.signInWithRedirect(provider);
-  }    
+    var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope('repo');
+    this.auth.auth.signInWithRedirect(provider);
+  }
 
 
   updateFirebaseName(displayNameParam: string): Promise<boolean> {
@@ -121,5 +131,5 @@ this.auth.auth.signInWithRedirect(provider);
       console.log('update user Name  failed', error);
       return false;
     });
-  } 
+  }
 }
