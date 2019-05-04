@@ -11,11 +11,11 @@ export class PbisPage implements OnInit {
   public tasks : Array<Object>=[];
   public tasks2 : Array<Object>=[];
   public tasks3 : Array<Object>=[];
+  public segment : string;
 
   constructor( public navCtrl: NavController,    private router: Router,
     private platform: Platform) { 
-
-    
+      this.segment = "1";    
 
     this.tasks=[
       {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController, AlertController} from '@ionic/angular';
+import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-register',
@@ -16,10 +16,10 @@ export class RegisterPage implements OnInit {
 
   public logoPath = '../../../assets/Scrum.png';
   constructor(public nav: NavController, public auth: AuthService, private toastController: ToastController
-   ) {
+  ) {
   }
 
-  
+
 
 
 
@@ -36,20 +36,25 @@ export class RegisterPage implements OnInit {
           console.log("i am value", value);
           if (value === true) {
             this.nav.navigateForward('menu/first');
+            this.mailInput = "";
+            this.nameInput = "";
+            this.passwordInput = "";
           } else {
-            this.presentToast('Registry error');
+            console.log(value);
+            this.presentToast('Registry error 1');
           }
         }).catch(value => {
           console.log(value);
-          this.presentToast('Registry error');
+          this.presentToast('Registry error 2');
         });
       } else {
-        this.presentToast('Registry error');
+        console.log(resolve);
+        this.presentToast('Registry error 3');
       }
       ;
     }, (error) => {
       console.log('registry error', error);
-      this.presentToast('Registry error');
+      this.presentToast('Registry error 4');
     });
 
   }
