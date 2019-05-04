@@ -13,14 +13,14 @@ export class LoginPage implements OnInit {
   public mailInput: string;
 
   public passwordInput: string;
-  
+
   public currentUser: IUser;
   public logoPath = '../../../assets/Scrum.png';
 
   constructor(private authService: AuthService, public navCtrl: NavController,
-     private toastController: ToastController) { 
-       this.currentUser = {} as IUser;
-     }
+    private toastController: ToastController) {
+    this.currentUser = {} as IUser;
+  }
 
   ngOnInit() {
 
@@ -76,12 +76,7 @@ export class LoginPage implements OnInit {
 
   loginWithGitHub() {
     this.authService.logIngWithGitHub();
-    window.close();
-
     this.redirectTo('/menu/first');
-    
-    console.log(window.location.port);
-
   }
 
 

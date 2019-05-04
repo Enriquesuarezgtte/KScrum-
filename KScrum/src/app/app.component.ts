@@ -1,4 +1,4 @@
-import { Component , ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Platform, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
 
 
-  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;  constructor(
+  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet; constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -22,6 +22,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
-  
+
 
 }

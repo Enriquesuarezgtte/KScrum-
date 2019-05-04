@@ -1,32 +1,38 @@
-<ion-header >
+<ion-header>
 </ion-header>
 
 
- 
+
 <ion-content padding id="generalBackground">
 
-<ion-img id ="logo" [src]="logoPath" ></ion-img>
-<div id="loginParams">
-    <ion-input id="mailInput" [(ngModel)]="mailInput" clearOnEdit="true" required="true" class="test" type="text" placeholder="Email"></ion-input>
-    <ion-input id="passwordInput" [(ngModel)]="passwordInput" clearOnEdit="true"  required="true" class="test" type="Password" placeholder="Password"></ion-input>
-</div>
-
-<ion-button   id ="loginButton"    (click)="login()">Login</ion-button>
-<div class="simpleText">
-<ion-label  >Don't have an account? </ion-label>
-</div>
-<div id="signUpParams" >
-<ion-button   id ="registerButton"  routerLink="/register" routerDirection="forward">Sign Up</ion-button>
-</div>
-<div class="orText">
-  <ion-label  >Or </ion-label>
+  <ion-img id="logo" [src]="logoPath"></ion-img>
+  <div id="loginParams">
+    <ion-input id="mailInput" [(ngModel)]="mailInput" clearOnEdit="true" required="true" class="test" type="text"
+      placeholder="Email"></ion-input>
+    <ion-input id="passwordInput" [(ngModel)]="passwordInput" clearOnEdit="true" required="true" class="test"
+      type="Password" placeholder="Password"></ion-input>
   </div>
-<div class="socialNButtons">
-  <ion-button   id ="googleButton" class="general"  (click)="loginWithGoogle()" >Sign in <ion-icon name="logo-google" ></ion-icon></ion-button>
-  <ion-button id="githubButton" class="general" (click) ="loginWithGitHub()" > Sing in  <ion-icon name="logo-github" ></ion-icon></ion-button>
-</div>
-<div id="centered">
-<ion-icon class="icon" name="logo-github"></ion-icon>
-<ion-icon class="icon" name ="logo-google"></ion-icon>
-</div>
+
+  <ion-button id="loginButton" (click)="login()">Login</ion-button>
+  <div class="simpleText">
+    <ion-label>Don't have an account? </ion-label>
+  </div>
+  <div id="signUpParams">
+    <ion-button id="registerButton" routerLink="/register" routerDirection="forward">Sign Up</ion-button>
+  </div>
+  <div class="orText">
+    <ion-label>Or </ion-label>
+  </div>
+  <div class="socialNButtons">
+    <ion-button id="googleButton" class="general" (click)="loginWithGoogle()">Sign in <ion-icon name="logo-google">
+      </ion-icon>
+    </ion-button>
+    <ion-button id="githubButton" class="general" (click)="loginWithGitHub()"> Sing in <ion-icon name="logo-github">
+      </ion-icon>
+    </ion-button>
+  </div>
+  <div id="centered">
+    <ion-icon class="icon" name="logo-github"></ion-icon>
+    <ion-icon class="icon" name="logo-google"></ion-icon>
+  </div>
 </ion-content>
