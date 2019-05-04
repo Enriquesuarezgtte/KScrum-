@@ -18,7 +18,7 @@ export class ProjectsPage implements OnInit {
 
 
   constructor(public router: Router, public projectsService: ProjectServiceService,
-    private alertController: AlertController , public navController : NavController) {
+    private alertController: AlertController, public navController: NavController) {
 
   }
 
@@ -77,7 +77,7 @@ export class ProjectsPage implements OnInit {
         projectId: id
       }
     };
-    this.navController.navigateForward(['/menu/projectEdition'] , navigationExtras);
+    this.navController.navigateForward(['/menu/projectEdition'], navigationExtras);
     //this.router.navigate(['/menu/projectEdition'], navigationExtras);
   }
 
@@ -88,7 +88,7 @@ export class ProjectsPage implements OnInit {
         projectId: id
       }
     };
-    this.navController.navigateForward(['/menu/first/tabs/projects/details'] , navigationExtras);
+    this.navController.navigateForward(['/menu/first/tabs/projects/details'], navigationExtras);
     //this.router.navigate(['/menu/projectEdition'], navigationExtras);
   }
 

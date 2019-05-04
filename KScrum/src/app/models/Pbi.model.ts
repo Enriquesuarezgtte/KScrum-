@@ -1,5 +1,5 @@
 export interface IPbi {
-    id :string,
+    id: string,
     projectId: string,
     PbiTitle: string,
     PbiDescription: string,
