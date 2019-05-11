@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Activities;
+package co.edu.konradlorenz.kscrum.Activities;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -7,10 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import co.edu.konradlorenz.napa_s.Fragments.ProjectDetailPlaceholderFragment;
-import co.edu.konradlorenz.napa_s.Fragments.ProjectTabletDetailFragment;
-import co.edu.konradlorenz.napa_s.Fragments.ProjectsFragment;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Fragments.ProjectDetailPlaceholderFragment;
+import co.edu.konradlorenz.kscrum.Fragments.ProjectsFragment;
+import co.edu.konradlorenz.kscrum.R;
 
 public class ProjectsContainerActivity extends AppCompatActivity {
 

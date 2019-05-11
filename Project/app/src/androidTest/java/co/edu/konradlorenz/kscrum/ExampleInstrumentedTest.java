@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s;
+package co.edu.konradlorenz.kscrum;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("co.edu.konradlorenz.napa_s", appContext.getPackageName());
+        assertEquals("co.edu.konradlorenz.kscrum", appContext.getPackageName());
     }
 }

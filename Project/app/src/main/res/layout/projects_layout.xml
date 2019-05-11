@@ -19,11 +19,11 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    style="@style/MatchParentStyle.NapaLogo.Projects"/>
+                    style="@style/MatchParentStyle.KScrumLogo.Projects"/>
 
                 <TextView
                     android:id="@+id/textView2"
-                    style="@style/MatchParentStyle.NapaName"/>
+                    style="@style/MatchParentStyle.KScrumName"/>
 
             </LinearLayout>
 

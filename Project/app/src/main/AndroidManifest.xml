@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.edu.konradlorenz.napa_s">
+    package="co.edu.konradlorenz.kscrum">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,17 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ProjectsContainerActivity"/>
-        <activity android:name=".Fragments.ProjectTabletDetailFragment"/>
-        <activity android:name=".Activities.CreateProjectActivity"></activity>
-        <activity android:name=".Activities.TaskDetailActivity"/>
+        <activity android:name="co.edu.konradlorenz.kscrum.Activities.ProjectsContainerActivity"/>
+        <activity android:name="co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity"></activity>
+        <activity android:name="co.edu.konradlorenz.kscrum.Activities.TaskDetailActivity"/>
         <activity
-            android:name=".Activities.SprintsActivity"/>
+            android:name="co.edu.konradlorenz.kscrum.Activities.SprintsActivity"/>
         <activity
-            android:name=".Activities.ProfileActivity"
+            android:name="co.edu.konradlorenz.kscrum.Activities.ProfileActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activities.RegisterActivity"
+            android:name="co.edu.konradlorenz.kscrum.Activities.RegisterActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>

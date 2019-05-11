@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Fragments;
+package co.edu.konradlorenz.kscrum.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,21 +15,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import co.edu.konradlorenz.napa_s.Activities.CreateProjectActivity;
-import co.edu.konradlorenz.napa_s.Activities.ProfileActivity;
-import co.edu.konradlorenz.napa_s.Activities.SprintsActivity;
-import co.edu.konradlorenz.napa_s.Adapters.ProjectsAdapter;
-import co.edu.konradlorenz.napa_s.Entities.Project;
-import co.edu.konradlorenz.napa_s.Fragments.BottomNavigationDrawerFragment;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity;
+import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
+import co.edu.konradlorenz.kscrum.Activities.SprintsActivity;
+import co.edu.konradlorenz.kscrum.Adapters.ProjectsAdapter;
+import co.edu.konradlorenz.kscrum.R;
 
 public class ProjectsFragment extends Fragment {
 

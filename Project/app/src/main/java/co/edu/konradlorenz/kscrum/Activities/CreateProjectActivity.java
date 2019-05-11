@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Activities;
+package co.edu.konradlorenz.kscrum.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,8 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import co.edu.konradlorenz.napa_s.Fragments.ProjectsFragment;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Fragments.ProjectsFragment;
+import co.edu.konradlorenz.kscrum.R;
 
 public class CreateProjectActivity extends AppCompatActivity {
 

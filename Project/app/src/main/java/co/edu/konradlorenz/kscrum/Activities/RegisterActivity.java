@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Activities;
+package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.R;
 
 
 public class RegisterActivity extends AppCompatActivity {

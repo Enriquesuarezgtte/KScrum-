@@ -23,11 +23,11 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        style="@style/MatchParentStyle.NapaLogo"/>
+                        style="@style/MatchParentStyle.KScrumLogo"/>
 
                     <TextView
                         android:id="@+id/textView2"
-                        style="@style/MatchParentStyle.NapaName.tablet"/>
+                        style="@style/MatchParentStyle.KScrumName.tablet"/>
 
                 </LinearLayout>
 

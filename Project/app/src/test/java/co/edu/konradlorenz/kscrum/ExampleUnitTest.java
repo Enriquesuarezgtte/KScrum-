@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s;
+package co.edu.konradlorenz.kscrum;
 
 import org.junit.Test;
 
