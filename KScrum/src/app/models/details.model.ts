@@ -1,10 +1,10 @@
 export class Sprint {
-    id:string;
+    id: string;
     title: string;
     creationDate: Date;
     lastDate: Date;
     percentage: string;
     extraInfo: string;
     imagen: string;
-    projectId : string;
+    projectId: string;
 }

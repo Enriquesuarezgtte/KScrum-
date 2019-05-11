@@ -1,8 +1,8 @@
 import { IProjectInterface } from './../../models/Project.model';
 import { Injectable } from '@angular/core';
-import { AngularFirestore , AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map , take} from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 
 
@@ -12,47 +12,47 @@ import { map , take} from 'rxjs/operators';
 })
 export class ProjectServiceService {
 
- 
-  private projects : Observable<IProjectInterface[]>;
-  private  projectsCollection : AngularFirestoreCollection<IProjectInterface>;
+
+  private projects: Observable<IProjectInterface[]>;
+  private projectsCollection: AngularFirestoreCollection<IProjectInterface>;
   constructor(private projectLogic: AngularFirestore) {
     this.projectsCollection = this.projectLogic.collection<IProjectInterface>('projects');
 
     this.projects = this.projectsCollection.snapshotChanges().pipe(
-        map(actions => {
-          return actions.map( a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
 
-            return { id , ... data};
-          });
-        })
+          return { id, ...data };
+        });
+      })
     );
 
-   }
+  }
 
 
 
-  getProjects() : Observable<IProjectInterface[]> {
+  getProjects(): Observable<IProjectInterface[]> {
 
     return this.projects;
 
   }
 
-  getUpdate() : Observable<IProjectInterface[]>{
+  getUpdate(): Observable<IProjectInterface[]> {
 
     let items = new Observable<IProjectInterface[]>();
-     items = this.projectsCollection.valueChanges();
+    items = this.projectsCollection.valueChanges();
     return items;
 
   }
 
 
 
-  getProject( projectId : string) : Observable<IProjectInterface>{
+  getProject(projectId: string): Observable<IProjectInterface> {
     return this.projectsCollection.doc<IProjectInterface>(projectId).valueChanges().pipe(
       take(1),
-      map( project =>{
+      map(project => {
         project.id = projectId;
         return project;
       })
@@ -60,22 +60,22 @@ export class ProjectServiceService {
   }
 
 
-  createProject(project: IProjectInterface) : Promise<DocumentReference> {
+  createProject(project: IProjectInterface): Promise<DocumentReference> {
     return this.projectsCollection.add(project);
   }
 
 
-  updateProject(project : IProjectInterface) : Promise<void> {
+  updateProject(project: IProjectInterface): Promise<void> {
     return this.projectsCollection.doc(project.id).update({
       projectDisplayName: project.projectDisplayName,
       projectPhotoURL: project.projectPhotoURL,
-      projectDescription : project.projectDescription,
-      projectLanguaje : project.projectLanguaje
+      projectDescription: project.projectDescription,
+      projectLanguaje: project.projectLanguaje
     });
   }
 
 
-  deleteProject(projectId : string) : Promise<void>{
+  deleteProject(projectId: string): Promise<void> {
     return this.projectsCollection.doc(projectId).delete();
   }
 

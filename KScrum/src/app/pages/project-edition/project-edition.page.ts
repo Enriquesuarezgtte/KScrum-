@@ -22,10 +22,10 @@ export class ProjectEditionPage implements OnInit {
     , private toastctrl: ToastController, private router: Router) {
     this.showSpinner = false;
 
-      this.activatedRoute.queryParams.subscribe(params => {
-         this.updateId = params["projectId"];
-        console.log("from params " , this.updateId);
-      })
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.updateId = params["projectId"];
+      console.log("from params ", this.updateId);
+    })
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class ProjectEditionPage implements OnInit {
     if (this.updateId) {
       this.pageTitle = "Update your project";
       this.projectLogic.getProject(this.updateId).subscribe(project => {
-        console.log("on init" , project);
+        console.log("on init", project);
         this.project = project;
       });
     } else {
