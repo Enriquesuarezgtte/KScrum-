@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Fragments;
+package co.edu.konradlorenz.kscrum.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import co.edu.konradlorenz.napa_s.Activities.LoginActivity;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Activities.LoginActivity;
+import co.edu.konradlorenz.kscrum.R;
 
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
 

@@ -99,14 +99,14 @@
     <!-- Login Styles -->
 
     <!-- Both (Tablet and Mobile) -->
-    <style name="MatchParentStyle.NapaLogo">
+    <style name="MatchParentStyle.KScrumLogo">
         <item name="android:layout_weight">2</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:src">@mipmap/ic_logo</item>
     </style>
 
-    <style name="MatchParentStyle.NapaLogo.Projects">
+    <style name="MatchParentStyle.KScrumLogo.Projects">
         <!--<item name="android:onClick">runEffectBAB</item>-->
     </style>
 
@@ -188,12 +188,12 @@
     </style>
     <!-- -->
 
-    <style name="MatchParentStyle.NapaName">
+    <style name="MatchParentStyle.KScrumName">
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">fill_vertical</item>
         <item name="android:text">@string/app_name_title</item>
-        <item name="android:textSize">@dimen/mobile_napa_title_size</item>
+        <item name="android:textSize">@dimen/mobile_kscrum_title_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -512,19 +512,19 @@
         <item name="android:padding">60dp</item>
     </style>
 
-    <style name="MatchParentStyle.NapaName.tablet">
+    <style name="MatchParentStyle.KScrumName.tablet">
         <item name="android:textSize">60sp</item>
     </style>
 
-    <style name="MatchParentStyle.NapaName.tablet.720">
+    <style name="MatchParentStyle.KScrumName.tablet.720">
         <item name="android:textSize">80sp</item>
     </style>
 
-    <style name="MatchParentStyle.NapaName.tablet.port">
+    <style name="MatchParentStyle.KScrumName.tablet.port">
         <item name="android:textSize">45sp</item>
     </style>
 
-    <style name="MatchParentStyle.NapaName.tablet.port.720">
+    <style name="MatchParentStyle.KScrumName.tablet.port.720">
         <item name="android:textSize">55sp</item>
     </style>
     <!-- -->

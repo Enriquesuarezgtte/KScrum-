@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Activities;
+package co.edu.konradlorenz.kscrum.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,10 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -19,10 +16,10 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.konradlorenz.napa_s.Fragments.DoingFragment;
-import co.edu.konradlorenz.napa_s.Fragments.DoneFragment;
-import co.edu.konradlorenz.napa_s.R;
-import co.edu.konradlorenz.napa_s.Fragments.ToDoFragment;
+import co.edu.konradlorenz.kscrum.Fragments.DoingFragment;
+import co.edu.konradlorenz.kscrum.Fragments.DoneFragment;
+import co.edu.konradlorenz.kscrum.R;
+import co.edu.konradlorenz.kscrum.Fragments.ToDoFragment;
 
 public class SprintsActivity extends AppCompatActivity {
 

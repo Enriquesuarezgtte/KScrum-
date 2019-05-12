@@ -1,26 +1,23 @@
-package co.edu.konradlorenz.napa_s.Fragments;
+package co.edu.konradlorenz.kscrum.Fragments;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.card.MaterialCardView;
 
-import co.edu.konradlorenz.napa_s.Activities.TaskDetailActivity;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Activities.TaskDetailActivity;
+import co.edu.konradlorenz.kscrum.R;
 
 
-public class DoingFragment extends Fragment {
+public class DoneFragment extends Fragment {
 
     private View view;
     private MaterialCardView materialCardView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +27,7 @@ public class DoingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_doing, container, false);
+        view = inflater.inflate(R.layout.fragment_done, container, false);
 
         findMaterialElements();
         cardHandler();
@@ -49,6 +46,7 @@ public class DoingFragment extends Fragment {
     }
 
     public void findMaterialElements(){
-        materialCardView = view.findViewById(R.id.doingCard);
+        materialCardView = view.findViewById(R.id.doneCard);
     }
+
 }

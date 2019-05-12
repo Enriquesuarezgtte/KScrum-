@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:gravity="fill_vertical"
                     android:layout_marginLeft="15dp"
-                    android:text="Napa S"
+                    android:text="KScrum"
                     android:textSize="30sp"
                     android:textStyle="bold"/>
 

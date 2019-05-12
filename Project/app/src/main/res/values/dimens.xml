@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Our own dimens -->
-        <dimen name="mobile_napa_title_size">30sp</dimen>
+        <dimen name="mobile_kscrum_title_size">30sp</dimen>
     <!-- -->
 
 

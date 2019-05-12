@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Entities;
+package co.edu.konradlorenz.kscrum.Entities;
 
 
 import android.content.res.TypedArray;

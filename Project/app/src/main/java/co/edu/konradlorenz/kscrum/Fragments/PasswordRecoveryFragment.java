@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Fragments;
+package co.edu.konradlorenz.kscrum.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.R;
 
 public class PasswordRecoveryFragment extends Fragment {
 

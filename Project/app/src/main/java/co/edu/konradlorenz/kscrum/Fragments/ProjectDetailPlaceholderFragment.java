@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Fragments;
+package co.edu.konradlorenz.kscrum.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.R;
 
 public class ProjectDetailPlaceholderFragment extends Fragment {
 

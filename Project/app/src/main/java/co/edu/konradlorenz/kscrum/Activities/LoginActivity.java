@@ -1,4 +1,4 @@
-package co.edu.konradlorenz.napa_s.Activities;
+package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import co.edu.konradlorenz.napa_s.Fragments.PasswordRecoveryFragment;
-import co.edu.konradlorenz.napa_s.R;
+import co.edu.konradlorenz.kscrum.Fragments.PasswordRecoveryFragment;
+import co.edu.konradlorenz.kscrum.R;
 
 
 public class LoginActivity extends AppCompatActivity {
