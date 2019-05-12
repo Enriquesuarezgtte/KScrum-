@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/principal"
+    tools:context=".Fragments.ProjectsFragment"
+    style="@style/MatchParentStyle.colorPrimaryDark">
+
+
+    <androidx.core.widget.NestedScrollView
+        style="@style/MatchParentStyle">
+
+        <LinearLayout
+            style="@style/MatchWrapStyle.LinearVerticalStyle.Padding.Projects">
+
+            <LinearLayout
+                style="@style/MatchWrapStyle.LinearHorizontalStyle">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    style="@style/MatchParentStyle.KScrumLogo.Projects"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/MatchParentStyle.KScrumName"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectProject"
+                style="@style/MatchParentStyle.SelectProject_Label"/>
+
+            <include layout="@layout/projects_recycler"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar_projects_layout"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/transparentFont"
+        app:fabAlignmentMode="center"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="30dp"
+        app:fabCradleVerticalOffset="5dp"
+        app:hideOnScroll="true"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:navigationIcon="@drawable/ic_menu"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_projects_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        app:layout_anchor="@id/bottom_app_bar_projects_layout"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
