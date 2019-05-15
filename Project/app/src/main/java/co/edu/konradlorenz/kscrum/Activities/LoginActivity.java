@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(this);
-
         findMaterialElements();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -57,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void findMaterialElements() {
+        FirebaseApp.initializeApp(this);
         loginProgressBar = findViewById(R.id.loading_spinner);
         googleSignButton = findViewById(R.id.google_login_button);
         googleSignButton.setOnClickListener(this);
