@@ -12,11 +12,14 @@
 
         <LinearLayout style="@style/MatchWrapStyle.LinearVerticalStyle.Padding.Projects">
 
-            <LinearLayout style="@style/MatchWrapStyle.LinearHorizontalStyle">
+            <LinearLayout
+                style="@style/MatchWrapStyle.LinearHorizontalStyle"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageView"
-                    style="@style/MatchParentStyle.KScrumLogo.Projects" />
+                    style="@style/MatchParentStyle.KScrumLogo.Projects"
+                    android:layout_weight="3" />
 
                 <TextView
                     android:id="@+id/textView2"

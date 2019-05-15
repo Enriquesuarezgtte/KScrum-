@@ -28,6 +28,8 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private NavigationView navigationView;
     private GoogleSignInClient googleSignInClient;
     private TextView username;
+    private TextView email;
+
     private FirebaseUser user;
     private FirebaseAuth mAuth;
 
@@ -78,8 +80,12 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
         navigationView = view.findViewById(R.id.navigation_view);
         closeButton = view.findViewById(R.id.close_menu_sheet);
         username=view.findViewById(R.id.user_name);
+        email=view.findViewById(R.id.user_email);
+
         mAuth = FirebaseAuth.getInstance();
         user=mAuth.getCurrentUser();
         username.setText(user.getDisplayName());
+        email.setText(user.getEmail());
+
     }
 }
