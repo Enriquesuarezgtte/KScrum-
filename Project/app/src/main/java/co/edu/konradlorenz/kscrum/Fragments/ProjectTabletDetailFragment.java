@@ -61,9 +61,9 @@ public class ProjectTabletDetailFragment extends Fragment {
 
 
     private void setUpLayout() {
-        projectTitle.setText(projectSelected.getProjectName());
-        Glide.with(this).load(projectSelected.getPlaceHolder()).into(projectImage);
-        percentageCompleted.setText(projectSelected.getPercentageComplete());
+        projectTitle.setText(projectSelected.getProjectDisplayName());
+        Glide.with(this).load(projectSelected.getProjectPhotoURL()).into(projectImage);
+        percentageCompleted.setText(projectSelected.getProjectDescription());
     }
 
 
