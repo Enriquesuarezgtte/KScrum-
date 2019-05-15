@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private Button googleSignButton;
     private View.OnClickListener buttonGoogle;
+
     private FirebaseAuth mAuth;
 
     private static final String TAG ="LoginActivity";
@@ -50,7 +51,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(this);
         findMaterialElements();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
+                GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
@@ -105,16 +107,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account!=null){
             Toast.makeText(this, "Login succesfully", Toast.LENGTH_LONG);
-
+            Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.sign_in_button:
+            case R.id.google_login_button:
                 sigIn();
-
+                break;
         }
     }
 
@@ -136,9 +140,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                // ...
-            }
+                Toast.makeText(this,"Google sign in failed",Toast.LENGTH_LONG );
+                }
         }
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
