@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,9 +22,9 @@ import co.edu.konradlorenz.kscrum.R;
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
 
     private View view;
-    private NavigationView navigationView;
     private ImageView closeButton;
-
+    private NavigationView navigationView;
+    private GoogleSignInClient googleSignInClient;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,8 +44,17 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_logout_option:
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        mAuth.signOut();
+
+
+
+
                         Intent newIntent = new Intent(getContext(), LoginActivity.class);
+                        newIntent.putExtra("LogOut", "logout");
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(newIntent);
+
                         return true;
                 }
                 return true;
