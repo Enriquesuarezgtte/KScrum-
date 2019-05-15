@@ -84,7 +84,10 @@
                     style="@style/MatchParentStyle.LinearVerticalStyle.SocialButtons">
 
                     <Button
-                        style="@style/MatchWrapStyle.SocialButtons.Google"/>
+                        style="@style/MatchWrapStyle.SocialButtons.Google"
+                        android:id="@+id/google_login_button"/>
+
+
 
                     <Button
                         style="@style/MatchWrapStyle.SocialButtons.Facebook"/>
