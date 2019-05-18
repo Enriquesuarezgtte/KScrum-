@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG ="LoginActivity";
     private static final int RC_SIGN_IN = 101;
     private FirebaseFirestore db;
+    private String flag_logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         googleSignButton.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
          db = FirebaseFirestore.getInstance();
+         try {
+             flag_logout=getIntent().getExtras().getString("LogOut");
+         }catch (Exception e){
+             Log.e("LOGOUT", "No se puede cerrar sesión");
+         }
     }
 
     public void openMainActivity(View view) {
@@ -105,12 +111,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account!=null){
+        if(flag_logout!=null){
+            signOut();
+        }else if(account!=null){
             Toast.makeText(this, "Login succesfully", Toast.LENGTH_LONG);
             Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
+
+    }
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                    }
+                });
     }
 
     @Override
