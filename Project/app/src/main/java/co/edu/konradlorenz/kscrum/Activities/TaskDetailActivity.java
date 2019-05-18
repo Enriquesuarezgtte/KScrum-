@@ -27,7 +27,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent = new Intent(TaskDetailActivity.this, SprintsActivity.class);
+                Intent newIntent = new Intent(TaskDetailActivity.this, PBIActivity.class);
                 startActivity(newIntent);
                 TaskDetailActivity.this.finish();
             }

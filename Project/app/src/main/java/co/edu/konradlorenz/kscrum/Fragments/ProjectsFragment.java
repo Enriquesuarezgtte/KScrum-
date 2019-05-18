@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 import co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity;
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
-import co.edu.konradlorenz.kscrum.Activities.SprintsActivity;
+import co.edu.konradlorenz.kscrum.Activities.PBIActivity;
 import co.edu.konradlorenz.kscrum.Adapters.ProjectsAdapter;
 import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.R;
@@ -134,7 +134,7 @@ public class ProjectsFragment extends Fragment {
     }
 
     public void openSprint(View view) {
-        Intent newIntent = new Intent(getActivity(), SprintsActivity.class);
+        Intent newIntent = new Intent(getActivity(), PBIActivity.class);
         startActivity(newIntent);
     }
 

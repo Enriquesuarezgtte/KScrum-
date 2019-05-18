@@ -21,7 +21,7 @@ import co.edu.konradlorenz.kscrum.Fragments.DoneFragment;
 import co.edu.konradlorenz.kscrum.R;
 import co.edu.konradlorenz.kscrum.Fragments.ToDoFragment;
 
-public class SprintsActivity extends AppCompatActivity {
+public class PBIActivity extends AppCompatActivity {
 
 
     private TabItem tab1;
@@ -40,7 +40,7 @@ public class SprintsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sprints);
+        setContentView(R.layout.activity_pbi);
 
 
         findMaterialElements();
@@ -105,6 +105,5 @@ public class SprintsActivity extends AppCompatActivity {
         }
     }
 
-    //------ TABS END
 
 }

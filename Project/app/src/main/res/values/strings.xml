@@ -14,4 +14,5 @@
     <string name="input_layout_password_text">Password</string>
     <string name="sign_text">Sign In</string>
     <string name="OR_text">    OR    </string>
+    <string name="title_activity_sprint">SprintActivity</string>
 </resources>
