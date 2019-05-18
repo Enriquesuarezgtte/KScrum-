@@ -1,11 +1,7 @@
 package co.edu.konradlorenz.kscrum.Entities;
 
 
-import android.content.res.TypedArray;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Project implements Serializable {
 

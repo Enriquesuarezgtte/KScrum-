@@ -29,7 +29,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
     private FragmentManager fragmentManager;
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView placeHolder;
         public TextView projectName, projectDescription;
@@ -58,7 +58,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         return new MyViewHolder(view);
     }
 
-    private void loadProjectDetail(int id, FragmentManager manager, Project newProject){
+    private void loadProjectDetail(int id, FragmentManager manager, Project newProject) {
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("PROJECT", newProject);
@@ -66,9 +66,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         ProjectTabletDetailFragment pTDF = new ProjectTabletDetailFragment();
         pTDF.setArguments(bundle);
 
-        if(id == R.id.projects_fragment){
+        if (id == R.id.projects_fragment) {
             manager.beginTransaction().add(id, pTDF).addToBackStack(null).commit();
-        }else{
+        } else {
             manager.beginTransaction().add(id, pTDF).commit();
         }
     }
@@ -84,12 +84,12 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
 
                 FragmentManager manager = ((AppCompatActivity) actualContext).getSupportFragmentManager();
 
-                if(actualContext.getResources().getBoolean(R.bool.has_two_panes)){
+                if (actualContext.getResources().getBoolean(R.bool.has_two_panes)) {
 
                     //Toast.makeText(actualContext, "Está en modo Landscape", Toast.LENGTH_SHORT).show();
                     loadProjectDetail(R.id.tablet_detail_project_fragment, manager, newProject);
 
-                }else{
+                } else {
 
                     //Toast.makeText(actualContext, "Está en modo Portrait", Toast.LENGTH_SHORT).show();
                     loadProjectDetail(R.id.projects_fragment, manager, newProject);

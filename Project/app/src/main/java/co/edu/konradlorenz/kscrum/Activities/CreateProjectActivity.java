@@ -1,10 +1,10 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,7 +24,7 @@ public class CreateProjectActivity extends AppCompatActivity {
         fabHandler();
     }
 
-    public void fabHandler(){
+    public void fabHandler() {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +35,7 @@ public class CreateProjectActivity extends AppCompatActivity {
         });
     }
 
-    public void findMaterialElements(){
+    public void findMaterialElements() {
         floatingActionButton = findViewById(R.id.createProjectFAB);
     }
 }

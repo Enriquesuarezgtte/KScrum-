@@ -3,12 +3,11 @@ package co.edu.konradlorenz.kscrum.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 
@@ -38,7 +37,7 @@ public class DoingFragment extends Fragment {
         return view;
     }
 
-    public void cardHandler(){
+    public void cardHandler() {
         materialCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +47,7 @@ public class DoingFragment extends Fragment {
         });
     }
 
-    public void findMaterialElements(){
+    public void findMaterialElements() {
         materialCardView = view.findViewById(R.id.doingCard);
     }
 }

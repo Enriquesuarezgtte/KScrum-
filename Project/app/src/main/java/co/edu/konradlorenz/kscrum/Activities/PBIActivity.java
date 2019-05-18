@@ -1,5 +1,7 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,8 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -18,8 +18,8 @@ import java.util.List;
 
 import co.edu.konradlorenz.kscrum.Fragments.DoingFragment;
 import co.edu.konradlorenz.kscrum.Fragments.DoneFragment;
-import co.edu.konradlorenz.kscrum.R;
 import co.edu.konradlorenz.kscrum.Fragments.ToDoFragment;
+import co.edu.konradlorenz.kscrum.R;
 
 public class PBIActivity extends AppCompatActivity {
 
@@ -49,24 +49,24 @@ public class PBIActivity extends AppCompatActivity {
         setupTabIcons();
     }
 
-    public void findMaterialElements(){
+    public void findMaterialElements() {
         toolbar = findViewById(R.id.toolbar);
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
     }
 
-    public void tabsSetUp(){
+    public void tabsSetUp() {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void setupTabIcons(){
+    private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new ToDoFragment(), "To Do");
         adapter.addFrag(new DoingFragment(), "Doing");
@@ -74,7 +74,7 @@ public class PBIActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter{
+    class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
@@ -93,7 +93,7 @@ public class PBIActivity extends AppCompatActivity {
             return fragmentList.size();
         }
 
-        public void addFrag(Fragment fragment, String title){
+        public void addFrag(Fragment fragment, String title) {
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
         }

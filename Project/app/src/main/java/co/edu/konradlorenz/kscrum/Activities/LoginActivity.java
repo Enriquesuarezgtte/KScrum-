@@ -42,10 +42,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
 
-    private static final String TAG ="LoginActivity";
+    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 101;
     private FirebaseFirestore db;
     private String flag_logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +65,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         googleSignButton = findViewById(R.id.google_login_button);
         googleSignButton.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
-         db = FirebaseFirestore.getInstance();
-         try {
-             flag_logout=getIntent().getExtras().getString("LogOut");
-         }catch (Exception e){
-             Log.e("LOGOUT", "No se puede cerrar sesión");
-         }
+        db = FirebaseFirestore.getInstance();
+        try {
+            flag_logout = getIntent().getExtras().getString("LogOut");
+        } catch (Exception e) {
+            Log.e("LOGOUT", "No se puede cerrar sesión");
+        }
     }
 
     public void openMainActivity(View view) {
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(flag_logout!=null){
+        if (flag_logout != null) {
             signOut();
         }
 
@@ -129,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.google_login_button:
                 sigIn();
                 break;
@@ -154,10 +155,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this,"Google sign in failed",Toast.LENGTH_LONG );
-                }
+                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG);
+            }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         credentialFirebaseSingIn(credential);
