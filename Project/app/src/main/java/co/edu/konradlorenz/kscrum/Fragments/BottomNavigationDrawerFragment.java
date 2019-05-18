@@ -7,11 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +27,12 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private ImageView closeButton;
     private NavigationView navigationView;
     private GoogleSignInClient googleSignInClient;
+    private TextView username;
+    private TextView email;
+
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,10 +54,6 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
                     case R.id.nav_logout_option:
                         FirebaseAuth mAuth = FirebaseAuth.getInstance();
                         mAuth.signOut();
-
-
-
-
                         Intent newIntent = new Intent(getContext(), LoginActivity.class);
                         newIntent.putExtra("LogOut", "logout");
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -75,5 +79,13 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     public void findMaterialElements(){
         navigationView = view.findViewById(R.id.navigation_view);
         closeButton = view.findViewById(R.id.close_menu_sheet);
+        username=view.findViewById(R.id.user_name);
+        email=view.findViewById(R.id.user_email);
+
+        mAuth = FirebaseAuth.getInstance();
+        user=mAuth.getCurrentUser();
+        username.setText(user.getDisplayName());
+        email.setText(user.getEmail());
+
     }
 }
