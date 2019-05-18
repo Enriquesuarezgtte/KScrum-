@@ -113,11 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(flag_logout!=null){
             signOut();
-        }else if(account!=null){
-            Toast.makeText(this, "Login succesfully", Toast.LENGTH_LONG);
-            Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
         }
 
     }
