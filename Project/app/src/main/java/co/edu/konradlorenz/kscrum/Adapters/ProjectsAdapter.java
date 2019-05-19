@@ -64,7 +64,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         Bundle bundle = new Bundle();
         bundle.putSerializable("PROJECT", newProject);
 
-        SprintFragment pTDF = new SprintFragment();
+         ProjectTabletDetailFragment pTDF = new ProjectTabletDetailFragment();
         pTDF.setArguments(bundle);
 
         if (id == R.id.projects_fragment) {

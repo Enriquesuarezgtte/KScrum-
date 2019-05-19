@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,8 +50,25 @@ public class ProjectTabletDetailFragment extends Fragment {
         fabProjectDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PBIActivity.class);
-                startActivity(intent);
+
+                SprintFragment sprintFragment= new SprintFragment();
+                sprintFragment.setArguments(projectData);
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.principal,sprintFragment,"sf");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+
+                //Intent intent = new Intent(getContext(), PBIActivity.class);
+                //startActivity(intent);
+                /*
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.fragment1, fragment2);
+    fragmentTransaction.commit();
+                 */
             }
         });
     }
