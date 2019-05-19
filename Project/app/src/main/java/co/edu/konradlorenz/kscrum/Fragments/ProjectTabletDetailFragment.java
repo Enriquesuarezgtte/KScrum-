@@ -55,7 +55,8 @@ public class ProjectTabletDetailFragment extends Fragment {
                 sprintFragment.setArguments(projectData);
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                fragmentTransaction.replace(R.id.principal,sprintFragment,"sf");
+//                fragmentTransaction.remove(manager.findFragmentById(R.id.projects_fragment));
+                fragmentTransaction.replace(R.id.projects_fragment,sprintFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 

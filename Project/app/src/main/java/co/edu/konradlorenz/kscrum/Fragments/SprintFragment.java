@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -147,6 +148,11 @@ public class SprintFragment extends Fragment {
     }
 
     private void recyclerSetUp() {
+        sprintRecycler.setHasFixedSize(true);
+        RecyclerView.LayoutManager recLayoutManager = new LinearLayoutManager(getContext());
+        sprintRecycler.setLayoutManager(recLayoutManager);
 
+        sprintAdapter = new SprintsAdapter(getContext(), sprints);
+        sprintRecycler.setAdapter(sprintAdapter);
     }
 }
