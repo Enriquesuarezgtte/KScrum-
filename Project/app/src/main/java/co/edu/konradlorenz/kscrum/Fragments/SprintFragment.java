@@ -1,0 +1,152 @@
+package co.edu.konradlorenz.kscrum.Fragments;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+import javax.annotation.Nullable;
+
+import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
+import co.edu.konradlorenz.kscrum.Adapters.SprintsAdapter;
+import co.edu.konradlorenz.kscrum.Entities.Sprint;
+import co.edu.konradlorenz.kscrum.R;
+
+
+
+public class SprintFragment extends Fragment {
+
+    private RecyclerView sprintRecycler;
+    private SprintsAdapter sprintAdapter;
+    private BottomAppBar sprintsBottonAppBar;
+    private FloatingActionButton floatingActionButton;
+    private View view;
+    private FirebaseFirestore db;
+    private CollectionReference collectionReference;
+    private ArrayList<Sprint> sprints;
+    FirebaseUser user;
+
+    public SprintFragment() {
+        // Required empty public constructor
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_sprint, container, false);
+        findMaterial();
+        setUpSupportActionBar();
+        fabHandler();
+        return view;
+    }
+
+    private void fabHandler() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent new Intent( getContext(), )
+                Toast.makeText(getContext(),"Recuerda crear sprints", Toast.LENGTH_LONG);
+            }
+        });
+    }
+
+    private void setUpSupportActionBar() {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(sprintsBottonAppBar);
+    }
+
+    private void findMaterial() {
+        sprintsBottonAppBar = view.findViewById(R.id.bottom_app_bar_sprints_layout);
+        floatingActionButton = view.findViewById(R.id.fab_sprints_layout);
+        sprintRecycler = view.findViewById(R.id.sprints_recycler);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.bottom_bar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.app_bar_profile:
+                //----- getACTIVITY VS getContext
+                Intent newIntent = new Intent(getContext(), ProfileActivity.class);
+                startActivity(newIntent);
+                break;
+            case android.R.id.home:
+                BottomNavigationDrawerFragment bottomNavigationDrawerFragment = new BottomNavigationDrawerFragment();
+                bottomNavigationDrawerFragment.show(getFragmentManager(), bottomNavigationDrawerFragment.getTag());
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @androidx.annotation.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        db = FirebaseFirestore.getInstance();
+        collectionReference =db.collection("sprints");
+        sprints=new ArrayList<>();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (e != null){
+                    Log.w("SPRINTFRAGMENT", "Listen failed");
+                }
+                sprints = new ArrayList<>();
+                for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
+                    Sprint sprint = new Sprint(doc.toObject(Sprint.class));
+                }
+                recyclerSetUp();
+            }
+        });
+    }
+
+    private void recyclerSetUp() {
+
+    }
+}

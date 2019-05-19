@@ -8,6 +8,20 @@ public class Sprint implements Serializable {
     private String descripcion;
     private String imageSprint;
 
+    public Sprint(Sprint toObject) {
+        this.titulo = toObject.titulo;
+        this.UIProject = toObject.UIProject;
+        this.descripcion = toObject.descripcion;
+        this.imageSprint = toObject.imageSprint;
+    }
+
+    public Sprint(String titulo, String UIProject, String descripcion, String imageSprint) {
+        this.titulo = titulo;
+        this.UIProject = UIProject;
+        this.descripcion = descripcion;
+        this.imageSprint = imageSprint;
+    }
+
     public String getTitulo() {
         return titulo;
     }

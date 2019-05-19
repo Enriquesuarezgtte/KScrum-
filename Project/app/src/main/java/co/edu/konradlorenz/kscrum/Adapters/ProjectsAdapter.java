@@ -20,6 +20,7 @@ import java.util.List;
 
 import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.Fragments.ProjectTabletDetailFragment;
+import co.edu.konradlorenz.kscrum.Fragments.SprintFragment;
 import co.edu.konradlorenz.kscrum.R;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyViewHolder> {
@@ -63,7 +64,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         Bundle bundle = new Bundle();
         bundle.putSerializable("PROJECT", newProject);
 
-        ProjectTabletDetailFragment pTDF = new ProjectTabletDetailFragment();
+        SprintFragment pTDF = new SprintFragment();
         pTDF.setArguments(bundle);
 
         if (id == R.id.projects_fragment) {
