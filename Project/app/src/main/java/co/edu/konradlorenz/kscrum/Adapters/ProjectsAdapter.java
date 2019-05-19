@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.konradlorenz.kscrum.Entities.Project;
@@ -28,28 +29,24 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
     private FragmentManager fragmentManager;
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView placeHolder;
-        public TextView projectName, percentageComplete;
+        public TextView projectName, projectDescription;
         private View view;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.placeHolder = itemView.findViewById(R.id.placeholder_image_item);
             this.projectName = itemView.findViewById(R.id.project_name_item);
-            this.percentageComplete = itemView.findViewById(R.id.percentage_complete_item);
+            this.projectDescription = itemView.findViewById(R.id.percentage_complete_item);
             this.view = itemView;
         }
     }
 
-    public ProjectsAdapter(Context actualContext) {
+    public ProjectsAdapter(Context actualContext, ArrayList<Project> projects) {
         this.actualContext = actualContext;
-        this.projectsList = Project.prepareProjects(
-                actualContext.getResources().obtainTypedArray(R.array.placeHolders),
-                actualContext.getResources().getStringArray(R.array.projectNames),
-                actualContext.getResources().getStringArray(R.array.percentagesComplete)
-        );
+        this.projectsList = projects;
     }
 
     @NonNull
@@ -61,7 +58,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         return new MyViewHolder(view);
     }
 
-    private void loadProjectDetail(int id, FragmentManager manager, Project newProject){
+    private void loadProjectDetail(int id, FragmentManager manager, Project newProject) {
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("PROJECT", newProject);
@@ -69,9 +66,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         ProjectTabletDetailFragment pTDF = new ProjectTabletDetailFragment();
         pTDF.setArguments(bundle);
 
-        if(id == R.id.projects_fragment){
+        if (id == R.id.projects_fragment) {
             manager.beginTransaction().add(id, pTDF).addToBackStack(null).commit();
-        }else{
+        } else {
             manager.beginTransaction().add(id, pTDF).commit();
         }
     }
@@ -87,12 +84,12 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
 
                 FragmentManager manager = ((AppCompatActivity) actualContext).getSupportFragmentManager();
 
-                if(actualContext.getResources().getBoolean(R.bool.has_two_panes)){
+                if (actualContext.getResources().getBoolean(R.bool.has_two_panes)) {
 
                     //Toast.makeText(actualContext, "Está en modo Landscape", Toast.LENGTH_SHORT).show();
                     loadProjectDetail(R.id.tablet_detail_project_fragment, manager, newProject);
 
-                }else{
+                } else {
 
                     //Toast.makeText(actualContext, "Está en modo Portrait", Toast.LENGTH_SHORT).show();
                     loadProjectDetail(R.id.projects_fragment, manager, newProject);
@@ -100,9 +97,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
             }
         });
 
-        Glide.with(actualContext).load(newProject.getPlaceHolder()).into(holder.placeHolder);
-        holder.projectName.setText(newProject.getProjectName());
-        holder.percentageComplete.setText(newProject.getPercentageComplete());
+        Glide.with(actualContext).load(newProject.getProjectPhotoURL()).into(holder.placeHolder);
+        holder.projectName.setText(newProject.getProjectDisplayName());
+        holder.projectDescription.setText(newProject.getProjectDescription());
     }
 
     @Override

@@ -50,7 +50,7 @@
                         android:gravity="bottom|left"
                         android:text="New User"
                         android:textSize="24sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -81,7 +81,7 @@
                     android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -148,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                         android:id="@+id/image_selected_view"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/select_image"/>
+                        android:src="@drawable/select_image" />
 
                     <Button
                         android:id="@+id/select_image_button"
@@ -183,7 +183,7 @@
                         android:textColor="#fff"
                         android:textStyle="bold"
                         android:text="Select photo"
-                        android:onClick="chooseImage"/>
+                        android:onClick="chooseImage" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -200,13 +200,12 @@
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:text="Sign in"
-                android:onClick="signInHandler"/>
+                android:onClick="signInHandler" />
 
 
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

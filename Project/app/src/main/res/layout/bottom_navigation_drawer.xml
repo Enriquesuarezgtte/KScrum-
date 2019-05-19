@@ -18,7 +18,7 @@
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_account"/>
+            android:src="@drawable/ic_account" />
 
         <TextView
             android:id="@+id/user_name"
@@ -41,7 +41,7 @@
             android:layout_marginTop="2dp"
             android:layout_toLeftOf="@+id/close_menu_sheet"
             android:layout_toRightOf="@+id/profile_image"
-            android:text="username@excolnet.com"/>
+            android:text="username@excolnet.com" />
 
 
         <ImageView

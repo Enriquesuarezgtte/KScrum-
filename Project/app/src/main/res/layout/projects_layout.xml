@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/principal"
-    tools:context=".Fragments.ProjectsFragment"
-    style="@style/MatchParentStyle.colorPrimaryDark">
+    style="@style/MatchParentStyle.colorPrimaryDark"
+    android:background="#E8EAF6"
+    tools:context=".Fragments.ProjectsFragment">
 
 
-    <androidx.core.widget.NestedScrollView
-        style="@style/MatchParentStyle">
+    <androidx.core.widget.NestedScrollView style="@style/MatchParentStyle">
 
-        <LinearLayout
-            style="@style/MatchWrapStyle.LinearVerticalStyle.Padding.Projects">
+        <LinearLayout style="@style/MatchWrapStyle.LinearVerticalStyle.Padding.Projects">
 
             <LinearLayout
-                style="@style/MatchWrapStyle.LinearHorizontalStyle">
+                style="@style/MatchWrapStyle.LinearHorizontalStyle"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageView"
-                    style="@style/MatchParentStyle.KScrumLogo.Projects"/>
+                    style="@style/MatchParentStyle.KScrumLogo.Projects"
+                    android:layout_weight="3" />
 
                 <TextView
                     android:id="@+id/textView2"
-                    style="@style/MatchParentStyle.KScrumName"/>
+                    style="@style/MatchParentStyle.KScrumName" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/selectProject"
-                style="@style/MatchParentStyle.SelectProject_Label"/>
+                style="@style/MatchParentStyle.SelectProject_Label" />
 
-            <include layout="@layout/projects_recycler"/>
+            <include layout="@layout/projects_recycler" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -50,7 +50,7 @@
         app:fabCradleVerticalOffset="5dp"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:navigationIcon="@drawable/ic_menu"/>
+        app:navigationIcon="@drawable/ic_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_projects_layout"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         app:fabSize="normal"
-        app:layout_anchor="@id/bottom_app_bar_projects_layout"/>
+        app:layout_anchor="@id/bottom_app_bar_projects_layout" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

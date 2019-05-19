@@ -106,6 +106,13 @@
         <item name="android:src">@mipmap/ic_logo</item>
     </style>
 
+    <style name="MatchParentStyle.KScrumLogo2">
+        <item name="android:layout_weight">2</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:src">@mipmap/logo</item>
+    </style>
+
     <style name="MatchParentStyle.KScrumLogo.Projects">
         <!--<item name="android:onClick">runEffectBAB</item>-->
     </style>
@@ -121,7 +128,7 @@
 
     <!-- Teléfono -->
     <style name="MatchParentStyle.LoginScrollview">
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">#EBEBEB</item>
     </style>
 
     <!-- Linear Layout Styles -->
@@ -420,7 +427,7 @@
         <item name="android:background">@color/white</item>
         <item name="android:drawableLeft">@drawable/googleg_standard_color_18</item>
         <item name="android:text">Google</item>
-        <item name="android:textColor">@color/com_facebook_likeview_text_color</item>
+        <item name="android:textColor">@color/com_facebook_button_background_color_focused</item>
     </style>
 
     <style name="MatchWrapStyle.SocialButtons.Google.tablet">
@@ -443,29 +450,29 @@
         <item name="android:textSize">22sp</item>
     </style>
 
-    <style name="MatchWrapStyle.SocialButtons.Facebook">
-        <item name="android:background">@color/facebook_button_color</item>
-        <item name="android:drawableLeft">@drawable/com_facebook_button_login_logo</item>
-        <item name="android:text">Facebook</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="MatchWrapStyle.SocialButtons.GitHub">
+        <item name="android:background">@color/github</item>
+        <item name="android:drawableLeft">@drawable/ic_github_circle</item>
+        <item name="android:text">GitHub</item>
+        <item name="android:textColor">@color/white_button</item>
     </style>
 
-    <style name="MatchWrapStyle.SocialButtons.Facebook.tablet">
+    <style name="MatchWrapStyle.SocialButtons.GitHub.tablet">
         <item name="android:layout_height">70dp</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="MatchWrapStyle.SocialButtons.Facebook.tablet.720">
+    <style name="MatchWrapStyle.SocialButtons.GitHub.tablet.720">
         <item name="android:layout_height">80dp</item>
         <item name="android:textSize">23sp</item>
     </style>
 
-    <style name="MatchWrapStyle.SocialButtons.Facebook.tablet.port">
+    <style name="MatchWrapStyle.SocialButtons.GitHub.tablet.port">
         <item name="android:layout_height">50dp</item>
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="MatchWrapStyle.SocialButtons.Facebook.tablet.port.720">
+    <style name="MatchWrapStyle.SocialButtons.GitHub.tablet.port.720">
         <item name="android:layout_height">62dp</item>
         <item name="android:textSize">22sp</item>
     </style>
@@ -527,6 +534,15 @@
     <style name="MatchParentStyle.KScrumName.tablet.port.720">
         <item name="android:textSize">55sp</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- -->
 
     <!-- -->

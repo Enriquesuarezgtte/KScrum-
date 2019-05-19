@@ -1,14 +1,8 @@
 package co.edu.konradlorenz.kscrum.Fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,13 +10,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 import co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity;
+import co.edu.konradlorenz.kscrum.Activities.PBIActivity;
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
-import co.edu.konradlorenz.kscrum.Activities.SprintsActivity;
 import co.edu.konradlorenz.kscrum.Adapters.ProjectsAdapter;
+import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.R;
 
 public class ProjectsFragment extends Fragment {
@@ -32,7 +44,10 @@ public class ProjectsFragment extends Fragment {
     private BottomAppBar projectsBottomAppBar;
     private FloatingActionButton floatingActionButton;
     private View actContext;
-
+    private FirebaseFirestore db;
+    private CollectionReference cr;
+    private ArrayList<Project> projects;
+    private FirebaseUser user;
 
     @Nullable
     @Override
@@ -42,7 +57,6 @@ public class ProjectsFragment extends Fragment {
         findMaterials();
         setUpSupportActionBar();
         fabHandler();
-        recyclerSetUp();
 
         return actContext;
     }
@@ -59,7 +73,7 @@ public class ProjectsFragment extends Fragment {
         projectsRecycler.setLayoutManager(recycleManager);
 
         //----- getACTIVITY VS getContext
-        projectsAdapter = new ProjectsAdapter(getContext());
+        projectsAdapter = new ProjectsAdapter(getContext(), projects);
         projectsRecycler.setAdapter(projectsAdapter);
     }
 
@@ -72,7 +86,6 @@ public class ProjectsFragment extends Fragment {
             }
         });
     }
-
 
 
     @Override
@@ -121,7 +134,41 @@ public class ProjectsFragment extends Fragment {
     }
 
     public void openSprint(View view) {
-        Intent newIntent = new Intent(getActivity(), SprintsActivity.class);
+        Intent newIntent = new Intent(getActivity(), PBIActivity.class);
         startActivity(newIntent);
+    }
+
+    public ProjectsFragment() {
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        db = FirebaseFirestore.getInstance();
+        cr = db.collection("projects");
+        projects = new ArrayList<>();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cr.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+
+                if (e != null) {
+                    Log.w("PROJECTSFRAGMENT", "Listen failed.", e);
+                }
+                projects = new ArrayList<>();
+                for (QueryDocumentSnapshot doc : value) {
+                    Project project = new Project(doc.toObject(Project.class));
+                    projects.add(project);
+                }
+                recyclerSetUp();
+            }
+        });
     }
 }

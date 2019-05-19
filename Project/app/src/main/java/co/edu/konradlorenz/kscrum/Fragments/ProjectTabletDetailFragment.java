@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import co.edu.konradlorenz.kscrum.Activities.SprintsActivity;
+import co.edu.konradlorenz.kscrum.Activities.PBIActivity;
 import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.R;
 
@@ -47,7 +47,7 @@ public class ProjectTabletDetailFragment extends Fragment {
         fabProjectDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SprintsActivity.class);
+                Intent intent = new Intent(getContext(), PBIActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,9 +61,9 @@ public class ProjectTabletDetailFragment extends Fragment {
 
 
     private void setUpLayout() {
-        projectTitle.setText(projectSelected.getProjectName());
-        Glide.with(this).load(projectSelected.getPlaceHolder()).into(projectImage);
-        percentageCompleted.setText(projectSelected.getPercentageComplete());
+        projectTitle.setText(projectSelected.getProjectDisplayName());
+        Glide.with(this).load(projectSelected.getProjectPhotoURL()).into(projectImage);
+        percentageCompleted.setText(projectSelected.getProjectDescription());
     }
 
 

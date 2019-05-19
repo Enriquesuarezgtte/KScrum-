@@ -12,16 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="co.edu.konradlorenz.kscrum.Activities.ProjectsContainerActivity"/>
-        <activity android:name="co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity"></activity>
-        <activity android:name="co.edu.konradlorenz.kscrum.Activities.TaskDetailActivity"/>
         <activity
-            android:name="co.edu.konradlorenz.kscrum.Activities.SprintsActivity"/>
+            android:name=".Activities.SprintActivity"
+            android:label="@string/title_activity_sprint"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activities.ProjectsContainerActivity" />
+        <activity android:name=".Activities.CreateProjectActivity" />
+        <activity android:name=".Activities.TaskDetailActivity" />
+        <activity android:name=".Activities.PBIActivity" />
         <activity
-            android:name="co.edu.konradlorenz.kscrum.Activities.ProfileActivity"
+            android:name=".Activities.ProfileActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="co.edu.konradlorenz.kscrum.Activities.RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>

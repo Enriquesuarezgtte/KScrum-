@@ -1,57 +1,62 @@
 package co.edu.konradlorenz.kscrum.Entities;
 
 
-import android.content.res.TypedArray;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Project implements Serializable {
 
-    private int placeHolder;
-    private String projectName;
-    private String percentageComplete;
+    private String projectDescription;
+    private String projectDisplayName;
+    private String projectLanguaje;
+    private String projectPhotoURL;
 
-    public Project(int placeHolder, String projectName, String percentageComplete) {
-        this.placeHolder = placeHolder;
-        this.projectName = projectName;
-        this.percentageComplete = percentageComplete;
+    public Project(String projectDescription, String projectDisplayName, String projectLanguaje, String projectPhotoURL) {
+        this.projectDescription = projectDescription;
+        this.projectDisplayName = projectDisplayName;
+        this.projectLanguaje = projectLanguaje;
+        this.projectPhotoURL = projectPhotoURL;
     }
 
-    public static List<Project> prepareProjects(TypedArray placeHolders, String[] projectsName, String[] percentageComplete){
+    public Project() {
 
-        List<Project> projects = new ArrayList<>(projectsName.length);
-
-        for(int i = 0; i < projectsName.length; i++){
-            Project project = new Project(placeHolders.getResourceId(i, -1), projectsName[i], percentageComplete[i]);
-            projects.add(project);
-        }
-
-        return projects;
     }
 
-    public int getPlaceHolder() {
-        return placeHolder;
+    public Project(Project toObject) {
+        this.projectDescription = toObject.projectDescription;
+        this.projectDisplayName = toObject.projectDisplayName;
+        this.projectLanguaje = toObject.projectLanguaje;
+        this.projectPhotoURL = toObject.projectPhotoURL;
     }
 
-    public void setPlaceHolder(int placeHolder) {
-        this.placeHolder = placeHolder;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public String getProjectDisplayName() {
+        return projectDisplayName;
     }
 
-    public String getPercentageComplete() {
-        return percentageComplete;
+    public void setProjectDisplayName(String projectDisplayName) {
+        this.projectDisplayName = projectDisplayName;
     }
 
-    public void setPercentageComplete(String percentageComplete) {
-        this.percentageComplete = percentageComplete;
+    public String getProjectLanguaje() {
+        return projectLanguaje;
+    }
+
+    public void setProjectLanguaje(String projectLanguaje) {
+        this.projectLanguaje = projectLanguaje;
+    }
+
+    public String getProjectPhotoURL() {
+        return projectPhotoURL;
+    }
+
+    public void setProjectPhotoURL(String projectPhotoURL) {
+        this.projectPhotoURL = projectPhotoURL;
     }
 }
