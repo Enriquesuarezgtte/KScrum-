@@ -20,6 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
@@ -38,6 +41,7 @@ import javax.annotation.Nullable;
 
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
 import co.edu.konradlorenz.kscrum.Adapters.SprintsAdapter;
+import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.R;
 
@@ -50,10 +54,13 @@ public class SprintFragment extends Fragment {
     private BottomAppBar sprintsBottonAppBar;
     private FloatingActionButton floatingActionButton;
     private View view;
+    private Project projectSelected;
+
     private FirebaseFirestore db;
     private CollectionReference collectionReference;
     private ArrayList<Sprint> sprints;
     FirebaseUser user;
+    private Bundle bundle;
 
     public SprintFragment() {
         // Required empty public constructor
@@ -66,9 +73,15 @@ public class SprintFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_sprint, container, false);
         findMaterial();
+        getBundleData();
         setUpSupportActionBar();
         fabHandler();
         return view;
+    }
+
+    private void getBundleData() {
+        bundle = this.getArguments();
+        projectSelected = (Project)bundle.getSerializable("PROJECT");
     }
 
     private void fabHandler() {
@@ -132,20 +145,23 @@ public class SprintFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (e != null){
-                    Log.w("SPRINTFRAGMENT", "Listen failed");
-                }
-                sprints = new ArrayList<>();
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
-                    Sprint sprint = new Sprint(doc.toObject(Sprint.class));
-                    sprints.add(sprint);
-                }
-                recyclerSetUp();
-            }
-        });
+        sprints = new ArrayList<>();
+
+        collectionReference.whereEqualTo("projectId", projectSelected.getId()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot doc:task.getResult()){
+                                Sprint sprint = new Sprint(doc.toObject(Sprint.class));
+                                sprints.add(sprint);
+                            }
+                            recyclerSetUp();
+                            }
+
+                    }
+                });
+
     }
 
     private void recyclerSetUp() {

@@ -52,6 +52,8 @@ public class ProjectTabletDetailFragment extends Fragment {
             public void onClick(View v) {
 
                 SprintFragment sprintFragment= new SprintFragment();
+                Bundle bundle= new Bundle();
+
                 sprintFragment.setArguments(projectData);
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
