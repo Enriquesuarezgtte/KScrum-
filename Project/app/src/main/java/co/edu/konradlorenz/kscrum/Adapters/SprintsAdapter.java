@@ -28,8 +28,8 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
 
     @NonNull
     @Override
-    public AdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sprint_item, parent);
+    public SprintsAdapter.AdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sprint_item, parent,false);
         return new AdapterHolder(view);
 
     }
@@ -44,9 +44,9 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
                 context.startActivity(intent);
             }
         });
-        Glide.with(context).load(newSprint.getImageSprint()).into(holder.placeHolder);
-        holder.sprintName.setText(newSprint.getTitulo());
-        holder.sprintDescripcion.setText(newSprint.getDescripcion());
+        Glide.with(context).load(newSprint.getImagen()).into(holder.placeHolder);
+        holder.sprintName.setText(newSprint.getTitle());
+        holder.sprintDescripcion.setText(newSprint.getPercentage());
 
     }
 
@@ -65,7 +65,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
             this.placeHolder = itemView.findViewById(R.id.placeholder_image_item_s);
             this.sprintName = itemView.findViewById(R.id.sprint_name_item);
             this.sprintDescripcion = itemView.findViewById(R.id.percentage_complete_item_s);
-            this.view = view;
+            this.view = itemView;
         }
     }
 

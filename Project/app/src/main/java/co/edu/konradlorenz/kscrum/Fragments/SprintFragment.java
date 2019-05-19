@@ -141,6 +141,7 @@ public class SprintFragment extends Fragment {
                 sprints = new ArrayList<>();
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
                     Sprint sprint = new Sprint(doc.toObject(Sprint.class));
+                    sprints.add(sprint);
                 }
                 recyclerSetUp();
             }

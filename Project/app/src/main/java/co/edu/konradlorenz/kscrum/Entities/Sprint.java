@@ -1,59 +1,95 @@
 package co.edu.konradlorenz.kscrum.Entities;
 
+
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class Sprint implements Serializable {
-    private String titulo;
-    private String UIProject;
-    private String descripcion;
-    private String imageSprint;
+    private String title;
+    private String  projectId;
+    private String percentage;
+    private Date lastDate;
+    private String imagen;
+    private String extraInfo;
+    private Date creationDate;
 
     public Sprint(Sprint toObject) {
-        this.titulo = toObject.titulo;
-        this.UIProject = toObject.UIProject;
-        this.descripcion = toObject.descripcion;
-        this.imageSprint = toObject.imageSprint;
+        this.title = toObject.title;
+        this.projectId = toObject.projectId;
+        this.percentage = toObject.percentage;
+        this.lastDate = toObject.lastDate;
+        this.imagen =toObject.imagen;
+        this.extraInfo = toObject.extraInfo;
+        this.creationDate = toObject.creationDate;
     }
 
     public Sprint() {
     }
 
-    public Sprint(String titulo, String UIProject, String descripcion, String imageSprint) {
-        this.titulo = titulo;
-        this.UIProject = UIProject;
-        this.descripcion = descripcion;
-        this.imageSprint = imageSprint;
+    public Sprint(String title, String projectId, String percentage, Date lastDate, String imagen, String extraInfo, Date creationDate) {
+        this.title = title;
+        this.projectId = projectId;
+        this.percentage = percentage;
+        this.lastDate = lastDate;
+        this.imagen = imagen;
+        this.extraInfo = extraInfo;
+        this.creationDate = creationDate;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getUIProject() {
-        return UIProject;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setUIProject(String UIProject) {
-        this.UIProject = UIProject;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getPercentage() {
+        return percentage;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
     }
 
-    public String getImageSprint() {
-        return imageSprint;
+    public Date getLastDate() {
+        return lastDate;
     }
 
-    public void setImageSprint(String imageSprint) {
-        this.imageSprint = imageSprint;
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }
