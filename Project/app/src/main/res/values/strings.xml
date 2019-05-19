@@ -14,4 +14,7 @@
     <string name="input_layout_password_text">Password</string>
     <string name="sign_text">Sign In</string>
     <string name="OR_text">    OR    </string>
+    <string name="gitHub_ClientId">77d7a76c72152b7bbe65</string>
+    <string name="gitHub_ClientSecret">9ff3ac88bbfd8aac348ed7cf5d175e042493e6eb</string>
+    <string name="title_activity_browser">BrowserActivity</string>
 </resources>
