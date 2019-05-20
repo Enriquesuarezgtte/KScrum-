@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
@@ -8,7 +7,9 @@
     tools:context=".Activities.LoginActivity">
 
     <LinearLayout
-        style="@style/MatchParentStyle.LinearVerticalStyle">
+        style="@style/MatchParentStyle.LinearVerticalStyle"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
         <ScrollView
             android:id="@+id/login_form"
@@ -16,19 +17,20 @@
 
             <LinearLayout
                 android:id="@+id/email_login_form"
-                style="@style/MatchWrapStyle.LinearVerticalStyle.Padding">
+                style="@style/MatchWrapStyle.LinearVerticalStyle.Padding"
+                android:layout_height="match_parent"
+                android:background="#EBEBEB">
 
                 <LinearLayout
-                    style="@style/MatchWrapStyle.LinearHorizontalStyle">
+                    style="@style/MatchWrapStyle.LinearHorizontalStyle"
+                    android:layout_height="wrap_content">
+
 
                     <ImageView
-                        android:id="@+id/imageView"
-                        style="@style/MatchParentStyle.KScrumLogo"/>
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        style="@style/MatchParentStyle.KScrumName"/>
-
+                        style="@style/MatchParentStyle.KScrumLogo2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +39,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/username_text_input"
-                        style="@style/MatchWrapStyle.TextInputEdit"/>
+                        style="@style/MatchWrapStyle.TextInputEdit" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,66 +49,60 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_text_input"
-                        style="@style/TextInputLayout.Password"/>
+                        style="@style/TextInputLayout.Password" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/email_sign_in_button"
-                    style="@style/MatchWrapStyle.SignButtonStyle"/>
+                    style="@style/MatchWrapStyle.SignButtonStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="#65D924" />
 
+
+                <LinearLayout style="@style/WrapMatchStyle.LinearHorizontalStyle.ForgotPasswordStyle" />
 
                 <LinearLayout
-                    style="@style/WrapMatchStyle.LinearHorizontalStyle.ForgotPasswordStyle">
+                    style="@style/MatchParentStyle.LinearHorizontalStyle.OrDivision"
+                    android:layout_marginTop="1dp">
 
-                    <TextView
-                        style="@style/Transparent_Text.ForgotAccount"/>
+                    <LinearLayout style="@style/LineDivisionStyle" />
 
-                    <TextView
-                        android:id="@+id/forgot_password_text"
-                        style="@style/Bold_Text.Signing"/>
+                    <TextView style="@style/MatchWrapStyle.ORText" />
+
+                    <LinearLayout style="@style/LineDivisionStyle" />
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/MatchParentStyle.LinearHorizontalStyle.OrDivision">
-
-                    <LinearLayout
-                        style="@style/LineDivisionStyle"/>
-
-                    <TextView
-                        style="@style/MatchWrapStyle.ORText" />
-
-                    <LinearLayout
-                        style="@style/LineDivisionStyle"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/MatchParentStyle.LinearVerticalStyle.SocialButtons">
+                    style="@style/MatchParentStyle.LinearVerticalStyle.SocialButtons"
+                    android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/google_login_button"
                         style="@style/MatchWrapStyle.SocialButtons.Google"
-                        android:id="@+id/google_login_button"/>
-
+                        android:layout_marginRight="3dp" />
 
 
                     <Button
+                        style="@style/MatchWrapStyle.SocialButtons.GitHub"
                         android:id="@+id/github_btn"
-                        style="@style/MatchWrapStyle.SocialButtons.Facebook"/>
-
-                    <Button
-                        style="@style/MatchWrapStyle.SocialButtons.Twitter"/>
+                        android:layout_marginLeft="3dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/SignUpLabel_Linear">
+                    style="@style/SignUpLabel_Linear"
+                    android:background="@color/line_division_color">
 
                     <TextView
-                        style="@style/Transparent_Text.DontAccount"/>
+                        style="@style/Transparent_Text.DontAccount"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/sign_up_button"
-                        style="@style/Bold_Text.SignUp"/>
+                        style="@style/Bold_Text.SignUp"
+                        android:textColor="@android:color/holo_red_dark" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -116,6 +112,6 @@
 
     <ProgressBar
         android:id="@+id/loading_spinner"
-        style="@style/ProgressBar"/>
+        style="@style/ProgressBar" />
 
 </RelativeLayout>

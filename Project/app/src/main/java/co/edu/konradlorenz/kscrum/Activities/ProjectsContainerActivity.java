@@ -30,16 +30,15 @@ public class ProjectsContainerActivity extends AppCompatActivity {
     }
 
 
-
     private void fillLayout() {
 
-        if(startMainBundle == null){
+        if (startMainBundle == null) {
             fragmentManager.beginTransaction().add(R.id.projects_fragment, new ProjectsFragment()).commit();
         }
 
         Boolean aBoolean = getResources().getBoolean(R.bool.has_two_panes);
 
-        if(getResources().getBoolean(R.bool.has_two_panes)){
+        if (getResources().getBoolean(R.bool.has_two_panes)) {
             fragmentManager.beginTransaction().add(R.id.tablet_detail_project_fragment, new ProjectDetailPlaceholderFragment()).commit();
         }
 
