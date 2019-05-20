@@ -90,6 +90,7 @@
 
 
                     <Button
+                        android:id="@+id/github_btn"
                         style="@style/MatchWrapStyle.SocialButtons.Facebook"/>
 
                     <Button

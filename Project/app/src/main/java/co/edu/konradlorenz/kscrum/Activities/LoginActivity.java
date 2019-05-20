@@ -1,6 +1,7 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,10 +28,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+
+import co.edu.konradlorenz.kscrum.Entities.LoginRequest;
 import co.edu.konradlorenz.kscrum.Entities.Usuario;
 import co.edu.konradlorenz.kscrum.Fragments.PasswordRecoveryFragment;
 import co.edu.konradlorenz.kscrum.R;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,37 +52,73 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private Button googleSignButton;
     private View.OnClickListener buttonGoogle;
+    private Button githubSignInButton;
+
+    public final String myCallback = "kscrum://callback";
 
     private FirebaseAuth mAuth;
 
-    private static final String TAG ="LoginActivity";
+    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 101;
     private FirebaseFirestore db;
     private String flag_logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        FirebaseApp.initializeApp(this);
+        //FirebaseApp.initializeApp(this);
         findMaterialElements();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
+        addGithubListener();
+
+    }
+
+    public void addGithubListener() {
+
+        githubSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGithubLogin();
+            }
+        });
+
+    }
+
+
+    public void startGithubLogin() {
+        String request = generateGitHubRequest();
+        Intent intent = new Intent(this , BrowserActivity.class);
+        intent.putExtra("reqUrl" , request);
+        startActivity(intent);
+    }
+
+
+    public String generateGitHubRequest() {
+        String result = "";
+
+        result += "https://github.com/login/oauth/authorize" + "?client_id=" + getString(R.string.gitHub_ClientId) + "&scope=user" + "&allow_signup=true" + "&redirect_uri=" + myCallback;
+
+        return result;
     }
 
     public void findMaterialElements() {
         FirebaseApp.initializeApp(this);
         loginProgressBar = findViewById(R.id.loading_spinner);
         googleSignButton = findViewById(R.id.google_login_button);
+        githubSignInButton = findViewById(R.id.github_btn);
         googleSignButton.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
-         db = FirebaseFirestore.getInstance();
-         try {
-             flag_logout=getIntent().getExtras().getString("LogOut");
-         }catch (Exception e){
-             Log.e("LOGOUT", "No se puede cerrar sesión");
-         }
+        db = FirebaseFirestore.getInstance();
+        try {
+            flag_logout = getIntent().getExtras().getString("LogOut");
+        } catch (Exception e) {
+            Log.e("LOGOUT", "No se puede cerrar sesión");
+        }
     }
 
     public void openMainActivity(View view) {
@@ -111,13 +160,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(flag_logout!=null){
+        if (flag_logout != null) {
             signOut();
-        }else if(account!=null){
-            Toast.makeText(this, "Login succesfully", Toast.LENGTH_LONG);
-            Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
         }
 
     }
@@ -134,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.google_login_button:
                 sigIn();
                 break;
@@ -159,10 +203,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this,"Google sign in failed",Toast.LENGTH_LONG );
-                }
+                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG);
+            }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         credentialFirebaseSingIn(credential);
@@ -193,6 +238,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
 }
