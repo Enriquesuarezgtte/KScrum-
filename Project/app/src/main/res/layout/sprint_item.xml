@@ -38,15 +38,26 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/percentage_complete_item_s"
+            android:id="@+id/description_item_s"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="fill_vertical|center"
+            android:padding="10dp"
+            android:text="Description"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/percentage_complete_item_s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="fill_vertical|center"
             android:padding="10dp"
             android:text="50% Complete"
             android:textColor="@color/white"
             android:textSize="14sp" />
+
 
     </LinearLayout>
 

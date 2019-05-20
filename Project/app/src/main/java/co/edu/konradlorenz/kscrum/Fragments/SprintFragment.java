@@ -63,7 +63,6 @@ public class SprintFragment extends Fragment {
     private Bundle bundle;
 
     public SprintFragment() {
-        // Required empty public constructor
     }
 
     @Nullable

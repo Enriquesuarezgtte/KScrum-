@@ -46,7 +46,8 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
         });
         Glide.with(context).load(newSprint.getImagen()).into(holder.placeHolder);
         holder.sprintName.setText(newSprint.getTitle());
-        holder.sprintDescripcion.setText(newSprint.getPercentage());
+        holder.sprintDescripcion.setText(newSprint.getExtraInfo());
+        holder.percentage.setText(newSprint.getPercentage());
 
     }
 
@@ -57,14 +58,15 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
 
     public class AdapterHolder extends RecyclerView.ViewHolder{
         public ImageView placeHolder;
-        public TextView sprintName, sprintDescripcion;
+        public TextView sprintName,percentage, sprintDescripcion;
         private View view;
 
         public AdapterHolder(@NonNull View itemView) {
             super(itemView);
             this.placeHolder = itemView.findViewById(R.id.placeholder_image_item_s);
             this.sprintName = itemView.findViewById(R.id.sprint_name_item);
-            this.sprintDescripcion = itemView.findViewById(R.id.percentage_complete_item_s);
+            this.sprintDescripcion = itemView.findViewById(R.id.description_item_s);
+            this.percentage = itemView.findViewById(R.id.percentage_complete_item_s);
             this.view = itemView;
         }
     }
