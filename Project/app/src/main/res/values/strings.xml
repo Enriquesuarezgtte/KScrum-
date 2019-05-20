@@ -18,4 +18,8 @@
     <string name="gitHub_ClientId">77d7a76c72152b7bbe65</string>
     <string name="gitHub_ClientSecret">9ff3ac88bbfd8aac348ed7cf5d175e042493e6eb</string>
     <string name="title_activity_browser">BrowserActivity</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_delete">Delete</string>
+
+
 </resources>

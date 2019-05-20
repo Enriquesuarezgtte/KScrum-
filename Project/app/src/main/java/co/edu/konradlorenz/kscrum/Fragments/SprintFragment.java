@@ -146,21 +146,40 @@ public class SprintFragment extends Fragment {
         super.onResume();
         sprints = new ArrayList<>();
 
-        collectionReference.whereEqualTo("projectId", projectSelected.getId()).get()
+       /* collectionReference.whereEqualTo("projectId", projectSelected.getId()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot doc:task.getResult()){
+
                                 Sprint sprint = new Sprint(doc.toObject(Sprint.class));
+                                Log.w("Sprint fr",doc.getId());
+                                sprint.setId(doc.getId());
                                 sprints.add(sprint);
                             }
                             recyclerSetUp();
                             }
 
                     }
-                });
+                });*/
+        collectionReference.whereEqualTo("projectId", projectSelected.getId()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+            if(e!=null){
+                Log.e("Sprint fragment", "Error in query");
+                return;
+            }sprints = new ArrayList<>();
 
+            for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
+                Sprint sprint = new Sprint(doc.toObject(Sprint.class));
+                Log.w("Sprint fr",doc.getId());
+                sprint.setId(doc.getId());
+                sprints.add(sprint);
+            }
+                recyclerSetUp();
+            }
+        });
     }
 
     private void recyclerSetUp() {

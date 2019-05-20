@@ -131,7 +131,11 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
     <!-- -->
+    <style name="ImageStyle">
 
+        <item name="android:scaleType">centerCrop</item>
+
+    </style>
     <!-- Teléfono -->
     <style name="MatchParentStyle.LoginScrollview">
         <item name="android:background">#EBEBEB</item>
