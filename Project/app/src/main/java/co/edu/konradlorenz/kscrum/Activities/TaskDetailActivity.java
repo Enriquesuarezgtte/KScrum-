@@ -1,10 +1,10 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,18 +23,18 @@ public class TaskDetailActivity extends AppCompatActivity {
         fabHandler();
     }
 
-    public void fabHandler(){
+    public void fabHandler() {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent = new Intent(TaskDetailActivity.this, SprintsActivity.class);
+                Intent newIntent = new Intent(TaskDetailActivity.this, PBIActivity.class);
                 startActivity(newIntent);
                 TaskDetailActivity.this.finish();
             }
         });
     }
 
-    public void findMaterialElements(){
+    public void findMaterialElements() {
         floatingActionButton = findViewById(R.id.taskDetailFAB);
     }
 

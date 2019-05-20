@@ -16,7 +16,9 @@
     <color name="com_facebook_likeboxcountview_text_color">#6a7180</color>
     <color name="com_facebook_button_background_color_focused_disabled">#84878c</color>
     <color name="white">#000000</color>
-    <color name="line_division_color">#4dffffff</color>
+    <color name="github">#673AB7</color>
+    <color name="white_button">#FFFFFF</color>
+    <color name="line_division_color">#4DB4B4B4</color>
     <color name="facebook_button_color">#3B5991</color>
     <color name="transparent_text">#80ffffff</color>
 </resources>

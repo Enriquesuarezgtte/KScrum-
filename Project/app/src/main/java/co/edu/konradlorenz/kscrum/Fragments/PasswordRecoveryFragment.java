@@ -31,7 +31,7 @@ public class PasswordRecoveryFragment extends Fragment {
         dialogHandler();
     }
 
-    public void dialogHandler(){
+    public void dialogHandler() {
         resetPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +47,7 @@ public class PasswordRecoveryFragment extends Fragment {
         trans.commit();
     }
 
-    public void findMaterialElements(){
+    public void findMaterialElements() {
         resetPasswordButton = getView().findViewById(R.id.reset_password_button);
     }
 

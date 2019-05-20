@@ -1,11 +1,7 @@
 package co.edu.konradlorenz.kscrum.Entities;
 
 
-import android.content.res.TypedArray;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Project implements Serializable {
 
@@ -13,12 +9,14 @@ public class Project implements Serializable {
     private String projectDisplayName;
     private String projectLanguaje;
     private String projectPhotoURL;
+    private  String id;
 
-    public Project(String projectDescription, String projectDisplayName, String projectLanguaje, String projectPhotoURL) {
+    public Project(String id,String projectDescription, String projectDisplayName, String projectLanguaje, String projectPhotoURL) {
         this.projectDescription = projectDescription;
         this.projectDisplayName = projectDisplayName;
         this.projectLanguaje = projectLanguaje;
         this.projectPhotoURL = projectPhotoURL;
+        this.id=id;
     }
 
     public Project() {
@@ -30,6 +28,15 @@ public class Project implements Serializable {
         this.projectDisplayName = toObject.projectDisplayName;
         this.projectLanguaje = toObject.projectLanguaje;
         this.projectPhotoURL = toObject.projectPhotoURL;
+        this.id=toObject.id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getProjectDescription() {
