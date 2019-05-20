@@ -7,6 +7,7 @@
 
     <!-- Own Colors-->
     <color name="transparentFont">#E6000000</color>
+    <color name="black">#E6000000</color>
     <color name="com_facebook_likeview_text_color">#6a7180</color>
     <color name="tw__composer_blue">#ff1da1f2</color>
     <color name="inputTextColor">#4dffffff</color>
@@ -21,4 +22,10 @@
     <color name="line_division_color">#4DB4B4B4</color>
     <color name="facebook_button_color">#3B5991</color>
     <color name="transparent_text">#80ffffff</color>
+    <color name="fab">#65D924</color>
+    <color name="font">#EBEBEB</color>
+
+
+
+
 </resources>

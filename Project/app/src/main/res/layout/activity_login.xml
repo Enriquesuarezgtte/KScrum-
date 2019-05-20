@@ -19,7 +19,7 @@
                 android:id="@+id/email_login_form"
                 style="@style/MatchWrapStyle.LinearVerticalStyle.Padding"
                 android:layout_height="match_parent"
-                android:background="#EBEBEB">
+                android:background="@color/font">
 
                 <LinearLayout
                     style="@style/MatchWrapStyle.LinearHorizontalStyle"
@@ -58,7 +58,7 @@
                     style="@style/MatchWrapStyle.SignButtonStyle"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="#65D924" />
+                    android:background="@color/fab" />
 
 
                 <LinearLayout style="@style/WrapMatchStyle.LinearHorizontalStyle.ForgotPasswordStyle" />
