@@ -56,7 +56,7 @@ public class PBIActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
-        sprint = (Sprint)new Intent().getSerializableExtra("sprint");
+        sprint = (Sprint)getIntent().getSerializableExtra("sprint");
     }
 
     public void tabsSetUp() {

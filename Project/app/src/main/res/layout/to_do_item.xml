@@ -18,6 +18,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/to_do_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,6 +28,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/toDoImage"
             android:layout_width="220dp"
             android:layout_height="82dp"
             android:layout_gravity="center"
@@ -34,6 +36,7 @@
             android:src="@drawable/diagonallayout_background" />
 
         <TextView
+            android:id="@+id/to_do_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -72,6 +75,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/to_do_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

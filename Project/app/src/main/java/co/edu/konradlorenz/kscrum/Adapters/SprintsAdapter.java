@@ -37,7 +37,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
     private FragmentManager fragmentManager;
     private FirebaseFirestore firebaseFirestore;
     private CollectionReference collectionReference;
-    Sprint newSprint;
+    private Sprint newSprint;
 
     class MyMenuItemClickListener extends  AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
@@ -88,6 +88,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
             public void onClick(View v) {
                 Intent intent = new Intent(context, PBIActivity.class);
                 intent.putExtra("sprint", newSprint);
+                intent.getExtras();
                 context.startActivity(intent);
             }
         });

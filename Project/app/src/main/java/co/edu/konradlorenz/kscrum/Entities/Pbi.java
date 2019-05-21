@@ -1,6 +1,7 @@
 package co.edu.konradlorenz.kscrum.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Pbi implements Serializable {
 
@@ -10,7 +11,8 @@ public class Pbi implements Serializable {
     private String sprintId;
     private String pbiEstado;
     private String pbiFile;
-
+    private Date pbiDate;
+    private String percentage;
     public Pbi() {
     }
 
@@ -21,6 +23,7 @@ public class Pbi implements Serializable {
         this.sprintId = sprintId;
         this.pbiEstado = pbiEstado;
         this.pbiFile = pbiFile;
+
     }
     public Pbi (Pbi toObject){
         this.pbiTitle = toObject.pbiTitle;
@@ -29,6 +32,8 @@ public class Pbi implements Serializable {
         this.sprintId = toObject.sprintId;
         this.pbiEstado = toObject.pbiEstado;
         this.pbiFile = toObject.pbiFile;
+        this.pbiDate = toObject.pbiDate;
+        this.percentage=toObject.percentage;
     }
 
     public String getPbiTitle() {
@@ -77,6 +82,22 @@ public class Pbi implements Serializable {
 
     public void setPbiFile(String pbiFile) {
         this.pbiFile = pbiFile;
+    }
+
+    public Date getPbiDate() {
+        return pbiDate;
+    }
+
+    public void setPbiDate(Date pbiDate) {
+        this.pbiDate = pbiDate;
+    }
+
+    public String getpercentage() {
+        return percentage;
+    }
+
+    public void setpercentage(String percentage) {
+        this.percentage = percentage;
     }
 }
             

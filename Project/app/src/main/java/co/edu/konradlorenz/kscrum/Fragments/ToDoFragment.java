@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import co.edu.konradlorenz.kscrum.Activities.TaskDetailActivity;
+import co.edu.konradlorenz.kscrum.Adapters.PbiAdapter;
 import co.edu.konradlorenz.kscrum.Entities.Pbi;
 import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.R;
@@ -33,7 +34,7 @@ import co.edu.konradlorenz.kscrum.R;
 
 public class ToDoFragment extends Fragment {
     private RecyclerView pbiRecycler;
-    private PBIAdapter pbiAdapter;
+    private PbiAdapter pbiAdapter;
     private View view;
     private MaterialCardView materialCardView;
     private Sprint sprint;
@@ -54,7 +55,7 @@ public class ToDoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_to_do, container, false);
 
         findMaterialElements();
-        cardHandler();
+      //  cardHandler();
 
         return view;
     }
@@ -78,6 +79,7 @@ public class ToDoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         collectionReference =db.collection("pbi");
         pbis=new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -89,7 +91,7 @@ public class ToDoFragment extends Fragment {
 
         collectionReference.whereEqualTo("sprintId", sprint.getId()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                if (e!=null){
                    Log.e("ToDo Fragment", e.getMessage());
                    return;
@@ -97,9 +99,11 @@ public class ToDoFragment extends Fragment {
                 pbis=new ArrayList<>();
 
                for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                   Pbi pbi = new Pbi(doc.toObject(Pbi.class));
-                   pbi.setSprintId(doc.getId());
-                   pbis.add(pbi);
+                   if(doc.toObject(Pbi.class).getPbiEstado().equals("ToDo")) {
+                       Pbi pbi = new Pbi(doc.toObject(Pbi.class));
+                       pbi.setSprintId(doc.getId());
+                       pbis.add(pbi);
+                   }
                }
                recyclerSetUp();
             }
@@ -110,6 +114,7 @@ public class ToDoFragment extends Fragment {
         pbiRecycler.setHasFixedSize(true);
         RecyclerView.LayoutManager reclaLayoutManager = new LinearLayoutManager(getContext());
         pbiRecycler.setLayoutManager(reclaLayoutManager);
-        //pbiAdapter = new
+        pbiAdapter = new PbiAdapter(getContext(), pbis);
+        pbiRecycler.setAdapter(pbiAdapter);
     }
 }
