@@ -87,6 +87,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PBIActivity.class);
+                intent.putExtra("sprint", newSprint);
                 context.startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.Fragments.DoingFragment;
 import co.edu.konradlorenz.kscrum.Fragments.DoneFragment;
 import co.edu.konradlorenz.kscrum.Fragments.ToDoFragment;
@@ -35,6 +37,7 @@ public class PBIActivity extends AppCompatActivity {
             R.drawable.ic_projects,
             R.drawable.ic_sprints
     };
+    private Sprint sprint;
     //------
 
     @Override
@@ -53,6 +56,7 @@ public class PBIActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tabs);
+        sprint = (Sprint)new Intent().getSerializableExtra("sprint");
     }
 
     public void tabsSetUp() {
@@ -94,6 +98,9 @@ public class PBIActivity extends AppCompatActivity {
         }
 
         public void addFrag(Fragment fragment, String title) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("sprint", sprint);
+            fragment.setArguments(bundle);
             fragmentList.add(fragment);
             fragmentTitleList.add(title);
         }

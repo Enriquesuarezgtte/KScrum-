@@ -8,17 +8,33 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 import co.edu.konradlorenz.kscrum.Activities.TaskDetailActivity;
+import co.edu.konradlorenz.kscrum.Entities.Pbi;
+import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.R;
 
 
 public class DoneFragment extends Fragment {
-
+    private RecyclerView pbiRecycler;
+    private PBIAdapter sprintAdapter;
     private View view;
     private MaterialCardView materialCardView;
+    private Sprint sprint;
+
+    private FirebaseFirestore db;
+    private CollectionReference collectionReference;
+    private ArrayList<Pbi> sprints;
+    FirebaseUser user;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +64,8 @@ public class DoneFragment extends Fragment {
 
     public void findMaterialElements() {
         materialCardView = view.findViewById(R.id.doneCard);
+        sprint = (Sprint) getArguments().getSerializable("sprint");
+
     }
 
 }
