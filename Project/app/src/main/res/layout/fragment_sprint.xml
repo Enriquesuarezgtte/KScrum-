@@ -41,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
+        app:backgroundTint="@color/fab"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_app_bar_sprints_layout" />
 

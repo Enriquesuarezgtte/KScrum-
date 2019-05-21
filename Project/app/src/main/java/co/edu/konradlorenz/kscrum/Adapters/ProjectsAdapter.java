@@ -2,11 +2,16 @@ package co.edu.konradlorenz.kscrum.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +19,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import co.edu.konradlorenz.kscrum.Entities.Project;
+import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.Fragments.ProjectTabletDetailFragment;
 import co.edu.konradlorenz.kscrum.Fragments.SprintFragment;
 import co.edu.konradlorenz.kscrum.R;
@@ -28,11 +44,15 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
     private Context actualContext;
     private List<Project> projectsList;
     private FragmentManager fragmentManager;
+    private CollectionReference collectionReference, collectionSprintReference;
+    private FirebaseFirestore firebaseFirestore;
+    private Project newProject2;
+
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView placeHolder;
+        public ImageView placeHolder, overflowp;
         public TextView projectName, projectDescription;
         private View view;
 
@@ -42,6 +62,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
             this.projectName = itemView.findViewById(R.id.project_name_item);
             this.projectDescription = itemView.findViewById(R.id.percentage_complete_item);
             this.view = itemView;
+            this.overflowp = itemView.findViewById(R.id.overflowp);
         }
     }
 
@@ -77,7 +98,8 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        final Project newProject = projectsList.get(position);
+         final Project newProject = projectsList.get(position);
+         newProject2=new Project(newProject);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,10 +123,76 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         Glide.with(actualContext).load(newProject.getProjectPhotoURL()).into(holder.placeHolder);
         holder.projectName.setText(newProject.getProjectDisplayName());
         holder.projectDescription.setText(newProject.getProjectDescription());
+        firebaseFirestore =  FirebaseFirestore.getInstance();
+        collectionSprintReference = firebaseFirestore.collection("sprints");
+        collectionReference = firebaseFirestore.collection("projects");
+        holder.overflowp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+    }
+
+    private void showPopupMenu(View v) {
+        PopupMenu popup = new PopupMenu(actualContext, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_pro_spr, popup.getMenu());
+        popup.setOnMenuItemClickListener(new ProjectsAdapter.MyMenuItemClickListener());
+        popup.show();
     }
 
     @Override
     public int getItemCount() {
         return projectsList.size();
+    }
+
+    public class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+        public MyMenuItemClickListener() {
+
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_edit_pro_spr:
+                    // Toast.makeText(context,R.string.action_add_favourite, Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_delete_pro_spr:
+
+                    collectionReference.document(newProject2.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            deleteSprintFromProject();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(actualContext,"Error on delete",Toast.LENGTH_LONG);
+
+                        }
+                    });
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
+
+    private void deleteSprintFromProject() {
+        collectionSprintReference.whereEqualTo("projectId", newProject2.getId()
+        ).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(e!=null){
+                    Log.e("Sprint fragment", "Error in query");
+                    return;
+                }
+                for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
+                   doc.getReference().delete();
+                }
+
+            }
+        });
     }
 }

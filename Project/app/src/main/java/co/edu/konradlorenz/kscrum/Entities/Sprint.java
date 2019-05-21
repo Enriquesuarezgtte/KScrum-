@@ -13,6 +13,7 @@ public class Sprint implements Serializable {
     private String imagen;
     private String extraInfo;
     private Date creationDate;
+    private String id;
 
     public Sprint(Sprint toObject) {
         this.title = toObject.title;
@@ -22,12 +23,14 @@ public class Sprint implements Serializable {
         this.imagen =toObject.imagen;
         this.extraInfo = toObject.extraInfo;
         this.creationDate = toObject.creationDate;
+        this.id=toObject.id;
     }
 
     public Sprint() {
     }
 
-    public Sprint(String title, String projectId, String percentage, Date lastDate, String imagen, String extraInfo, Date creationDate) {
+    public Sprint(String title, String projectId, String percentage, Date lastDate, String imagen, String extraInfo, Date creationDate
+    ,String id) {
         this.title = title;
         this.projectId = projectId;
         this.percentage = percentage;
@@ -35,6 +38,7 @@ public class Sprint implements Serializable {
         this.imagen = imagen;
         this.extraInfo = extraInfo;
         this.creationDate = creationDate;
+        this.id=id;
     }
 
     public String getTitle() {
@@ -91,5 +95,13 @@ public class Sprint implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

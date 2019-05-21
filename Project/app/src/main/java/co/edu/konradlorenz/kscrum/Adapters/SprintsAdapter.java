@@ -3,10 +3,14 @@ package co.edu.konradlorenz.kscrum.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +18,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -25,6 +35,42 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
     private Context context;
     private List<Sprint> sprintList;
     private FragmentManager fragmentManager;
+    private FirebaseFirestore firebaseFirestore;
+    private CollectionReference collectionReference;
+    private Sprint newSprint;
+
+    class MyMenuItemClickListener extends  AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+
+        public MyMenuItemClickListener() {
+
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_edit_pro_spr:
+                   // Toast.makeText(context,R.string.action_add_favourite, Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_delete_pro_spr:
+                    System.out.println("adfs");
+                   collectionReference.document(newSprint.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void aVoid) {
+                           Toast.makeText(context,"Delete succesfully",Toast.LENGTH_LONG);
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
+                           Toast.makeText(context,"Error on delete",Toast.LENGTH_LONG);
+
+                       }
+                   });
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
 
     @NonNull
     @Override
@@ -35,12 +81,14 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterHolder holder, int position) {
-        final Sprint newSprint =sprintList.get(position);
+    public void onBindViewHolder(@NonNull final AdapterHolder holder, int position) {
+        newSprint =sprintList.get(position);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PBIActivity.class);
+                intent.putExtra("sprint", newSprint);
+                intent.getExtras();
                 context.startActivity(intent);
             }
         });
@@ -48,6 +96,14 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
         holder.sprintName.setText(newSprint.getTitle());
         holder.sprintDescripcion.setText(newSprint.getExtraInfo());
         holder.percentage.setText(newSprint.getPercentage());
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        collectionReference = firebaseFirestore.collection("sprints");
+          holder.dots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(holder.view);
+            }
+        });
 
     }
 
@@ -60,6 +116,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
         public ImageView placeHolder;
         public TextView sprintName,percentage, sprintDescripcion;
         private View view;
+        private ImageView dots;
 
         public AdapterHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +125,7 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
             this.sprintDescripcion = itemView.findViewById(R.id.description_item_s);
             this.percentage = itemView.findViewById(R.id.percentage_complete_item_s);
             this.view = itemView;
+            this.dots= itemView.findViewById(R.id.overflow);
         }
     }
 
@@ -75,6 +133,16 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
         this.context = context;
         this.sprintList = sprintList;
     }
+
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(context, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_pro_spr, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.show();
+    }
+
 
 
 }

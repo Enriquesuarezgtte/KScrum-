@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -131,7 +131,11 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
     <!-- -->
+    <style name="ImageStyle">
 
+        <item name="android:scaleType">centerCrop</item>
+
+    </style>
     <!-- Teléfono -->
     <style name="MatchParentStyle.LoginScrollview">
         <item name="android:background">#EBEBEB</item>
@@ -143,10 +147,10 @@
     </style>
 
     <style name="MatchWrapStyle.LinearVerticalStyle.Padding.Projects">
-        <item name="android:padding">30dp</item>
+        <item name="android:padding">10dp</item>
     </style>
     <style name="MatchWrapStyle.LinearVerticalStyle.Padding.Sprints">
-        <item name="android:padding">30dp</item>
+        <item name="android:padding">10dp</item>
     </style>
 
     <style name="MatchWrapStyle.LinearVerticalStyle.Padding.Land">
