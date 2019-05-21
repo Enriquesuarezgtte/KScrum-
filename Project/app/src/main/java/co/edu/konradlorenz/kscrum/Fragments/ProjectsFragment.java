@@ -165,7 +165,7 @@ public class ProjectsFragment extends Fragment {
                 projects = new ArrayList<>();
                 for (QueryDocumentSnapshot doc : value) {
                     Project project = new Project(doc.toObject(Project.class));
-
+                    project.setId(doc.getId());
                     projects.add(project);
                 }
                 recyclerSetUp();

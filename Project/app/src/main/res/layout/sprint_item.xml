@@ -77,10 +77,10 @@
                 android:id="@+id/overflow"
                 style="@style/ImageStyle"
                 android:layout_width="@dimen/ic_album_overflow_width"
-                android:layout_height="@dimen/ic_album_overflow_height"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/ic_album_overflow_margin_top"
-                android:layout_weight="3"
+                android:layout_weight="1.5"
                 android:src="@drawable/ic_dots" />
 
 
