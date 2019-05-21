@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_button"
     tools:context=".Fragments.DoneFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +17,7 @@
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:minHeight="185dp"
-        app:cardBackgroundColor="@color/common_google_signin_btn_text_dark_focused">
+        app:cardBackgroundColor="@color/fontcard">
 
         <LinearLayout
             android:layout_width="match_parent"
