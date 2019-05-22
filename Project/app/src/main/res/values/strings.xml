@@ -21,5 +21,14 @@
     <string name="menu_edit">Editar</string>
     <string name="menu_delete">Delete</string>
 
+    <string name="status_todo">To Do</string>
+    <string name="status_done">Done</string>
+    <string name="status_doing">Doing</string>
+
+   <string-array name="status">
+       <item>ToDo</item>
+       <item>Done</item>
+       <item>Doing</item>
+   </string-array>
 
 </resources>
