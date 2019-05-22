@@ -127,6 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
         String  email = user_email.getText().toString();
         String password = user_password.getText().toString();
         String completeName = username + " " +  lastname;
+        ImageView imagen = imageRegisterInput;
+
 
         boolean execute = true;
 
@@ -136,6 +138,11 @@ public class RegisterActivity extends AppCompatActivity {
             user_name.setError("Please insert a name");
             execute = false;
             errView = user_name;
+        }
+        if(selectedImage==null){
+            execute=false;
+            user_name.setError("Please select a photo");
+        errView =user_name;
         }
 
         if(lastname == null ||  lastname.isEmpty()){
@@ -224,6 +231,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void LoginSuccessfull(){
         FirebaseUser user = auth.getCurrentUser();
+
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
         dbCollection.collection("Users").document(user.getUid()).set(newUser);
         signUpHandler();

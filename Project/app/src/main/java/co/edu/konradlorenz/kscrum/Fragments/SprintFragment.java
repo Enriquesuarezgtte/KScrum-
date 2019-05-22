@@ -32,6 +32,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -61,6 +62,7 @@ public class SprintFragment extends Fragment {
     private ArrayList<Sprint> sprints;
     FirebaseUser user;
     private Bundle bundle;
+    private ListenerRegistration registration;
 
     public SprintFragment() {
     }
@@ -146,7 +148,7 @@ public class SprintFragment extends Fragment {
         super.onResume();
         sprints = new ArrayList<>();
 
-        collectionReference.whereEqualTo("projectId", projectSelected.getId()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+         registration= collectionReference.whereEqualTo("projectId", projectSelected.getId()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
             if(e!=null){
@@ -172,5 +174,11 @@ public class SprintFragment extends Fragment {
 
         sprintAdapter = new SprintsAdapter(getContext(), sprints);
         sprintRecycler.setAdapter(sprintAdapter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        registration.remove();
     }
 }

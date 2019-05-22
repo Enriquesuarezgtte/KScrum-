@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,25 +31,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
+
 import co.edu.konradlorenz.kscrum.Entities.LoginRequest;
+import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.Entities.Usuario;
 import co.edu.konradlorenz.kscrum.Fragments.PasswordRecoveryFragment;
 import co.edu.konradlorenz.kscrum.R;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,6 +66,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputEditText usernameInput;
     private TextInputEditText passwordInput;
     private Button loginBtn;
+    private CollectionReference cr;
+    private ListenerRegistration registration;
+
 
     public final String myCallback = "kscrum://callback";
 
@@ -142,13 +150,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void doLogin(){
         FirebaseUser user = mAuth.getCurrentUser();
+
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
+
          db.collection("Users").document(user.getUid()).set(newUser);
+
+
+
         Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         loginProgressBar.setVisibility(View.GONE);
         startActivity(i);
         cleanFields();
+
 
 
     }
