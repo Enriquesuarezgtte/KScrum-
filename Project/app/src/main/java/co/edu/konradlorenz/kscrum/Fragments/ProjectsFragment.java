@@ -22,9 +22,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -47,7 +49,6 @@ public class ProjectsFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference cr;
     private ArrayList<Project> projects;
-    private FirebaseUser user;
 
     @Nullable
     @Override
@@ -146,15 +147,21 @@ public class ProjectsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         db = FirebaseFirestore.getInstance();
-        cr = db.collection("projects");
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+
+
+                cr = db.collection("projects");
         projects = new ArrayList<>();
-        user = FirebaseAuth.getInstance().getCurrentUser();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         cr.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
@@ -163,9 +170,10 @@ public class ProjectsFragment extends Fragment {
                     Log.w("PROJECTSFRAGMENT", "Listen failed.", e);
                 }
                 projects = new ArrayList<>();
-                for (QueryDocumentSnapshot doc : value) {
-                    Project project = new Project(doc.toObject(Project.class));
-
+                for (DocumentChange doc :value.getDocumentChanges()) {
+                   System.out.println(doc.getDocument().getReference().getPath());
+                    Project project = new Project(doc.getDocument().toObject(Project.class));
+                    project.setId(doc.getDocument().getId());
                     projects.add(project);
                 }
                 recyclerSetUp();
