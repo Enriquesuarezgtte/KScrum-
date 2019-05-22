@@ -19,7 +19,7 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    style="@style/MatchParentStyle.KScrumLogo.Projects"
+                    style="@style/MatchParentStyle.KScrumLogo2.Projects"
                     android:layout_weight="3" />
 
                 <TextView
