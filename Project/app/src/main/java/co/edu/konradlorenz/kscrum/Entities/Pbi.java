@@ -13,6 +13,8 @@ public class Pbi implements Serializable {
     private String pbiFile;
     private Date pbiDate;
     private String percentage;
+    private Date lastDate;
+    private String pbiId;
     public Pbi() {
     }
 
@@ -34,6 +36,8 @@ public class Pbi implements Serializable {
         this.pbiFile = toObject.pbiFile;
         this.pbiDate = toObject.pbiDate;
         this.percentage=toObject.percentage;
+        this.lastDate=toObject.lastDate;
+        this.pbiId=toObject.pbiId;
     }
 
     public String getPbiTitle() {
@@ -92,12 +96,28 @@ public class Pbi implements Serializable {
         this.pbiDate = pbiDate;
     }
 
-    public String getpercentage() {
+    public String getPercentage() {
         return percentage;
     }
 
-    public void setpercentage(String percentage) {
+    public void setPercentage(String percentage) {
         this.percentage = percentage;
+    }
+
+    public Date getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public String getPbiId() {
+        return pbiId;
+    }
+
+    public void setPbiId(String pbiId) {
+        this.pbiId = pbiId;
     }
 }
             
