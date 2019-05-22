@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,9 @@ public class TaskDetailActivity extends AppCompatActivity {
     private Context context;
     private FirebaseFirestore firebaseFirestore;
     private DocumentReference documentReference;
+    private Spinner spinner;
+    private String selectedItem;
+    private ArrayAdapter adapterSpinner;
 
 
     @Override
@@ -58,6 +64,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         description.setText(pbi.getPbiDescription());
         Glide.with(this).load(pbi.getPbiImage()).into(pbiImage);
         context=this;
+        selectedItem = pbi.getPbiEstado();
     }
 
     public void fabHandler() {
@@ -66,11 +73,11 @@ public class TaskDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 pbi.setPbiDescription(description.getText().toString());
+                pbi.setPbiEstado(selectedItem);
                 documentReference.set(pbi).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(context, "Pbi modified succesfully", Toast.LENGTH_LONG);
-
                         Intent newIntent = new Intent(TaskDetailActivity.this, PBIActivity.class);
                         newIntent.putExtra("pbi", pbi);
                         newIntent.putExtra("sprint", (Sprint)getIntent().getSerializableExtra("sprint"));
@@ -97,13 +104,27 @@ public class TaskDetailActivity extends AppCompatActivity {
         pbi = (Pbi)getIntent().getExtras().getSerializable("pbi");
         firebaseFirestore = FirebaseFirestore.getInstance();
         documentReference = firebaseFirestore.collection("pbi").document(pbi.getPbiId());
+        spinner =findViewById(R.id.spinner);
+
+        adapterSpinner=ArrayAdapter.createFromResource(this, R.array.status, R.layout.spinner_item);
+        spinner.setAdapter(adapterSpinner);
+        spinner.setSelection(adapterSpinner.getPosition(pbi.getPbiEstado()));
+
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = spinner.getSelectedItem().toString();
+            }
 
-
-
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedItem =pbi.getPbiEstado();
+            }
+        });
     }
 }

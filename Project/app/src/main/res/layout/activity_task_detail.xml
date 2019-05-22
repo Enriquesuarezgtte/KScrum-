@@ -23,23 +23,56 @@
             android:textStyle="bold"
             android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/pbi_beginning_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Date: 12/02/2019"
-            android:textSize="20dp"
-            android:layout_gravity="left"
-            android:layout_marginTop="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        >
 
         <TextView
-            android:id="@+id/pbi_last_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deadline: 21/02/2019"
-            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="Start Date: "
+            android:textColor="#D81B60"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/pbi_beginning_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginTop="8dp" />
+            android:text=" 12/02/2019"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="Deadline: "
+            android:textColor="#D81B60"
+            android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/pbi_last_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_marginTop="8dp"
+        android:text="21/02/2019"
+        android:layout_weight="1"
+        android:textSize="16dp" />
+
+</LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -47,16 +80,57 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:hint="Description"
-            app:boxBackgroundColor="@color/inputTextColor">
+            app:boxBackgroundColor="@color/inputTextColor"
+            app:boxStrokeColor="#df408a">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pbi_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textLongMessage|textAutoCorrect|text"
                 android:textSize="14dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp">
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00DF408A"
+        android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="PBI status : "
+            android:textColor="#D81B60"
+            android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#8BDF40"
+                android:entries="@array/status"
+                android:spinnerMode="dropdown">
+
+            </Spinner>
+        </LinearLayout>
+</LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,14 +157,15 @@
 
                 <Button
                     android:id="@+id/pbi_file"
+                    style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/customborder"
-                    style="?android:textAppearanceSmall"
+                    android:backgroundTint="@color/fab"
+                    android:text="Select file"
                     android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:text="Select file" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
@@ -101,8 +176,9 @@
         android:id="@+id/taskDetailFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_check"
-        app:fabSize="normal"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:src="@drawable/ic_check"
+        app:backgroundTint="@color/fab"
+        app:fabSize="normal" />
 </RelativeLayout>
