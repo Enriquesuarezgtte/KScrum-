@@ -26,6 +26,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import co.edu.konradlorenz.kscrum.Entities.Pbi;
 import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.R;
@@ -46,6 +50,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private ArrayAdapter adapterSpinner;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +62,15 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     private void setUpView() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+
+            String bd=format.format(pbi.getPbiDate());
+            String ld = format.format(pbi.getLastDate());
+            lastDate.setText(" "+ld);
+            beginningDate.setText(" "+bd);
 
         title.setText(pbi.getPbiTitle());
-        beginningDate.setText(pbi.getPbiDate().toString());
-        lastDate.setText(pbi.getLastDate().toString());
         description.setText(pbi.getPbiDescription());
         Glide.with(this).load(pbi.getPbiImage()).into(pbiImage);
         context=this;
