@@ -52,7 +52,6 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
                    // Toast.makeText(context,R.string.action_add_favourite, Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_delete_pro_spr:
-                    System.out.println("adfs");
                    collectionReference.document(newSprint.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                        @Override
                        public void onSuccess(Void aVoid) {
@@ -88,7 +87,6 @@ public class SprintsAdapter extends RecyclerView.Adapter<SprintsAdapter.AdapterH
             public void onClick(View v) {
                 Intent intent = new Intent(context, PBIActivity.class);
                 intent.putExtra("sprint", newSprint);
-                intent.getExtras();
                 context.startActivity(intent);
             }
         });

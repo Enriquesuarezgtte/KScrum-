@@ -60,15 +60,6 @@ public class ToDoFragment extends Fragment {
         return view;
     }
 
-    public void cardHandler() {
-        materialCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newIntent = new Intent(getContext(), TaskDetailActivity.class);
-                startActivity(newIntent);
-            }
-        });
-    }
 
     public void findMaterialElements() {
         materialCardView = view.findViewById(R.id.toDoCard);
@@ -99,9 +90,9 @@ public class ToDoFragment extends Fragment {
                 pbis=new ArrayList<>();
 
                for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                   if(doc.toObject(Pbi.class).getPbiEstado().equals("ToDo")) {
+                   if((doc.toObject(Pbi.class).getPbiEstado().equals("ToDo"))){
                        Pbi pbi = new Pbi(doc.toObject(Pbi.class));
-                       pbi.setSprintId(doc.getId());
+                       pbi.setPbiId(doc.getId());
                        pbis.add(pbi);
                    }
                }

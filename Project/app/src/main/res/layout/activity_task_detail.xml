@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/font"
     tools:context=".Activities.TaskDetailActivity"
     android:padding="30dp">
 
@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/pbi_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -23,6 +24,7 @@
             android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/pbi_beginning_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start Date: 12/02/2019"
@@ -31,6 +33,7 @@
             android:layout_marginTop="20dp" />
 
         <TextView
+            android:id="@+id/pbi_last_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deadline: 21/02/2019"
@@ -47,7 +50,7 @@
             app:boxBackgroundColor="@color/inputTextColor">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_text_input"
+                android:id="@+id/pbi_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -73,13 +76,13 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/image_selected_view"
+                    android:id="@+id/pbi_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/doc_icon" />
 
                 <Button
-                    android:id="@+id/select_image_button"
+                    android:id="@+id/pbi_file"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

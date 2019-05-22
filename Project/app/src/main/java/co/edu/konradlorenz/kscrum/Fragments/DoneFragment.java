@@ -104,7 +104,7 @@ public class DoneFragment extends Fragment {
                 for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
                     if(doc.toObject(Pbi.class).getPbiEstado().equals("Done")) {
                     Pbi pbi = new Pbi(doc.toObject(Pbi.class));
-                    pbi.setSprintId(doc.getId());
+                    pbi.setPbiId(doc.getId());
                     pbis.add(pbi);
                 }
                 }
