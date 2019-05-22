@@ -20,7 +20,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +35,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import co.edu.konradlorenz.kscrum.Entities.LoginRequest;
 import co.edu.konradlorenz.kscrum.Entities.Usuario;
@@ -53,12 +58,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button googleSignButton;
     private View.OnClickListener buttonGoogle;
     private Button githubSignInButton;
+    private TextInputEditText usernameInput;
+    private TextInputEditText passwordInput;
+    private Button loginBtn;
 
     public final String myCallback = "kscrum://callback";
 
     private FirebaseAuth mAuth;
 
     private static final String TAG = "LoginActivity";
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private static final int RC_SIGN_IN = 101;
     private FirebaseFirestore db;
     private String flag_logout;
@@ -75,8 +84,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         addGithubListener();
+        addSimpleLoginListener();
+
 
     }
+
+    public void addSimpleLoginListener(){
+            loginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    View FocusView = null;
+                    String mail =  usernameInput.getText().toString();
+                    String pwd =   passwordInput.getText().toString();
+
+                    if(mail  != null && !mail.isEmpty()){
+                        if(!validateMail(mail)) {
+                            usernameInput.setError("Please enter an valid email");
+                            usernameInput.requestFocus();
+                        }else{
+
+                            if (pwd != null && !pwd.isEmpty()){
+                                LogInWithEmailAndPassword(mail , pwd);
+                            }else {
+                                passwordInput.setError("Please enter a password");
+                                passwordInput.requestFocus();
+                            }
+
+                        }
+                    }else {
+                        usernameInput.setError("Please enter an email");
+                        loginProgressBar.requestFocus();
+                    }
+
+
+
+
+
+                }
+            });
+    }
+
+    public void LogInWithEmailAndPassword(String mail , String pwd){
+        loginProgressBar.setVisibility(View.VISIBLE);
+        this.mAuth.signInWithEmailAndPassword(mail , pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        doLogin();
+                    }else {
+                        loginProgressBar.setVisibility(View.GONE);
+                        logInConectionFailed();
+                    }
+            }
+        });
+    }
+
+    private void doLogin(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
+         db.collection("Users").document(user.getUid()).set(newUser);
+        Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        loginProgressBar.setVisibility(View.GONE);
+        startActivity(i);
+        cleanFields();
+
+
+    }
+
+    public void cleanFields(){
+        this.usernameInput.setText("");
+        this.passwordInput.setText("");
+    }
+
+    public static boolean validateMail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
 
     public void addGithubListener() {
 
@@ -112,8 +198,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         googleSignButton = findViewById(R.id.google_login_button);
         githubSignInButton = findViewById(R.id.github_btn);
         googleSignButton.setOnClickListener(this);
+        usernameInput =  findViewById(R.id.username_text_login);
+        passwordInput = findViewById(R.id.password_text_input);
+        loginBtn = findViewById(R.id.email_sign_in_button);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
         try {
             flag_logout = getIntent().getExtras().getString("LogOut");
         } catch (Exception e) {
@@ -121,28 +211,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void openMainActivity(View view) {
-        loginProgressBar.setVisibility(View.VISIBLE);
-        Thread splashTread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    int waited = 0;
-                    // SplashActivity screen pause time
-                    while (waited < 1000) {
-                        sleep(250);
-                        waited += 100;
-                    }
-                } catch (InterruptedException e) {
-                } finally {
-                    Intent newIntent = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-                    startActivity(newIntent);
-                    LoginActivity.this.finish();
-                }
-            }
-        };
-        splashTread.start();
-    }
 
     public void signUpHandler(View view) {
         Intent newIntent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -180,12 +248,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.google_login_button:
-                sigIn();
+                googleSignIn();
                 break;
         }
     }
 
-    private void sigIn() {
+    private void googleSignIn() {
         Intent signIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signIntent, RC_SIGN_IN);
     }
@@ -219,7 +287,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            logInSucceed();
+                            doLogin();
                         } else {
                             logInConectionFailed();
                         }
@@ -228,17 +296,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void logInConectionFailed() {
-        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG);
+        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
     }
 
-    private void logInSucceed() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
-        db.collection("Users").document(user.getUid()).set(newUser);
-        Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-    }
 
 
     @Override

@@ -119,7 +119,7 @@
         <item name="android:src">@mipmap/logo</item>
     </style>
 
-    <style name="MatchParentStyle.KScrumLogo.Projects">
+    <style name="MatchParentStyle.KScrumLogo2.Projects">
         <!--<item name="android:onClick">runEffectBAB</item>-->
     </style>
 
@@ -337,6 +337,11 @@
     <style name="Transparent_Text.ForgotAccount.tablet.port">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 
     <style name="Transparent_Text.ForgotAccount.tablet.port.720">
         <item name="android:textSize">19sp</item>

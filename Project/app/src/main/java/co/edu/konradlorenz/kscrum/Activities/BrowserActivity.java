@@ -1,9 +1,11 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,9 +26,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Message;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
 import android.webkit.RenderProcessGoneDetail;
@@ -37,6 +43,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -58,6 +65,7 @@ public class BrowserActivity extends AppCompatActivity {
     private WebView webView;
     private FirebaseAuth  mAuth;
     private FirebaseFirestore db;
+    private LinearLayout progressView;
 
     public final static String TAG="BrowserActivity";
 
@@ -77,6 +85,21 @@ public class BrowserActivity extends AppCompatActivity {
     public void initViewParams(){
         this.currentRequest = getIntent().getStringExtra("reqUrl");
         this.webView = findViewById(R.id.web_v);
+        this.progressView=  findViewById(R.id.loadingView);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showPView(final boolean show){
+        if(show){
+            webView.setVisibility(View.GONE);
+            Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+            progressView.setVisibility(View.VISIBLE);
+            progressView.startAnimation(slideUp);
+        }else {
+            progressView.setVisibility(View.GONE);
+            webView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void initializeWebView(){
@@ -109,6 +132,7 @@ public class BrowserActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if ( request.getUrl().getQueryParameter("code") != null){
+                    showPView(true);
                     String transitCode = request.getUrl().getQueryParameter("code");
                     generatePostGithubRequest(transitCode);
                 }
@@ -196,6 +220,7 @@ public class BrowserActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        showPView(false);
     }
 
 
