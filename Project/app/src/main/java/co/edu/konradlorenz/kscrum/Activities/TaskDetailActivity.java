@@ -77,7 +77,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         title.setText(pbi.getPbiTitle());
         description.setText(pbi.getPbiDescription());
         Glide.with(this).load(pbi.getPbiImage()).into(pbiImage);
-        context=this;
         selectedItem = pbi.getPbiEstado();
     }
 
@@ -117,6 +116,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     public void findMaterialElements() {
+        context=this;
         floatingActionButton = findViewById(R.id.taskDetailFAB);
         title= findViewById(R.id.pbi_title); beginningDate = findViewById(R.id.pbi_beginning_date);
         lastDate=findViewById(R.id.pbi_last_date); description=findViewById(R.id.pbi_description);

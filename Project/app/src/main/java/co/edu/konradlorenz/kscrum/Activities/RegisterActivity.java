@@ -2,6 +2,7 @@ package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -50,6 +51,9 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar prog;
     private Context context;
     private  ConnectivityManager cm;
+    public static final String PREFERENCE= "preference";
+    public static final String PREF_NAME = "name";
+    public static final String PREF_PASSWD = "passwd";
 
 
 
@@ -254,7 +258,12 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
         dbCollection.collection("Users").document(user.getUid()).set(newUser);
-
+        SharedPreferences mSharedPreference = getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mSharedPreference.edit();
+        mEditor.putString(PREF_NAME,user.getDisplayName());
+        mEditor.putString(PREF_PASSWD,user_password.getText().toString());
+        mEditor.apply();
+        finish();
         user.sendEmailVerification()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

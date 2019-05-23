@@ -21,15 +21,15 @@
         <activity android:name=".Activities.ProjectsContainerActivity" />
         <activity android:name=".Activities.CRUProjectsActivity" />
         <activity android:name=".Activities.TaskDetailActivity" />
-        <activity android:name=".Activities.SprintsActivity" />
-        <activity android:name=".Activities.PBIActivity" />
         <activity
             android:name=".Activities.ProfileActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Activities.RegisterActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

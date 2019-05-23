@@ -63,7 +63,9 @@ public class PbiAdapter extends RecyclerView.Adapter<PbiAdapter.PbiAdapterHolder
                 Intent newIntent = new Intent(context, TaskDetailActivity.class);
                 newIntent.putExtra("sprint", sprint);
                 newIntent.putExtra("pbi", pbi);
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(newIntent);
+
             }
         });
     }
