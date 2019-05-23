@@ -1,5 +1,6 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,25 +32,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
+
 import co.edu.konradlorenz.kscrum.Entities.LoginRequest;
+import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.Entities.Usuario;
 import co.edu.konradlorenz.kscrum.Fragments.PasswordRecoveryFragment;
 import co.edu.konradlorenz.kscrum.R;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,6 +67,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputEditText usernameInput;
     private TextInputEditText passwordInput;
     private Button loginBtn;
+    private CollectionReference cr;
+    private ListenerRegistration registration;
+    private Context context;
+    private boolean login;
+
 
     public final String myCallback = "kscrum://callback";
 
@@ -76,8 +87,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //FirebaseApp.initializeApp(this);
+        login =false;
         findMaterialElements();
+        context=this;
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -100,6 +112,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     if(mail  != null && !mail.isEmpty()){
                         if(!validateMail(mail)) {
+                            usernameInput.setError("Please enter an valid email");
+                            usernameInput.requestFocus();
+                        }else if(!validateDomain(mail)){
                             usernameInput.setError("Please enter an valid email");
                             usernameInput.requestFocus();
                         }else{
@@ -125,6 +140,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
     }
 
+    private boolean validateDomain(String mail) {
+
+        //return false if mail is not valid
+        String domain=""; boolean a =false;
+        for (int i =0; i<mail.length();i++){
+            if((mail.charAt(i)+"").equals(".")){
+                a=false;
+            }
+            if(a){
+                domain += mail.charAt(i)+"";
+            }
+
+            if((mail.charAt(i)+"").equals("@")){
+                a=true;
+            }
+            if((mail.charAt(i)+"").equals(".")){
+                a=false;
+            }
+
+        }
+        if(domain.equals("gmail")){
+            return true;
+        }
+        return false;
+    }
+
     public void LogInWithEmailAndPassword(String mail , String pwd){
         loginProgressBar.setVisibility(View.VISIBLE);
         this.mAuth.signInWithEmailAndPassword(mail , pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -142,13 +183,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void doLogin(){
         FirebaseUser user = mAuth.getCurrentUser();
+
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
+
          db.collection("Users").document(user.getUid()).set(newUser);
-        Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        loginProgressBar.setVisibility(View.GONE);
-        startActivity(i);
-        cleanFields();
+        mAuth.getCurrentUser().reload();
+        if(mAuth.getCurrentUser().isEmailVerified()){
+            Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            loginProgressBar.setVisibility(View.GONE);
+            startActivity(i);
+            cleanFields();
+        }else{
+            Toast.makeText(context, "Please verify your email",  Toast.LENGTH_LONG).show();
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
+            Intent newIntent = new Intent(context, LoginActivity.class);
+            newIntent.putExtra("LogOut", "logout");
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(newIntent);
+            cleanFields();
+        }
+
+
+
 
 
     }
@@ -271,7 +329,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG).show();
             }
         }
     }

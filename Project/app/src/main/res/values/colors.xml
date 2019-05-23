@@ -26,6 +26,7 @@
     <color name="font">#EBEBEB</color>
     <color name="tabs">#000000</color>
     <color name="fontcard">#E0E0E0</color>
-
+    <color name="cleanRed">#EC9696</color>
+    <color name="cleanGreen">#B6E08E</color>
 
 </resources>
