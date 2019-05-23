@@ -2,7 +2,10 @@ package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,6 +50,11 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signUpButton;
     private ProgressBar prog;
     private Context context;
+    private  ConnectivityManager cm;
+    public static final String PREFERENCE= "preference";
+    public static final String PREF_NAME = "name";
+    public static final String PREF_PASSWD = "passwd";
+
 
 
     private FirebaseAuth  auth;
@@ -83,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.sign_up_button);
         prog = findViewById(R.id.user_registration_progressbar);
         context=this;
+        cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
     }
 
@@ -119,8 +128,13 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                tryToRegistry();
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                if(!isConnected){
+                    Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+                }else {
+                    tryToRegistry();
+                }
             }
         });
     }
@@ -244,7 +258,12 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
         dbCollection.collection("Users").document(user.getUid()).set(newUser);
-
+        SharedPreferences mSharedPreference = getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mSharedPreference.edit();
+        mEditor.putString(PREF_NAME,user.getDisplayName());
+        mEditor.putString(PREF_PASSWD,user_password.getText().toString());
+        mEditor.apply();
+        finish();
         user.sendEmailVerification()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
