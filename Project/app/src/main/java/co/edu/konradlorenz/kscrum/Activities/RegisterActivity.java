@@ -3,6 +3,8 @@ package co.edu.konradlorenz.kscrum.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signUpButton;
     private ProgressBar prog;
     private Context context;
+    private  ConnectivityManager cm;
+
 
 
     private FirebaseAuth  auth;
@@ -83,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.sign_up_button);
         prog = findViewById(R.id.user_registration_progressbar);
         context=this;
+        cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
     }
 
@@ -119,8 +124,13 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                tryToRegistry();
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                if(!isConnected){
+                    Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+                }else {
+                    tryToRegistry();
+                }
             }
         });
     }

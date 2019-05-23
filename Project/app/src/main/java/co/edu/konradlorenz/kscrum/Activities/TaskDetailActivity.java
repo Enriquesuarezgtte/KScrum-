@@ -2,6 +2,8 @@ package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -48,6 +50,8 @@ public class TaskDetailActivity extends AppCompatActivity {
     private Spinner spinner;
     private String selectedItem;
     private ArrayAdapter adapterSpinner;
+    private ConnectivityManager cm;
+
 
 
 
@@ -81,6 +85,11 @@ public class TaskDetailActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                if(!isConnected){
+                    Toast.makeText(context, "No Internet connection. Try later", Toast.LENGTH_LONG).show();
+                }else {
 
                 pbi.setPbiDescription(description.getText().toString());
                 pbi.setPbiEstado(selectedItem);
@@ -97,11 +106,12 @@ public class TaskDetailActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Error modifing pbi", Toast.LENGTH_LONG);
+                        Toast.makeText(context, "Error modifing pbi", Toast.LENGTH_LONG).show();
                         Log.e("TASK DETAIL", e.getMessage());
                     }
                 });
 
+            }
             }
         });
     }
@@ -115,7 +125,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         documentReference = firebaseFirestore.collection("pbi").document(pbi.getPbiId());
         spinner =findViewById(R.id.spinner);
-
+        cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         adapterSpinner=ArrayAdapter.createFromResource(this, R.array.status, R.layout.spinner_item);
         spinner.setAdapter(adapterSpinner);
         spinner.setSelection(adapterSpinner.getPosition(pbi.getPbiEstado()));

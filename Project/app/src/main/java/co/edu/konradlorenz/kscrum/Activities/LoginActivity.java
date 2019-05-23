@@ -2,6 +2,8 @@ package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ListenerRegistration registration;
     private Context context;
     private boolean login;
+    private  ConnectivityManager cm;
 
 
     public final String myCallback = "kscrum://callback";
@@ -93,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+         cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
 
         addGithubListener();
@@ -174,8 +178,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(task.isSuccessful()){
                         doLogin();
                     }else {
-                        loginProgressBar.setVisibility(View.GONE);
-                        logInConectionFailed();
+                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                        boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                        if(!isConnected){
+                            Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+                            loginProgressBar.setVisibility(View.GONE);
+                        }else {
+                            loginProgressBar.setVisibility(View.GONE);
+                            logInConectionFailed();
+                        }
                     }
             }
         });
@@ -235,10 +246,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     public void startGithubLogin() {
-        String request = generateGitHubRequest();
-        Intent intent = new Intent(this , BrowserActivity.class);
-        intent.putExtra("reqUrl" , request);
-        startActivity(intent);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+        if(!isConnected){
+            Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+            loginProgressBar.setVisibility(View.GONE);
+        }else {
+            String request = generateGitHubRequest();
+            Intent intent = new Intent(this, BrowserActivity.class);
+            intent.putExtra("reqUrl", request);
+            startActivity(intent);
+        }
     }
 
 
@@ -347,7 +365,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             doLogin();
                         } else {
-                            logInConectionFailed();
+                            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                            boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                            if(!isConnected){
+                                Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+
+                            }else{
+                                logInConectionFailed();
+                            }
                         }
                     }
                 });
@@ -362,6 +387,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+
+
 
     }
 
