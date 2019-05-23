@@ -171,6 +171,7 @@ public class ProjectsFragment extends Fragment {
 
                 if (e != null) {
                     if(e.getCode().toString().equals("PERMISSION_DENIED")) {
+
                         FirebaseAuth mAuth = FirebaseAuth.getInstance();
                         mAuth.signOut();
                         Intent newIntent = new Intent(getContext(), LoginActivity.class);

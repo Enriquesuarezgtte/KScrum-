@@ -49,7 +49,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_text_input"
-                        style="@style/TextInputLayout.Password" />
+                        style="@style/TextInputLayout.Password"
+                        android:inputType="textPassword|numberPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
