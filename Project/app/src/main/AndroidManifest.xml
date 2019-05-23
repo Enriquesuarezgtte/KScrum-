@@ -19,7 +19,7 @@
             android:label="@string/title_activity_browser"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activities.ProjectsContainerActivity" />
-        <activity android:name=".Activities.CreateProjectActivity" />
+        <activity android:name=".Activities.CRUProjectsActivity" />
         <activity android:name=".Activities.TaskDetailActivity" />
         <activity android:name=".Activities.SprintsActivity" />
         <activity android:name=".Activities.PBIActivity" />

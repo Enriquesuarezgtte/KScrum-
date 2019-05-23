@@ -50,7 +50,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_text_input"
                         style="@style/TextInputLayout.Password"
-                        android:inputType="textPassword|numberPassword" />
+                        android:inputType="textPassword"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
