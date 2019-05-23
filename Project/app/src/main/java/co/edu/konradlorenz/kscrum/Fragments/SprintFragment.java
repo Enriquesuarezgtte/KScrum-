@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
+import co.edu.konradlorenz.kscrum.Activities.CRUSprintsActivity;
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
 import co.edu.konradlorenz.kscrum.Adapters.SprintsAdapter;
 import co.edu.konradlorenz.kscrum.Entities.Project;
@@ -74,7 +75,7 @@ public class SprintFragment extends Fragment {
         findMaterial();
         getBundleData();
         setUpSupportActionBar();
-        fabHandler();
+        addFabListener();
         return view;
     }
 
@@ -83,15 +84,6 @@ public class SprintFragment extends Fragment {
         projectSelected = (Project)bundle.getSerializable("PROJECT");
     }
 
-    private void fabHandler() {
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // Intent new Intent( getContext(), )
-                Toast.makeText(getContext(),"Recuerda crear sprints", Toast.LENGTH_LONG);
-            }
-        });
-    }
 
     private void setUpSupportActionBar() {
         ((AppCompatActivity) getActivity()).setSupportActionBar(sprintsBottonAppBar);
@@ -161,6 +153,19 @@ public class SprintFragment extends Fragment {
                 sprints.add(sprint);
             }
                 recyclerSetUp();
+            }
+        });
+    }
+
+    private void addFabListener(){
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(getActivity().getApplicationContext() , CRUSprintsActivity.class);
+                newIntent.putExtra("projectUUID" , projectSelected.getId());
+                newIntent.putExtra("currentSize" , sprintAdapter.getItemCount() + "");
+
+                startActivity(newIntent);
             }
         });
     }
