@@ -19,20 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import co.edu.konradlorenz.kscrum.Activities.CreateProjectActivity;
+import co.edu.konradlorenz.kscrum.Activities.CRUProjectsActivity;
 import co.edu.konradlorenz.kscrum.Activities.PBIActivity;
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
 import co.edu.konradlorenz.kscrum.Adapters.ProjectsAdapter;
@@ -49,6 +47,7 @@ public class ProjectsFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference cr;
     private ArrayList<Project> projects;
+    private ListenerRegistration currentListener;
 
     @Nullable
     @Override
@@ -82,7 +81,8 @@ public class ProjectsFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent = new Intent(getContext(), CreateProjectActivity.class);
+                Intent newIntent = new Intent(getContext(), CRUProjectsActivity.class);
+                newIntent.putExtra("UUID" , "");
                 startActivity(newIntent);
             }
         });
@@ -162,7 +162,7 @@ public class ProjectsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        cr.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        currentListener = cr.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
 
@@ -179,5 +179,11 @@ public class ProjectsFragment extends Fragment {
                 recyclerSetUp();
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        currentListener.remove();
     }
 }

@@ -1,6 +1,7 @@
 package co.edu.konradlorenz.kscrum.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import co.edu.konradlorenz.kscrum.Activities.CRUProjectsActivity;
 import co.edu.konradlorenz.kscrum.Entities.Project;
 import co.edu.konradlorenz.kscrum.Entities.Sprint;
 import co.edu.konradlorenz.kscrum.Fragments.ProjectTabletDetailFragment;
@@ -156,7 +158,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.MyView
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_edit_pro_spr:
-                    // Toast.makeText(context,R.string.action_add_favourite, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(actualContext , CRUProjectsActivity.class);
+                    intent.putExtra("UUID" , newProject2.getId());
+                    actualContext.startActivity(intent);
+
                     return true;
                 case R.id.action_delete_pro_spr:
 
