@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,11 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 import co.edu.konradlorenz.kscrum.Activities.CRUProjectsActivity;
+import co.edu.konradlorenz.kscrum.Activities.LoginActivity;
 import co.edu.konradlorenz.kscrum.Activities.PBIActivity;
 import co.edu.konradlorenz.kscrum.Activities.ProfileActivity;
 import co.edu.konradlorenz.kscrum.Adapters.ProjectsAdapter;
@@ -48,7 +51,6 @@ public class ProjectsFragment extends Fragment {
     private CollectionReference cr;
     private ArrayList<Project> projects;
     private ListenerRegistration currentListener;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -167,16 +169,29 @@ public class ProjectsFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
 
                 if (e != null) {
-                    Log.w("PROJECTSFRAGMENT", "Listen failed.", e);
+                    if(e.getCode().toString().equals("PERMISSION_DENIED")) {
+
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        mAuth.signOut();
+                        Intent newIntent = new Intent(getContext(), LoginActivity.class);
+                        newIntent.putExtra("LogOut", "logout");
+                        Toast.makeText(getContext(), "Domain not allowed only @gmail/ @konradlorenz.edu.co", Toast.LENGTH_LONG).show();
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(newIntent);
+                        return;
+                    }
+                    Log.w("PROJECTSFRAGMENT", e.getCode().toString(), e);
+                    return;
+                }else {
+                    projects = new ArrayList<>();
+                    for (DocumentChange doc : value.getDocumentChanges()) {
+                        System.out.println(doc.getDocument().getReference().getPath());
+                        Project project = new Project(doc.getDocument().toObject(Project.class));
+                        project.setId(doc.getDocument().getId());
+                        projects.add(project);
+                    }
+                    recyclerSetUp();
                 }
-                projects = new ArrayList<>();
-                for (DocumentChange doc :value.getDocumentChanges()) {
-                   System.out.println(doc.getDocument().getReference().getPath());
-                    Project project = new Project(doc.getDocument().toObject(Project.class));
-                    project.setId(doc.getDocument().getId());
-                    projects.add(project);
-                }
-                recyclerSetUp();
             }
         });
     }

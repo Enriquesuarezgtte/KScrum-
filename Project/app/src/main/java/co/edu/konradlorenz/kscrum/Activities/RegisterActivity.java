@@ -1,14 +1,17 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText user_password;
     private Button signUpButton;
     private ProgressBar prog;
+    private Context context;
 
 
     private FirebaseAuth  auth;
@@ -78,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         user_password = findViewById(R.id.password_text_registry);
         signUpButton = findViewById(R.id.sign_up_button);
         prog = findViewById(R.id.user_registration_progressbar);
+        context=this;
 
     }
 
@@ -127,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
         String  email = user_email.getText().toString();
         String password = user_password.getText().toString();
         String completeName = username + " " +  lastname;
+        ImageView imagen = imageRegisterInput;
+
 
         boolean execute = true;
 
@@ -136,6 +143,11 @@ public class RegisterActivity extends AppCompatActivity {
             user_name.setError("Please insert a name");
             execute = false;
             errView = user_name;
+        }
+        if(selectedImage==null){
+            execute=false;
+            user_name.setError("Please select a photo");
+        errView =user_name;
         }
 
         if(lastname == null ||  lastname.isEmpty()){
@@ -153,11 +165,17 @@ public class RegisterActivity extends AppCompatActivity {
             errView = user_email;
 
         }else if (!validateMail(email)){
+
+                user_email.setError("Please enter a valid mail");
+                execute = false;
+
+                errView = user_email;
+
+        }else if(!validateDomain(email)){
             user_email.setError("Please enter a valid mail");
             execute = false;
 
             errView = user_email;
-
         }
 
 
@@ -226,6 +244,16 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
         dbCollection.collection("Users").document(user.getUid()).set(newUser);
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context,"Email sent. Please verify your account", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
         signUpHandler();
     }
 
@@ -239,6 +267,38 @@ public class RegisterActivity extends AppCompatActivity {
         return matcher.find();
     }
 
+    private boolean validateDomain(String mail) {
+            boolean c=false;
+            String fullDomain="";
+        //return false if mail is not valid
+        String domain=""; boolean a =false;
+        for (int i =0; i<mail.length();i++){
+            if((mail.charAt(i)+"").equals(".")&&a){
+                a=false;
+            }
+            if(a){
+                domain += mail.charAt(i)+"";
+            }else if(c){
+                fullDomain += mail.charAt(i)+"";
+            }
+
+            if((mail.charAt(i)+"").equals("@")){
+                a=true;
+                c=true;
+            }
+
+
+        }
+        if(domain.equals("gmail")||(domain+fullDomain).equals("konradlorenz.edu.co")){
+           return true;
+        }else if(domain.equals("163")||domain.equals("126")||domain.equals("qq")|(
+                domain+fullDomain).equalsIgnoreCase("WWW.SINA.COM")
+        ||fullDomain.contains("cn")){
+        return true;
+        }
+        return false;
+    }
+
     public void chooseImage() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
@@ -247,7 +307,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void signUpHandler() {
-        Intent newIntent = new Intent(RegisterActivity.this, ProjectsContainerActivity.class);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+        Intent newIntent = new Intent(context, LoginActivity.class);
+        newIntent.putExtra("LogOut", "logout");
         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         prog.setVisibility(View.GONE);
         startActivity(newIntent);
