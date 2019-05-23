@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".Activities.CreateProjectActivity"
-    android:padding="30dp">
+    android:background="@color/font"
+    tools:context=".Activities.CRUProjectsActivity">
+
+    <include layout="@layout/simple_loading_layout"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="30dp">
         <TextView
+            android:id="@+id/cruPtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Create New Project"
+            android:text="Create a New Project"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -47,11 +50,11 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:hint="Description"
+            android:hint="Language"
             app:boxBackgroundColor="@color/inputTextColor">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_text_input"
+                android:id="@+id/projectLanguaje_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -59,23 +62,48 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:hint="Description"
+            app:counterEnabled="true"
+            app:counterMaxLength="300"
+            app:boxBackgroundColor="@color/inputTextColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/project_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLength="300"
+                android:textSize="14dp" />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/customborder"
             android:gravity="center"
-            android:background="@drawable/customborder">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/image_selected_view"
@@ -85,27 +113,40 @@
 
                 <Button
                     android:id="@+id/select_image_button"
+                    style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/customborder"
-                    style="?android:textAppearanceSmall"
+                    android:backgroundTint="@color/white"
+                    android:text="Select file"
                     android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:text="Select file" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <Button
+                android:id="@+id/createProjectBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="create Project"
+                android:drawableStart="@drawable/ic_check"
+                android:paddingLeft="25dp"
+                android:background="@color/fab"/>
         </LinearLayout>
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createProjectFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_check"
-        app:fabSize="normal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
 
-</RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
