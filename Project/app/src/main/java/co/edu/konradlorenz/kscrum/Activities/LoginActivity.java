@@ -2,6 +2,9 @@ package co.edu.konradlorenz.kscrum.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,6 +74,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ListenerRegistration registration;
     private Context context;
     private boolean login;
+    private  ConnectivityManager cm;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    public static final String PREFERENCE= "preference";
+    public static final String PREF_NAME = "name";
+    public static final String PREF_PASSWD = "passwd";
+    public static final String PREF_SKIP_LOGIN = "skip_login";
 
 
     public final String myCallback = "kscrum://callback";
@@ -93,12 +103,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+         cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+         mSharedPreferences = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
+         mEditor = mSharedPreferences.edit();
+        if(mSharedPreferences.contains(PREF_SKIP_LOGIN)) {
+            Intent intent = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
+            loginProgressBar.setVisibility(View.GONE);
+            startActivity(intent);
+            finish();
+        }else {
+            addGithubListener();
+            addSimpleLoginListener();
 
-        addGithubListener();
-        addSimpleLoginListener();
-
-
+        }
     }
 
     public void addSimpleLoginListener(){
@@ -174,8 +192,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(task.isSuccessful()){
                         doLogin();
                     }else {
-                        loginProgressBar.setVisibility(View.GONE);
-                        logInConectionFailed();
+                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                        boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                        if(!isConnected){
+                            Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+                            loginProgressBar.setVisibility(View.GONE);
+                        }else {
+                            loginProgressBar.setVisibility(View.GONE);
+                            logInConectionFailed();
+                        }
                     }
             }
         });
@@ -187,13 +212,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Usuario newUser = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString(), user.getUid());
 
          db.collection("Users").document(user.getUid()).set(newUser);
+
         mAuth.getCurrentUser().reload();
         if(mAuth.getCurrentUser().isEmailVerified()){
+            SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+            mEditor.putString(PREF_SKIP_LOGIN,"skip");
+            mEditor.apply();
             Intent i = new Intent(LoginActivity.this, ProjectsContainerActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             loginProgressBar.setVisibility(View.GONE);
             startActivity(i);
             cleanFields();
+
         }else{
             Toast.makeText(context, "Please verify your email",  Toast.LENGTH_LONG).show();
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -235,10 +264,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     public void startGithubLogin() {
-        String request = generateGitHubRequest();
-        Intent intent = new Intent(this , BrowserActivity.class);
-        intent.putExtra("reqUrl" , request);
-        startActivity(intent);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+        if(!isConnected){
+            Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+            loginProgressBar.setVisibility(View.GONE);
+        }else {
+            String request = generateGitHubRequest();
+            Intent intent = new Intent(this, BrowserActivity.class);
+            intent.putExtra("reqUrl", request);
+            startActivity(intent);
+        }
     }
 
 
@@ -297,7 +333,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        // ...
+                        SharedPreferences.Editor mEditor =  getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit();
+                        mEditor.clear();
+                        mEditor.commit();
+                        mEditor.apply();
                     }
                 });
     }
@@ -347,7 +386,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             doLogin();
                         } else {
-                            logInConectionFailed();
+                            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                            boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                            if(!isConnected){
+                                Toast.makeText(context, "No Internet connection", Toast.LENGTH_LONG).show();
+
+                            }else{
+                                logInConectionFailed();
+                            }
                         }
                     }
                 });
@@ -362,6 +408,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+
+
 
     }
 

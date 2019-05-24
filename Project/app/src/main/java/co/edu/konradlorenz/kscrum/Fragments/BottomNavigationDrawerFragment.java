@@ -1,6 +1,8 @@
 package co.edu.konradlorenz.kscrum.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -29,6 +31,8 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private GoogleSignInClient googleSignInClient;
     private TextView username;
     private TextView email;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -57,6 +61,10 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
                         Intent newIntent = new Intent(getContext(), LoginActivity.class);
                         newIntent.putExtra("LogOut", "logout");
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        SharedPreferences.Editor mEditor = getContext().getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit();
+                        mEditor.clear();
+                        mEditor.commit();
+                        mEditor.apply();
                         startActivity(newIntent);
 
                         return true;

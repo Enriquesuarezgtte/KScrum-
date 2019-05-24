@@ -1,7 +1,10 @@
 package co.edu.konradlorenz.kscrum.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -60,6 +63,7 @@ public class CRUProjectsActivity extends AppCompatActivity {
     private Button createProjectButton;
 
     private String UUID;
+    private ConnectivityManager cm;
 
 
     private Boolean isCreate = false;
@@ -73,6 +77,7 @@ public class CRUProjectsActivity extends AppCompatActivity {
 
     private FirebaseStorage storage;
 
+    private Context contex;
 
 
 
@@ -80,8 +85,10 @@ public class CRUProjectsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cru_projects);
+        contex=this;
         getLayoutComponents();
         UUID = validateActivityIncoming();
+
         initializeFirebaseComponents();
         createListeners();
 
@@ -100,7 +107,13 @@ public class CRUProjectsActivity extends AppCompatActivity {
         createProjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tryToExecute();
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+                if(!isConnected){
+                    Toast.makeText(contex, "No Internet connecticontexton. Try later", Toast.LENGTH_LONG).show();
+                }else {
+                    tryToExecute();
+                }
             }
         });
     }
@@ -205,6 +218,8 @@ public class CRUProjectsActivity extends AppCompatActivity {
         selectDocumentButton =findViewById(R.id.select_image_button);
         createProjectButton = findViewById(R.id.createProjectBtn);
         projectImage = findViewById(R.id.image_selected_view);
+        cm = (ConnectivityManager)contex.getSystemService(Context.CONNECTIVITY_SERVICE);
+
     }
 
     private String validateActivityIncoming() {
